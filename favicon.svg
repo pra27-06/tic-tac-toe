@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF9A8B"/>
+      <stop offset="50%" stop-color="#FF6A88"/>
+      <stop offset="100%" stop-color="#FF99AC"/>
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#FF6A88" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  <!-- Background Rounded Badge -->
+  <rect x="8" y="8" width="84" height="84" rx="26" fill="url(#grad)" filter="url(#shadow)"/>
+  
+  <!-- Cute Smiling Star Piece -->
+  <!-- Eyes -->
+  <ellipse cx="38" cy="46" rx="5" ry="6" fill="#3D2B3D"/>
+  <ellipse cx="62" cy="46" rx="5" ry="6" fill="#3D2B3D"/>
+  <!-- Eye sparkles -->
+  <circle cx="36" cy="44" r="2" fill="#FFFFFF"/>
+  <circle cx="60" cy="44" r="2" fill="#FFFFFF"/>
+  <!-- Blush -->
+  <ellipse cx="30" cy="54" rx="5" ry="2.5" fill="#FF477E" opacity="0.6"/>
+  <ellipse cx="70" cy="54" rx="5" ry="2.5" fill="#FF477E" opacity="0.6"/>
+  <!-- Happy Smile -->
+  <path d="M 44 54 Q 50 62 56 54" stroke="#3D2B3D" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+  
+  <!-- Little Sparkle on Top -->
+  <path d="M 72 20 Q 75 25 80 26 Q 75 27 72 32 Q 71 27 66 26 Q 71 25 72 20 Z" fill="#FFF475"/>
+</svg>
