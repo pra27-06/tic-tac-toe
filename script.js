@@ -1,41 +1,97 @@
 /**
- * 🌸 KAWAII TIC-TAC-TOE 🎀
- * Pure Vanilla JavaScript implementation with Web Audio FX, Minimax AI,
- * Canvas Confetti, SVG Win-Line strike, and responsive touch controls.
+ * 🌸 KAWAII ZERO & CROSS (TIC-TAC-TOE) 🎀
+ * Pure Vanilla JavaScript implementation with Custom Kawaii Vector Graphics,
+ * Web Audio FX, Minimax AI, Canvas Confetti, and SVG Win-Line strike.
  */
 
 (() => {
   'use strict';
 
-  // --- Cute Themes Definition ---
-  const THEMES = [
+  // --- Cute Zero & Cross Color Palettes ---
+  const PALETTES = [
     {
-      id: 'kitty-bunny',
-      name: 'Kitty & Bunny',
-      p1: { name: 'Kitty', icon: '🐱', symbol: 'cat', color: '#ff6584' },
-      p2: { name: 'Bunny', icon: '🐰', symbol: 'bunny', color: '#6c5ce7' },
-      botName: 'Bunny Bot'
+      id: 'sakura-sky',
+      name: 'Sakura & Sky',
+      p1: {
+        label: 'Cross (X)',
+        name: 'Player X',
+        color: '#ff6584',
+        grad: ['#ff7597', '#ff5277'],
+        faceColor: '#ffffff',
+        blush: '#ff7597'
+      },
+      p2: {
+        label: 'Zero (O)',
+        name: 'Player O',
+        botName: 'Bot (O)',
+        color: '#0984e3',
+        grad: ['#4facfe', '#00c6ff'],
+        faceColor: '#ffffff',
+        blush: '#ff7675'
+      }
     },
     {
-      id: 'berry-boba',
-      name: 'Berry & Boba',
-      p1: { name: 'Strawberry', icon: '🍓', symbol: 'strawberry', color: '#e84393' },
-      p2: { name: 'Boba Tea', icon: '🧋', symbol: 'boba', color: '#0984e3' },
-      botName: 'Boba Bot'
+      id: 'bubblegum-mint',
+      name: 'Bubblegum & Mint',
+      p1: {
+        label: 'Cross (X)',
+        name: 'Player X',
+        color: '#9b51e0',
+        grad: ['#b388ff', '#7c4dff'],
+        faceColor: '#ffffff',
+        blush: '#ea80fc'
+      },
+      p2: {
+        label: 'Zero (O)',
+        name: 'Player O',
+        botName: 'Bot (O)',
+        color: '#10b981',
+        grad: ['#34d399', '#059669'],
+        faceColor: '#ffffff',
+        blush: '#f87171'
+      }
     },
     {
-      id: 'heart-star',
-      name: 'Heart & Star',
-      p1: { name: 'Heart', icon: '💖', symbol: 'heart', color: '#ff7675' },
-      p2: { name: 'Star', icon: '⭐', symbol: 'star', color: '#fdcb6e' },
-      botName: 'Star Bot'
+      id: 'peach-lavender',
+      name: 'Peach & Lavender',
+      p1: {
+        label: 'Cross (X)',
+        name: 'Player X',
+        color: '#ff7675',
+        grad: ['#ff9999', '#ff5252'],
+        faceColor: '#ffffff',
+        blush: '#ff7675'
+      },
+      p2: {
+        label: 'Zero (O)',
+        name: 'Player O',
+        botName: 'Bot (O)',
+        color: '#6c5ce7',
+        grad: ['#a29bfe', '#6c5ce7'],
+        faceColor: '#ffffff',
+        blush: '#fd79a8'
+      }
     },
     {
-      id: 'kawaii-xo',
-      name: 'Kawaii X & O',
-      p1: { name: 'Pink X', icon: '🌸', symbol: 'x', color: '#ff6b81' },
-      p2: { name: 'Mint O', icon: '🎀', symbol: 'o', color: '#2ed573' },
-      botName: 'Robot O'
+      id: 'sunny-berry',
+      name: 'Sunny & Berry',
+      p1: {
+        label: 'Cross (X)',
+        name: 'Player X',
+        color: '#e84393',
+        grad: ['#fd79a8', '#e84393'],
+        faceColor: '#ffffff',
+        blush: '#ff7675'
+      },
+      p2: {
+        label: 'Zero (O)',
+        name: 'Player O',
+        botName: 'Bot (O)',
+        color: '#f59e0b',
+        grad: ['#fcd34d', '#f59e0b'],
+        faceColor: '#ffffff',
+        blush: '#ff7675'
+      }
     }
   ];
 
@@ -50,6 +106,82 @@
     [0, 4, 8], // Diag 1
     [2, 4, 6]  // Diag 2
   ];
+
+  // --- SVG Kawaii Graphics Generators for Cross (X) & Zero (O) ---
+  function getCuteCrossSvg(grad, blush, idSuffix = 'main') {
+    const gradId = `xGrad_${idSuffix}`;
+    return `
+      <svg class="mark-svg mark-x" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="${gradId}" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="${grad[0]}" />
+            <stop offset="100%" stop-color="${grad[1]}" />
+          </linearGradient>
+          <filter id="xShadow_${idSuffix}" x="-20%" y="-20%" width="140%" height="140%">
+            <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="${grad[1]}" flood-opacity="0.32"/>
+          </filter>
+        </defs>
+        <!-- Soft Rounded Diagonal Strokes of X -->
+        <line x1="22" y1="22" x2="78" y2="78" stroke="url(#${gradId})" stroke-width="17" stroke-linecap="round" filter="url(#xShadow_${idSuffix})" />
+        <line x1="78" y1="22" x2="22" y2="78" stroke="url(#${gradId})" stroke-width="17" stroke-linecap="round" filter="url(#xShadow_${idSuffix})" />
+        
+        <!-- Center Kawaii Face Circle -->
+        <circle cx="50" cy="50" r="18" fill="#ffffff" filter="url(#xShadow_${idSuffix})" />
+        <!-- Happy Eyes -->
+        <circle cx="43.5" cy="48" r="2.6" fill="#373244" />
+        <circle cx="56.5" cy="48" r="2.6" fill="#373244" />
+        <!-- Eye Sparkles -->
+        <circle cx="42.5" cy="46.8" r="1" fill="#ffffff" />
+        <circle cx="55.5" cy="46.8" r="1" fill="#ffffff" />
+        <!-- Rosy Blush Cheeks -->
+        <ellipse cx="39" cy="53" rx="2.8" ry="1.5" fill="${blush}" opacity="0.85" />
+        <ellipse cx="61" cy="53" rx="2.8" ry="1.5" fill="${blush}" opacity="0.85" />
+        <!-- Sweet Smile -->
+        <path d="M 46.5 52 Q 50 56.5 53.5 52" stroke="#373244" stroke-width="2" stroke-linecap="round" fill="none" />
+        <!-- Little Sparkle on Tip -->
+        <path d="M 74 16 Q 77 21 82 22 Q 77 23 74 28 Q 73 23 68 22 Q 73 21 74 16 Z" fill="#fff375" opacity="0.9" />
+      </svg>
+    `;
+  }
+
+  function getCuteZeroSvg(grad, blush, idSuffix = 'main') {
+    const gradId = `oGrad_${idSuffix}`;
+    return `
+      <svg class="mark-svg mark-o" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="${gradId}" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="${grad[0]}" />
+            <stop offset="100%" stop-color="${grad[1]}" />
+          </linearGradient>
+          <filter id="oShadow_${idSuffix}" x="-20%" y="-20%" width="140%" height="140%">
+            <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="${grad[1]}" flood-opacity="0.32"/>
+          </filter>
+        </defs>
+        <!-- Plump Round Donut of O -->
+        <circle cx="50" cy="50" r="32" stroke="url(#${gradId})" stroke-width="16" fill="none" filter="url(#oShadow_${idSuffix})" />
+        
+        <!-- Cute Little Ribbon Bow on Top -->
+        <path d="M 42 12 Q 50 17 50 19 Q 50 17 58 12 Q 55 21 50 19 Q 45 21 42 12 Z" fill="#ff7597" />
+        <circle cx="50" cy="18" r="2.8" fill="#ffe4eb" />
+
+        <!-- Center Kawaii Face Circle -->
+        <circle cx="50" cy="50" r="18" fill="#ffffff" filter="url(#oShadow_${idSuffix})" />
+        <!-- Happy Eyes -->
+        <circle cx="43.5" cy="48" r="2.6" fill="#373244" />
+        <circle cx="56.5" cy="48" r="2.6" fill="#373244" />
+        <!-- Eye Sparkles -->
+        <circle cx="42.5" cy="46.8" r="1" fill="#ffffff" />
+        <circle cx="55.5" cy="46.8" r="1" fill="#ffffff" />
+        <!-- Rosy Blush Cheeks -->
+        <ellipse cx="39" cy="53" rx="2.8" ry="1.5" fill="${blush}" opacity="0.85" />
+        <ellipse cx="61" cy="53" rx="2.8" ry="1.5" fill="${blush}" opacity="0.85" />
+        <!-- Sweet Smile -->
+        <path d="M 46.5 52 Q 50 56.5 53.5 52" stroke="#373244" stroke-width="2" stroke-linecap="round" fill="none" />
+        <!-- Little Sparkle on Side -->
+        <path d="M 80 44 Q 82 48 86 49 Q 82 50 80 54 Q 79 50 75 49 Q 79 48 80 44 Z" fill="#fff375" opacity="0.9" />
+      </svg>
+    `;
+  }
 
   // --- Sound Synthesizer (Web Audio API) ---
   class SoundController {
@@ -76,7 +208,7 @@
       return this.enabled;
     }
 
-    playPop(frequency = 520) {
+    playPop(frequency = 540) {
       if (!this.enabled) return;
       this.init();
       if (!this.ctx) return;
@@ -88,7 +220,7 @@
 
         osc.type = 'sine';
         osc.frequency.setValueAtTime(frequency, now);
-        osc.frequency.exponentialRampToValueAtTime(frequency * 0.4, now + 0.12);
+        osc.frequency.exponentialRampToValueAtTime(frequency * 0.45, now + 0.12);
 
         gain.gain.setValueAtTime(0.28, now);
         gain.gain.exponentialRampToValueAtTime(0.001, now + 0.12);
@@ -109,16 +241,16 @@
       if (!this.ctx) return;
 
       try {
-        const notes = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6 arpeggio
+        const notes = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6 joyful arpeggio
         notes.forEach((freq, idx) => {
-          const startTime = this.ctx.currentTime + idx * 0.1;
+          const startTime = this.ctx.currentTime + idx * 0.09;
           const osc = this.ctx.createOscillator();
           const gain = this.ctx.createGain();
 
           osc.type = 'triangle';
           osc.frequency.setValueAtTime(freq, startTime);
 
-          gain.gain.setValueAtTime(0.24, startTime);
+          gain.gain.setValueAtTime(0.25, startTime);
           gain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.35);
 
           osc.connect(gain);
@@ -138,9 +270,9 @@
       if (!this.ctx) return;
 
       try {
-        const notes = [440, 392, 349.23]; // A4, G4, F4 cute sad sigh
+        const notes = [440, 392, 349.23]; // Cute sigh chords
         notes.forEach((freq, idx) => {
-          const startTime = this.ctx.currentTime + idx * 0.12;
+          const startTime = this.ctx.currentTime + idx * 0.11;
           const osc = this.ctx.createOscillator();
           const gain = this.ctx.createGain();
 
@@ -196,7 +328,7 @@
       this.ctx = canvas.getContext('2d');
       this.particles = [];
       this.animationFrame = null;
-      this.colors = ['#ff7597', '#ffe082', '#a7f3d0', '#b39ddb', '#70a1ff', '#ff9ff3'];
+      this.colors = ['#ff7597', '#4facfe', '#ffe082', '#a7f3d0', '#b39ddb', '#ff9ff3'];
       this.resize();
       window.addEventListener('resize', () => this.resize());
     }
@@ -206,7 +338,7 @@
       this.canvas.height = window.innerHeight;
     }
 
-    burst(count = 70) {
+    burst(count = 75) {
       this.resize();
       for (let i = 0; i < count; i++) {
         this.particles.push({
@@ -270,36 +402,32 @@
     }
   }
 
-  // --- Main Game State & Logic ---
-  class KawaiiTicTacToe {
+  // --- Main Kawaii Zero & Cross Game Controller ---
+  class KawaiiZeroAndCross {
     constructor() {
-      // Game State
       this.boardState = Array(9).fill(null);
-      this.currentTurn = 'p1'; // 'p1' or 'p2'
+      this.currentTurn = 'p1'; // 'p1' (Cross X) or 'p2' (Zero O)
       this.gameMode = 'pve'; // 'pve' (vs Machine) or 'pvp' (2 players)
       this.difficulty = 'medium'; // 'easy', 'medium', 'hard' (genius)
       this.firstTurnPref = 'p1'; // 'p1', 'p2', or 'random'
       this.isGameOver = false;
       this.isAiThinking = false;
-      this.history = []; // snapshots for undo
-      this.themeIndex = 0;
+      this.history = [];
+      this.paletteIndex = 0;
       this.streak = 0;
       this.streakWinner = null;
 
-      // Saved Scores
       this.scores = this.loadScores();
-
-      // Controllers
       this.sound = new SoundController();
       this.confetti = new ConfettiEngine(document.getElementById('confetti-canvas'));
 
-      // Cache DOM Elements
+      // DOM Elements Cache
       this.dom = {
         board: document.getElementById('board'),
         cells: Array.from(document.querySelectorAll('.cell')),
         winLineSvg: document.getElementById('win-line-svg'),
         winLine: document.getElementById('win-line'),
-        
+
         modePve: document.getElementById('mode-pve'),
         modePvp: document.getElementById('mode-pvp'),
         aiControls: document.getElementById('ai-controls'),
@@ -308,6 +436,8 @@
 
         cardP1: document.getElementById('card-p1'),
         cardP2: document.getElementById('card-p2'),
+        avatarP1: document.getElementById('avatar-p1'),
+        avatarP2: document.getElementById('avatar-p2'),
         nameP1: document.getElementById('name-p1'),
         nameP2: document.getElementById('name-p2'),
         iconP1: document.getElementById('icon-p1'),
@@ -325,7 +455,7 @@
         soundBtn: document.getElementById('sound-btn'),
         soundIcon: document.getElementById('sound-icon'),
         helpBtn: document.getElementById('help-btn'),
-        
+
         restartRoundBtn: document.getElementById('restart-round-btn'),
         undoBtn: document.getElementById('undo-btn'),
         resetScoreBtn: document.getElementById('reset-score-btn'),
@@ -344,26 +474,26 @@
         helpOkBtn: document.getElementById('help-ok-btn')
       };
 
-      // Load saved theme
-      const savedTheme = localStorage.getItem('kawaii_theme_index');
-      if (savedTheme !== null) {
-        this.themeIndex = parseInt(savedTheme, 10) % THEMES.length;
+      // Load saved palette
+      const savedPalette = localStorage.getItem('kawaii_zc_palette');
+      if (savedPalette !== null) {
+        this.paletteIndex = parseInt(savedPalette, 10) % PALETTES.length;
       }
 
       this.initEvents();
-      this.applyTheme();
+      this.applyPalette();
       this.updateScoreboard();
       this.resetRound(true);
       this.updateSoundButton();
     }
 
-    get currentTheme() {
-      return THEMES[this.themeIndex];
+    get currentPalette() {
+      return PALETTES[this.paletteIndex];
     }
 
     loadScores() {
       try {
-        const stored = localStorage.getItem('kawaii_ttt_scores');
+        const stored = localStorage.getItem('kawaii_zc_scores');
         if (stored) {
           return JSON.parse(stored);
         }
@@ -375,14 +505,14 @@
 
     saveScores() {
       try {
-        localStorage.setItem('kawaii_ttt_scores', JSON.stringify(this.scores));
+        localStorage.setItem('kawaii_zc_scores', JSON.stringify(this.scores));
       } catch (e) {
         console.warn('Could not save scores:', e);
       }
     }
 
     initEvents() {
-      // Cell clicks
+      // Cell clicks & keyboard access
       this.dom.cells.forEach(cell => {
         cell.addEventListener('click', (e) => this.handleCellClick(e));
         cell.addEventListener('keydown', (e) => {
@@ -418,12 +548,12 @@
         });
       });
 
-      // Theme toggle
+      // Palette toggle
       this.dom.themeBtn.addEventListener('click', () => {
-        this.themeIndex = (this.themeIndex + 1) % THEMES.length;
-        localStorage.setItem('kawaii_theme_index', this.themeIndex);
+        this.paletteIndex = (this.paletteIndex + 1) % PALETTES.length;
+        localStorage.setItem('kawaii_zc_palette', this.paletteIndex);
         this.sound.playClick();
-        this.applyTheme();
+        this.applyPalette();
         this.renderBoard();
         this.updateStatusBanner();
       });
@@ -480,7 +610,7 @@
         if (e.target === this.dom.helpModal) closeHelp();
       });
 
-      // Responsive redraw of win line on window resize
+      // Window resize: recompute SVG winning strike line
       window.addEventListener('resize', () => {
         if (this.winningCombo) {
           this.drawWinningLine(this.winningCombo);
@@ -493,22 +623,25 @@
       this.dom.soundBtn.title = this.sound.enabled ? 'Sound: On' : 'Sound: Off';
     }
 
-    applyTheme() {
-      const theme = this.currentTheme;
-      this.dom.themeLabel.textContent = theme.name;
-      this.dom.iconP1.textContent = theme.p1.icon;
-      this.dom.nameP1.textContent = theme.p1.name;
+    applyPalette() {
+      const p = this.currentPalette;
+      this.dom.themeLabel.textContent = p.name;
 
+      // Update Card 1 (Cross X)
+      this.dom.nameP1.textContent = p.p1.name;
+      this.dom.iconP1.innerHTML = getCuteCrossSvg(p.p1.grad, p.p1.blush, 'icon_p1');
+
+      // Update Card 2 (Zero O or Bot O)
       if (this.gameMode === 'pve') {
-        this.dom.iconP2.textContent = '🤖';
-        this.dom.nameP2.textContent = theme.botName;
+        this.dom.nameP2.textContent = p.p2.botName;
+        this.dom.iconP2.innerHTML = getCuteZeroSvg(p.p2.grad, p.p2.blush, 'icon_p2');
       } else {
-        this.dom.iconP2.textContent = theme.p2.icon;
-        this.dom.nameP2.textContent = theme.p2.name;
+        this.dom.nameP2.textContent = p.p2.name;
+        this.dom.iconP2.innerHTML = getCuteZeroSvg(p.p2.grad, p.p2.blush, 'icon_p2');
       }
 
-      document.documentElement.style.setProperty('--player1-color', theme.p1.color);
-      document.documentElement.style.setProperty('--player2-color', theme.p2.color);
+      document.documentElement.style.setProperty('--player1-color', p.p1.color);
+      document.documentElement.style.setProperty('--player2-color', p.p2.color);
     }
 
     switchMode(mode) {
@@ -526,7 +659,7 @@
         this.dom.aiControls.classList.add('hidden');
       }
 
-      this.applyTheme();
+      this.applyPalette();
       this.resetRound(false);
     }
 
@@ -551,7 +684,7 @@
       this.winningCombo = null;
       this.history = [];
 
-      // Determine who starts
+      // Determine starting player
       if (this.firstTurnPref === 'p1') {
         this.currentTurn = 'p1';
       } else if (this.firstTurnPref === 'p2') {
@@ -595,7 +728,7 @@
     }
 
     updateStatusBanner(customText = null) {
-      const theme = this.currentTheme;
+      const p = this.currentPalette;
 
       if (customText) {
         this.dom.statusText.textContent = customText;
@@ -605,22 +738,20 @@
       if (this.isGameOver) return;
 
       if (this.currentTurn === 'p1') {
-        this.dom.statusAvatar.textContent = theme.p1.icon;
-        this.dom.statusText.textContent = `${theme.p1.name}'s turn! Tap an empty tile~`;
+        this.dom.statusAvatar.innerHTML = '✖️';
+        this.dom.statusText.textContent = "Cross (X)'s turn! Tap an empty tile~";
       } else {
         if (this.gameMode === 'pve') {
-          this.dom.statusAvatar.textContent = '🤖';
-          this.dom.statusText.textContent = `${theme.botName} is pondering... ✨`;
+          this.dom.statusAvatar.innerHTML = '🤖';
+          this.dom.statusText.textContent = `${p.p2.botName} is thinking super hard... ✨`;
         } else {
-          this.dom.statusAvatar.textContent = theme.p2.icon;
-          this.dom.statusText.textContent = `${theme.p2.name}'s turn! Make your move~`;
+          this.dom.statusAvatar.innerHTML = '⭕';
+          this.dom.statusText.textContent = "Zero (O)'s turn! Make your move~";
         }
       }
     }
 
     updateUndoButton() {
-      // In PvE, can undo if at least player has made a move
-      // In PvP, can undo if at least 1 move has happened
       this.dom.undoBtn.disabled = this.history.length === 0 || this.isAiThinking;
     }
 
@@ -632,14 +763,14 @@
 
       if (this.boardState[index] !== null) return;
 
-      // In PvE mode, user only plays as P1
+      // In PvE mode, user plays as Cross (p1)
       if (this.gameMode === 'pve' && this.currentTurn !== 'p1') return;
 
       this.executeMove(index, this.currentTurn);
     }
 
     executeMove(index, player) {
-      // Save history for undo
+      // Save history snapshot for undo
       this.history.push({
         board: [...this.boardState],
         turn: this.currentTurn
@@ -648,7 +779,7 @@
       this.boardState[index] = player;
       this.renderCell(index, player);
 
-      // Sound feedback
+      // Cute pop sound with higher pitch for X, deeper pop for O
       this.sound.playPop(player === 'p1' ? 560 : 440);
 
       // Check win or tie
@@ -677,17 +808,19 @@
 
     renderCell(index, player) {
       const cell = this.dom.cells[index];
-      const theme = this.currentTheme;
+      const p = this.currentPalette;
       cell.classList.add('taken');
 
       const markDiv = document.createElement('div');
       markDiv.className = 'cell-mark';
 
-      const iconSpan = document.createElement('span');
-      iconSpan.className = 'emoji-icon';
-      iconSpan.textContent = player === 'p1' ? theme.p1.icon : (this.gameMode === 'pve' ? '🤖' : theme.p2.icon);
+      if (player === 'p1') {
+        markDiv.innerHTML = getCuteCrossSvg(p.p1.grad, p.p1.blush, `cell_${index}`);
+      } else {
+        markDiv.innerHTML = getCuteZeroSvg(p.p2.grad, p.p2.blush, `cell_${index}`);
+      }
 
-      markDiv.appendChild(iconSpan);
+      cell.innerHTML = '';
       cell.appendChild(markDiv);
     }
 
@@ -706,7 +839,6 @@
       if (this.history.length === 0 || this.isAiThinking) return;
 
       if (this.gameMode === 'pve') {
-        // Pop back to the last player move
         let snapshot = null;
         while (this.history.length > 0) {
           snapshot = this.history.pop();
@@ -717,7 +849,6 @@
           this.currentTurn = 'p1';
         }
       } else {
-        // In PvP, just pop the last single turn
         const snapshot = this.history.pop();
         if (snapshot) {
           this.boardState = snapshot.board;
@@ -792,9 +923,9 @@
 
       // Sound & Confetti celebration
       this.sound.playWin();
-      this.confetti.burst(80);
+      this.confetti.burst(85);
 
-      // Show Victory Modal after gentle pause
+      // Show Victory Modal
       setTimeout(() => {
         this.openVictoryModal(win.player);
       }, 550);
@@ -810,8 +941,8 @@
       this.updateActiveCard();
 
       this.sound.playDraw();
-      this.dom.statusAvatar.textContent = '🎀';
-      this.dom.statusText.textContent = "It's a tie! Both of you were incredible!";
+      this.dom.statusAvatar.innerHTML = '🎀';
+      this.dom.statusText.textContent = "It's a tie! Both of you played so well!";
 
       setTimeout(() => {
         this.openDrawModal();
@@ -848,28 +979,28 @@
     }
 
     openVictoryModal(winner) {
-      const theme = this.currentTheme;
-      let avatar, title, message;
+      const p = this.currentPalette;
+      let avatarHtml, title, message;
 
       if (winner === 'p1') {
-        avatar = theme.p1.icon;
-        title = `Woohoo! ${theme.p1.name} Won!`;
+        avatarHtml = getCuteCrossSvg(p.p1.grad, p.p1.blush, 'modal_win');
+        title = `Yay! Cross (X) Won!`;
         message = this.gameMode === 'pve'
-          ? "You outsmarted the adorable bot! Sparkling performance! 💖"
-          : `Amazing match! Congratulations ${theme.p1.name}! 🎉`;
+          ? "You outsmarted the cute Bot! Sensational victory! 💖"
+          : `Brilliant moves! Congratulations Player X! 🎉`;
       } else {
         if (this.gameMode === 'pve') {
-          avatar = '🤖';
-          title = `Beep Boop! ${theme.botName} Won!`;
-          message = "The cute bot was very lucky this time! Want a rematch? 🌸";
+          avatarHtml = getCuteZeroSvg(p.p2.grad, p.p2.blush, 'modal_win');
+          title = `Beep Boop! Bot (O) Won!`;
+          message = "The cute bot was very lucky this time! Ready for a rematch? 🌸";
         } else {
-          avatar = theme.p2.icon;
-          title = `Hooray! ${theme.p2.name} Won!`;
-          message = `Sensational victory! Beautifully played! 🎈`;
+          avatarHtml = getCuteZeroSvg(p.p2.grad, p.p2.blush, 'modal_win');
+          title = `Hooray! Zero (O) Won!`;
+          message = `Sensational victory! Beautifully played Player O! 🎈`;
         }
       }
 
-      this.dom.modalAvatar.textContent = avatar;
+      this.dom.modalAvatar.innerHTML = avatarHtml;
       this.dom.modalTitle.textContent = title;
       this.dom.modalMessage.textContent = message;
 
@@ -885,7 +1016,7 @@
     }
 
     openDrawModal() {
-      this.dom.modalAvatar.textContent = '🤝';
+      this.dom.modalAvatar.innerHTML = '🤝';
       this.dom.modalTitle.textContent = "It's a Lovely Draw!";
       this.dom.modalMessage.textContent = "Two brilliant minds matched each other move for move! 🎀";
       this.dom.modalStreakBadge.style.display = 'none';
@@ -903,8 +1034,8 @@
     triggerAiMove(delay = 400) {
       this.isAiThinking = true;
       this.updateUndoButton();
-      this.dom.statusAvatar.textContent = '🤖';
-      this.dom.statusText.textContent = `${this.currentTheme.botName} is thinking super hard... ✨`;
+      this.dom.statusAvatar.innerHTML = '🤖';
+      this.dom.statusText.textContent = `${this.currentPalette.p2.botName} is thinking super hard... ✨`;
 
       setTimeout(() => {
         if (this.isGameOver) {
@@ -928,9 +1059,8 @@
 
       if (emptyIndices.length === 0) return -1;
 
-      // 🌸 1. Easy Mode: Almost completely random and cute!
+      // 🌸 1. Easy Mode: Playful and cute
       if (this.difficulty === 'easy') {
-        // 20% of the time, takes a winning move if obvious, else random
         if (Math.random() < 0.25) {
           const winMove = this.findWinningMove(this.boardState, 'p2');
           if (winMove !== -1) return winMove;
@@ -940,11 +1070,11 @@
 
       // ⚡ 2. Medium Mode: Smart but beatable
       if (this.difficulty === 'medium') {
-        // Check if AI can win immediately
+        // Take winning move if available
         const winMove = this.findWinningMove(this.boardState, 'p2');
         if (winMove !== -1) return winMove;
 
-        // Check if Player is about to win and block it (80% chance)
+        // Block player from winning (82% chance)
         const blockMove = this.findWinningMove(this.boardState, 'p1');
         if (blockMove !== -1 && Math.random() < 0.82) return blockMove;
 
@@ -964,7 +1094,6 @@
       let bestScore = -Infinity;
       let move = emptyIndices[0];
 
-      // If board is empty, picking center or a corner immediately saves computation
       if (emptyIndices.length === 9) {
         return [0, 2, 4, 6, 8][Math.floor(Math.random() * 5)];
       }
@@ -1041,9 +1170,9 @@
   // Initialize once DOM is ready
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
-      window.game = new KawaiiTicTacToe();
+      window.game = new KawaiiZeroAndCross();
     });
   } else {
-    window.game = new KawaiiTicTacToe();
+    window.game = new KawaiiZeroAndCross();
   }
 })();

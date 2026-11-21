@@ -1,30 +1,51 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
   <defs>
-    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#FF9A8B"/>
-      <stop offset="50%" stop-color="#FF6A88"/>
-      <stop offset="100%" stop-color="#FF99AC"/>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fff0f5"/>
+      <stop offset="100%" stop-color="#e8f4fd"/>
+    </linearGradient>
+    <linearGradient id="xGradFav" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff7597"/>
+      <stop offset="100%" stop-color="#ff5277"/>
+    </linearGradient>
+    <linearGradient id="oGradFav" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4facfe"/>
+      <stop offset="100%" stop-color="#00f2fe"/>
     </linearGradient>
     <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
-      <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#FF6A88" flood-opacity="0.3"/>
+      <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#b89ac2" flood-opacity="0.3"/>
     </filter>
   </defs>
+
   <!-- Background Rounded Badge -->
-  <rect x="8" y="8" width="84" height="84" rx="26" fill="url(#grad)" filter="url(#shadow)"/>
-  
-  <!-- Cute Smiling Star Piece -->
-  <!-- Eyes -->
-  <ellipse cx="38" cy="46" rx="5" ry="6" fill="#3D2B3D"/>
-  <ellipse cx="62" cy="46" rx="5" ry="6" fill="#3D2B3D"/>
-  <!-- Eye sparkles -->
-  <circle cx="36" cy="44" r="2" fill="#FFFFFF"/>
-  <circle cx="60" cy="44" r="2" fill="#FFFFFF"/>
-  <!-- Blush -->
-  <ellipse cx="30" cy="54" rx="5" ry="2.5" fill="#FF477E" opacity="0.6"/>
-  <ellipse cx="70" cy="54" rx="5" ry="2.5" fill="#FF477E" opacity="0.6"/>
-  <!-- Happy Smile -->
-  <path d="M 44 54 Q 50 62 56 54" stroke="#3D2B3D" stroke-width="3.5" stroke-linecap="round" fill="none"/>
-  
-  <!-- Little Sparkle on Top -->
-  <path d="M 72 20 Q 75 25 80 26 Q 75 27 72 32 Q 71 27 66 26 Q 71 25 72 20 Z" fill="#FFF475"/>
+  <rect x="6" y="6" width="88" height="88" rx="26" fill="url(#bgGrad)" stroke="#ffffff" stroke-width="3" filter="url(#shadow)"/>
+
+  <!-- Cute Little Cross (X) on Left -->
+  <g transform="translate(14, 22) scale(0.48)">
+    <line x1="15" y1="15" x2="65" y2="65" stroke="url(#xGradFav)" stroke-width="16" stroke-linecap="round"/>
+    <line x1="65" y1="15" x2="15" y2="65" stroke="url(#xGradFav)" stroke-width="16" stroke-linecap="round"/>
+    <circle cx="40" cy="40" r="14" fill="#ffffff"/>
+    <circle cx="35" cy="38" r="2.5" fill="#373244"/>
+    <circle cx="45" cy="38" r="2.5" fill="#373244"/>
+    <ellipse cx="32" cy="43" rx="2.5" ry="1.2" fill="#ff7597"/>
+    <ellipse cx="48" cy="43" rx="2.5" ry="1.2" fill="#ff7597"/>
+    <path d="M 37 42 Q 40 45 43 42" stroke="#373244" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+  </g>
+
+  <!-- Cute Little Zero (O) on Right -->
+  <g transform="translate(48, 22) scale(0.48)">
+    <circle cx="40" cy="40" r="26" stroke="url(#oGradFav)" stroke-width="14" fill="none"/>
+    <circle cx="40" cy="40" r="14" fill="#ffffff"/>
+    <!-- Cute Bow -->
+    <path d="M 34 10 Q 40 14 40 16 Q 40 14 46 10 Q 44 17 40 16 Q 36 17 34 10 Z" fill="#ff7597"/>
+    <circle cx="40" cy="15" r="2" fill="#ffd1dc"/>
+    <circle cx="35" cy="38" r="2.5" fill="#373244"/>
+    <circle cx="45" cy="38" r="2.5" fill="#373244"/>
+    <ellipse cx="32" cy="43" rx="2.5" ry="1.2" fill="#ff7675"/>
+    <ellipse cx="48" cy="43" rx="2.5" ry="1.2" fill="#ff7675"/>
+    <path d="M 37 42 Q 40 45 43 42" stroke="#373244" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+  </g>
+
+  <!-- Sparkles -->
+  <path d="M 50 74 Q 52 78 56 79 Q 52 80 50 84 Q 49 80 45 79 Q 49 78 50 74 Z" fill="#ffd166"/>
 </svg>

@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>🌸 Kawaii Tic-Tac-Toe 🎀 | Cute Play & AI</title>
-  <meta name="description" content="A super cute, joyful Tic-Tac-Toe game with charming animations, lovely sounds, 1-Player vs Cute AI (with multiple difficulties) and 2-Player Pass & Play modes!" />
+  <title>🌸 Kawaii Zero &amp; Cross 🎀 | Cute Tic-Tac-Toe</title>
+  <meta name="description" content="A super cute, joyful Zero and Cross (Tic-Tac-Toe) game with lovely graphics, sweet animations, sounds, 1-Player vs Cute AI and 2-Player Pass & Play modes!" />
   <meta name="theme-color" content="#ffd1dc" />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -15,16 +15,16 @@
 <body>
   <!-- Ambient Floating Background Elements -->
   <div class="bg-decorations" aria-hidden="true">
-    <span class="bubble b1">🌸</span>
+    <span class="bubble b1">✖️</span>
     <span class="bubble b2">✨</span>
-    <span class="bubble b3">💖</span>
-    <span class="bubble b4">⭐</span>
-    <span class="bubble b5">🍓</span>
-    <span class="bubble b6">☁️</span>
-    <span class="bubble b7">🐾</span>
-    <span class="bubble b8">🎀</span>
-    <span class="bubble b9">🐰</span>
-    <span class="bubble b10">✨</span>
+    <span class="bubble b3">⭕</span>
+    <span class="bubble b4">💖</span>
+    <span class="bubble b5">⭐</span>
+    <span class="bubble b6">🎀</span>
+    <span class="bubble b7">✖️</span>
+    <span class="bubble b8">⭕</span>
+    <span class="bubble b9">✨</span>
+    <span class="bubble b10">💖</span>
   </div>
 
   <!-- Fullscreen Confetti Canvas -->
@@ -35,16 +35,16 @@
     <header class="header">
       <div class="logo-wrapper">
         <span class="sparkle-icon">✨</span>
-        <h1 class="game-title">Tic-Tac-Toe</h1>
+        <h1 class="game-title">Zero &amp; Cross</h1>
         <span class="sparkle-icon">🎀</span>
       </div>
-      <p class="game-subtitle">The cutest game to play with friends or cute AI!</p>
+      <p class="game-subtitle">The sweetest Zero (O) &amp; Cross (X) game!</p>
 
       <!-- Quick Action Bar -->
       <div class="top-bar">
-        <button id="theme-btn" class="pill-btn theme-toggle" title="Switch Cute Character Theme" aria-label="Switch Theme">
+        <button id="theme-btn" class="pill-btn theme-toggle" title="Switch Cute Pastel Colors" aria-label="Switch Color Theme">
           <span class="btn-icon">🎨</span>
-          <span class="btn-label" id="theme-label">Kitty &amp; Bunny</span>
+          <span class="btn-label" id="theme-label">Sakura &amp; Sky</span>
         </button>
 
         <button id="sound-btn" class="pill-btn icon-only" title="Toggle Sound Effects" aria-label="Toggle Sound">
@@ -75,7 +75,7 @@
         <div class="control-row">
           <span class="control-label">🤖 Difficulty:</span>
           <div class="difficulty-group">
-            <button class="diff-btn" data-diff="easy" title="Casual & silly">🌸 Easy</button>
+            <button class="diff-btn" data-diff="easy" title="Casual & playful">🌸 Easy</button>
             <button class="diff-btn active" data-diff="medium" title="Smart & balanced">⚡ Medium</button>
             <button class="diff-btn" data-diff="hard" title="Genius Unbeatable AI">👑 Genius</button>
           </div>
@@ -84,8 +84,8 @@
         <div class="control-row">
           <span class="control-label">🎯 First Turn:</span>
           <div class="first-turn-group">
-            <button class="turn-choice-btn active" data-turn="p1">You First</button>
-            <button class="turn-choice-btn" data-turn="p2">Bot First</button>
+            <button class="turn-choice-btn active" data-turn="p1">Cross (X) First</button>
+            <button class="turn-choice-btn" data-turn="p2">Zero (O) First</button>
             <button class="turn-choice-btn" data-turn="random">🎲 Random</button>
           </div>
         </div>
@@ -94,14 +94,14 @@
 
     <!-- Scoreboard -->
     <section class="scoreboard" aria-label="Scoreboard">
-      <!-- Player 1 Card -->
+      <!-- Player 1 Card (Cross X) -->
       <div class="score-card player-1" id="card-p1">
         <div class="avatar-badge" id="avatar-p1">
-          <span class="char-icon" id="icon-p1">🐱</span>
+          <span class="char-icon" id="icon-p1">✖️</span>
           <span class="turn-indicator-dot" title="Current Turn"></span>
         </div>
         <div class="score-info">
-          <div class="player-name" id="name-p1">Player 1</div>
+          <div class="player-name" id="name-p1">Player X</div>
           <div class="score-val" id="score-p1">0</div>
         </div>
       </div>
@@ -115,14 +115,14 @@
         </div>
       </div>
 
-      <!-- Player 2 / AI Card -->
+      <!-- Player 2 / AI Card (Zero O) -->
       <div class="score-card player-2" id="card-p2">
         <div class="avatar-badge" id="avatar-p2">
-          <span class="char-icon" id="icon-p2">🐰</span>
+          <span class="char-icon" id="icon-p2">⭕</span>
           <span class="turn-indicator-dot" title="Current Turn"></span>
         </div>
         <div class="score-info">
-          <div class="player-name" id="name-p2">Cute Bot</div>
+          <div class="player-name" id="name-p2">Bot (O)</div>
           <div class="score-val" id="score-p2">0</div>
         </div>
       </div>
@@ -130,13 +130,13 @@
 
     <!-- Game Status & Turn Banner -->
     <div class="turn-banner" id="turn-banner" role="status" aria-live="polite">
-      <span class="status-avatar" id="status-avatar">🐱</span>
-      <span class="status-text" id="status-text">Your turn! Tap a tile to start~</span>
+      <span class="status-avatar" id="status-avatar">✖️</span>
+      <span class="status-text" id="status-text">Cross (X)'s turn! Tap a tile to start~</span>
     </div>
 
     <!-- Main Game Board Container -->
     <section class="board-wrapper">
-      <div class="board" id="board" role="grid" aria-label="Tic Tac Toe 3 by 3 Grid">
+      <div class="board" id="board" role="grid" aria-label="Zero and Cross 3 by 3 Grid">
         <!-- 9 clickable grid cells -->
         <button class="cell" data-index="0" role="gridcell" aria-label="Top-Left cell"></button>
         <button class="cell" data-index="1" role="gridcell" aria-label="Top-Center cell"></button>
@@ -193,10 +193,10 @@
         <span>✨</span><span>🎉</span><span>🌸</span><span>⭐</span>
       </div>
       <div class="modal-badge-wrapper">
-        <div class="modal-avatar" id="modal-avatar">🐱</div>
+        <div class="modal-avatar" id="modal-avatar">✖️</div>
       </div>
-      <h2 class="modal-title" id="modal-title">Yay! Kitty Won!</h2>
-      <p class="modal-subtitle" id="modal-message">What a sensational cute victory! 🎈</p>
+      <h2 class="modal-title" id="modal-title">Yay! Cross (X) Won!</h2>
+      <p class="modal-subtitle" id="modal-message">What a sensational victory! 🎈</p>
 
       <div class="modal-stats" id="modal-streak-badge">
         🔥 <span id="modal-streak-text">Win Streak: 1</span>
@@ -219,7 +219,7 @@
       <button class="modal-close-corner" id="help-close-x" aria-label="Close Help">✕</button>
       <div class="help-header">
         <span class="help-icon">📖</span>
-        <h2>How to Play Kawaii Tic-Tac-Toe</h2>
+        <h2>How to Play Zero &amp; Cross</h2>
       </div>
 
       <div class="help-content">
@@ -227,7 +227,7 @@
           <span class="help-badge">1</span>
           <div>
             <strong>Goal:</strong>
-            <p>Line up 3 of your cute characters in a row (horizontally, vertically, or diagonally) before your opponent does!</p>
+            <p>Connect 3 of your cute <strong>Crosses (X)</strong> or <strong>Zeros (O)</strong> in a row (horizontally, vertically, or diagonally) to win!</p>
           </div>
         </div>
 
@@ -235,16 +235,16 @@
           <span class="help-badge">2</span>
           <div>
             <strong>Game Modes:</strong>
-            <p><strong>🤖 vs Cute Machine:</strong> Test your wits against the adorable Bot with Easy, Medium, or Unbeatable Genius levels!</p>
-            <p><strong>👥 2 Players:</strong> Pass the phone or play together on the same screen with a friend.</p>
+            <p><strong>🤖 vs Cute Machine:</strong> Play as Cross (X) against the cute Bot (O) with Easy, Medium, or Unbeatable Genius levels!</p>
+            <p><strong>👥 2 Players:</strong> Play with a friend taking turns as Cross (X) and Zero (O) on the same screen.</p>
           </div>
         </div>
 
         <div class="help-item">
           <span class="help-badge">3</span>
           <div>
-            <strong>Themes:</strong>
-            <p>Tap <strong>🎨</strong> at the top to change characters anytime (Kitty &amp; Bunny, Strawberry &amp; Boba, Heart &amp; Star, or Kawaii X &amp; O)!</p>
+            <strong>Color Palettes:</strong>
+            <p>Tap <strong>🎨</strong> at the top to change cute pastel color themes (Sakura &amp; Sky, Bubblegum &amp; Mint, Peach &amp; Lavender, or Sunny &amp; Berry)!</p>
           </div>
         </div>
       </div>

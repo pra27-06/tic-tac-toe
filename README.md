@@ -1,6 +1,6 @@
-# 🌸 Kawaii Tic-Tac-Toe 🎀
+# 🌸 Kawaii Zero & Cross 🎀
 
-A delightful, super-cute, aesthetic Tic-Tac-Toe web game featuring sweet animations, playful sound effects, celebratory confetti, 4 adorable character themes, and two complete game modes: **Single-Player vs Cute Machine** and **2-Player Pass & Play**!
+A delightful, super-cute, aesthetic Zero (O) & Cross (X) Tic-Tac-Toe web game featuring custom kawaii vector graphics with smiling faces and blush cheeks, sweet animations, playful synthesized sound effects, celebratory confetti, 4 pastel color palettes, and two complete game modes: **Single-Player vs Cute Machine** and **2-Player Pass & Play**!
 
 🎮 **Play Online**: [https://pra27-06.github.io/tic-tac-toe/](https://pra27-06.github.io/tic-tac-toe/)
 
@@ -8,20 +8,20 @@ A delightful, super-cute, aesthetic Tic-Tac-Toe web game featuring sweet animati
 
 ## ✨ Features
 
-- 💖 **Aesthetic Pastel Kawaii Design**: Soft gradients, glassmorphism cards, gentle floating sparkles, and spring-physics bounce animations.
+- 💖 **Kawaii Zero (O) & Cross (X) Graphics**: Instead of plain letters, every Cross and Zero is an animated vector piece with smiling eyes, blush cheeks, and sparkling ribbons!
 - 🤖 **1-Player Mode (vs Cute Machine)**:
-  - **🌸 Easy (Baby Bot)**: Relaxed, friendly, and cute.
+  - **🌸 Easy (Baby Bot)**: Relaxed, friendly, and playful.
   - **⚡ Medium (Clever Bot)**: Smart, blocks winning lines, and plays tactically.
   - **👑 Genius (Unbeatable Bot)**: Powered by the Minimax algorithm with depth scoring — mathematically unbeatable!
-  - **First-Turn Selection**: Choose whether you start first, the bot starts first, or pick randomly (`🎲 Random`).
+  - **First-Turn Selection**: Choose whether Cross (X) starts first, Zero (O) starts first, or pick randomly (`🎲 Random`).
 - 👥 **2-Player Mode (Pass & Play)**:
   - Play with a friend on the same phone, tablet, or laptop.
   - Active turn glow badge and dynamic turn announcement banner.
-- 🎨 **4 Cute Themes** (Switch anytime with the 🎨 button):
-  1. 🐱 **Kitty & Bunny** (Paw-some Cat vs Hoppy Bunny)
-  2. 🍓 **Berry & Boba** (Sweet Strawberry vs Cozy Boba Tea)
-  3. 💖 **Heart & Star** (Glitter Heart vs Magic Star)
-  4. 🌸 **Kawaii X & O** (Blushing Pink X vs Mint Ribbon O)
+- 🎨 **4 Cute Pastel Color Palettes** (Switch anytime with the 🎨 button):
+  1. 🌸 **Sakura & Sky** (Sakura Pink X & Sky Blue O)
+  2. 🍬 **Bubblegum & Mint** (Lavender Purple X & Mint Green O)
+  3. 🍑 **Peach & Lavender** (Coral Peach X & Sweet Lavender O)
+  4. 🌟 **Sunny & Berry** (Ruby Berry X & Buttercup Yellow O)
 - 🔊 **Synthesized Web Audio FX**:
   - Zero external sound files — 100% reliable offline sound synthesizer.
   - Bubble pops, happy win arpeggios, draw sighs, and tactile button clicks.
@@ -45,11 +45,11 @@ A delightful, super-cute, aesthetic Tic-Tac-Toe web game featuring sweet animati
 ## 🕹️ How to Play
 
 1. Choose your game mode:
-   - Tap **🤖 vs Cute Machine** to play against the computer.
+   - Tap **🤖 vs Cute Machine** to play as Cross (X) against the computer as Zero (O).
    - Tap **👥 2 Players** to play with a friend.
 2. If playing against the Machine, select your desired difficulty: **Easy**, **Medium**, or **Genius**.
 3. Take turns tapping an empty tile on the 3×3 grid.
-4. The first player to connect 3 tiles horizontally, vertically, or diagonally wins the round! 🎉
+4. The first player to connect 3 of their symbols horizontally, vertically, or diagonally wins the round! 🎉
 5. If all 9 tiles are filled and nobody has 3 in a row, the round ends in a cute Draw! 🤝
 
 ---
@@ -59,35 +59,13 @@ A delightful, super-cute, aesthetic Tic-Tac-Toe web game featuring sweet animati
 Anyone in the world can play your game for free using **GitHub Pages**:
 
 1. Go to your repository on GitHub: [https://github.com/pra27-06/tic-tac-toe](https://github.com/pra27-06/tic-tac-toe)
-2. Click on the **⚙️ Settings** tab at the top.
+2. Click on the **⚙️ Settings** tab at the top right.
 3. On the left sidebar, click on **Pages** (under the "Code and automation" section).
 4. Under **Build and deployment**:
-   - **Source**: Select `Deploy from a branch`.
-   - **Branch**: Select `main` and folder `/ (root)`.
+   - **Source**: Select `GitHub Actions` (or `Deploy from a branch` ➔ branch `main` or `gh-pages` ➔ `/ (root)`).
    - Click **Save**.
 5. Wait 1–2 minutes, and GitHub will provide your live URL:
    👉 **`https://pra27-06.github.io/tic-tac-toe/`**
-
----
-
-## 💻 Local Development & Testing
-
-This project is built with zero build steps or heavy dependencies. You can run it immediately on any browser!
-
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/pra27-06/tic-tac-toe.git
-   cd tic-tac-toe
-   ```
-2. Open `index.html` directly in your favorite browser:
-   - On Windows: double-click `index.html` or run `start index.html` in PowerShell.
-   - Or start a quick local server:
-     ```bash
-     npx serve .
-     # or
-     python -m http.server 8000
-     ```
-3. Open `http://localhost:8000` and enjoy!
 
 ---
 
@@ -95,7 +73,7 @@ This project is built with zero build steps or heavy dependencies. You can run i
 
 - **HTML5**: Semantic layout, accessible dialog modals, and responsive viewport setup.
 - **CSS3**: Modern CSS Variables, Flexbox, CSS Grid, Glassmorphism backdrop-filters, and Keyframe animations.
-- **Vanilla JavaScript (ES6+)**: Minimax algorithm, Web Audio API, Canvas particle confetti engine, and State management.
+- **Vanilla JavaScript (ES6+)**: Custom SVG Kawaii procedural graphics, Minimax algorithm, Web Audio API, Canvas particle confetti engine, and State management.
 
 ---
 
