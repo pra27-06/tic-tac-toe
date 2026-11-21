@@ -1,204 +1,18 @@
 /**
- * 👶 ZERO KATA • CUTE BABIES EDITION 🍼
- * Pure Vanilla JavaScript implementation with Adorable Baby Vector Graphics,
- * Web Audio FX, Minimax AI, Canvas Confetti, and SVG Win-Line strike.
+ * 🎮 KAWAII ARCADE & GAME HUB 🎀
+ * Zero Kata, Stone Paper Scissors (1P, 2P & 3P Modes), and Memory Cards.
+ * Pure Vanilla JavaScript with Web Audio Synthesizer, Minimax AI, and Confetti Engine.
  */
 
 (() => {
   'use strict';
 
-  // --- Cute Baby Zero Kata Color Themes ---
-  const PALETTES = [
-    {
-      id: 'baby-girl-boy',
-      name: 'Baby Girl & Boy',
-      p1: {
-        label: 'Baby Kata',
-        name: 'Baby Kata',
-        color: '#ff6584',
-        grad: ['#ff7597', '#ff5277'],
-        blush: '#ff7597'
-      },
-      p2: {
-        label: 'Baby Zero',
-        name: 'Baby Zero',
-        botName: 'Baby Bot',
-        color: '#0284c7',
-        grad: ['#38bdf8', '#0284c7'],
-        blush: '#ff7675'
-      }
-    },
-    {
-      id: 'teddy-duckling',
-      name: 'Teddy & Duckling',
-      p1: {
-        label: 'Teddy Kata',
-        name: 'Teddy Kata',
-        color: '#c27803',
-        grad: ['#e59819', '#b45309'],
-        blush: '#f87171'
-      },
-      p2: {
-        label: 'Duckling Zero',
-        name: 'Duckling Zero',
-        botName: 'Baby Bot',
-        color: '#eab308',
-        grad: ['#fde047', '#eab308'],
-        blush: '#fb7185'
-      }
-    },
-    {
-      id: 'baby-bunny-kitty',
-      name: 'Bunny & Kitty',
-      p1: {
-        label: 'Baby Bunny',
-        name: 'Baby Bunny',
-        color: '#f43f5e',
-        grad: ['#fb7185', '#e11d48'],
-        blush: '#fb7185'
-      },
-      p2: {
-        label: 'Baby Kitty',
-        name: 'Baby Kitty',
-        botName: 'Kitty Bot',
-        color: '#8b5cf6',
-        grad: ['#a78bfa', '#7c3aed'],
-        blush: '#f472b6'
-      }
-    },
-    {
-      id: 'pacifier-rattle',
-      name: 'Pacifier & Rattle',
-      p1: {
-        label: 'Pacifier Kata',
-        name: 'Pacifier Kata',
-        color: '#ec4899',
-        grad: ['#f472b6', '#db2777'],
-        blush: '#fb7185'
-      },
-      p2: {
-        label: 'Rattle Zero',
-        name: 'Rattle Zero',
-        botName: 'Rattle Bot',
-        color: '#10b981',
-        grad: ['#34d399', '#059669'],
-        blush: '#f87171'
-      }
-    }
-  ];
-
-  // Winning 3-in-a-row combinations
-  const WINNING_COMBOS = [
-    [0, 1, 2], // Row 1
-    [3, 4, 5], // Row 2
-    [6, 7, 8], // Row 3
-    [0, 3, 6], // Col 1
-    [1, 4, 7], // Col 2
-    [2, 5, 8], // Col 3
-    [0, 4, 8], // Diag 1
-    [2, 4, 6]  // Diag 2
-  ];
-
-  // --- SVG Kawaii Cute Baby Graphics Generators for Kata & Zero ---
-  function getCuteBabyKataSvg(palette, idSuffix = 'main') {
-    const grad = palette.p1.grad;
-    const blush = palette.p1.blush;
-    const gradId = `kataBabyGrad_${idSuffix}`;
-    const shadowId = `kShadow_${idSuffix}`;
-
-    return `
-      <svg class="mark-svg mark-kata" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <linearGradient id="${gradId}" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="${grad[0]}" />
-            <stop offset="100%" stop-color="${grad[1]}" />
-          </linearGradient>
-          <filter id="${shadowId}" x="-20%" y="-20%" width="140%" height="140%">
-            <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="${grad[1]}" flood-opacity="0.32"/>
-          </filter>
-        </defs>
-        <!-- Soft Rounded Diagonal Strokes of Kata -->
-        <line x1="22" y1="22" x2="78" y2="78" stroke="url(#${gradId})" stroke-width="17" stroke-linecap="round" filter="url(#${shadowId})" />
-        <line x1="78" y1="22" x2="22" y2="78" stroke="url(#${gradId})" stroke-width="17" stroke-linecap="round" filter="url(#${shadowId})" />
-        
-        <!-- Cute Baby Face in Center -->
-        <circle cx="50" cy="50" r="19" fill="#fff6ec" filter="url(#${shadowId})" />
-        <!-- Baby Hair Curl -->
-        <path d="M 50 31 Q 54 26 48 24 Q 45 28 50 31" fill="#c48a56" />
-        <!-- Big Shiny Baby Eyes -->
-        <circle cx="43" cy="48" r="3" fill="#373244" />
-        <circle cx="57" cy="48" r="3" fill="#373244" />
-        <!-- Sparkles in Eyes -->
-        <circle cx="42" cy="46.5" r="1.2" fill="#ffffff" />
-        <circle cx="56" cy="46.5" r="1.2" fill="#ffffff" />
-        <circle cx="44.2" cy="49" r="0.6" fill="#ffffff" />
-        <circle cx="58.2" cy="49" r="0.6" fill="#ffffff" />
-        <!-- Chubby Rosy Cheeks -->
-        <ellipse cx="38" cy="53" rx="3.5" ry="2" fill="${blush}" opacity="0.85" />
-        <ellipse cx="62" cy="53" rx="3.5" ry="2" fill="${blush}" opacity="0.85" />
-        <!-- Cute Baby Pacifier (Chupie) -->
-        <ellipse cx="50" cy="56" rx="5.5" ry="4" fill="${grad[0]}" />
-        <circle cx="50" cy="56" r="2.2" fill="#ffffff" />
-        <path d="M 47 59 Q 50 64 53 59" stroke="${grad[0]}" stroke-width="2" fill="none" stroke-linecap="round" />
-        <!-- Sparkle Accent -->
-        <path d="M 75 16 Q 78 21 83 22 Q 78 23 75 28 Q 74 23 69 22 Q 74 21 75 16 Z" fill="#fff375" opacity="0.9" />
-      </svg>
-    `;
-  }
-
-  function getCuteBabyZeroSvg(palette, idSuffix = 'main') {
-    const grad = palette.p2.grad;
-    const blush = palette.p2.blush;
-    const gradId = `zeroBabyGrad_${idSuffix}`;
-    const shadowId = `zShadow_${idSuffix}`;
-
-    return `
-      <svg class="mark-svg mark-zero" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <linearGradient id="${gradId}" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="${grad[0]}" />
-            <stop offset="100%" stop-color="${grad[1]}" />
-          </linearGradient>
-          <filter id="${shadowId}" x="-20%" y="-20%" width="140%" height="140%">
-            <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="${grad[1]}" flood-opacity="0.32"/>
-          </filter>
-        </defs>
-        <!-- Plump Round Donut Ring of Zero -->
-        <circle cx="50" cy="50" r="32" stroke="url(#${gradId})" stroke-width="16" fill="none" filter="url(#${shadowId})" />
-        
-        <!-- Baby Cap / Bonnet on Top of Zero -->
-        <path d="M 36 21 Q 50 11 64 21 Q 50 17 36 21 Z" fill="${grad[0]}" />
-        <circle cx="50" cy="12" r="3.5" fill="#fde047" />
-
-        <!-- Cute Baby Face in Center -->
-        <circle cx="50" cy="50" r="19" fill="#fff6ec" filter="url(#${shadowId})" />
-        <!-- Baby Hair Curl -->
-        <path d="M 50 31 Q 46 26 52 24 Q 55 28 50 31" fill="#c48a56" />
-        <!-- Big Shiny Baby Eyes -->
-        <circle cx="43" cy="48" r="3" fill="#373244" />
-        <circle cx="57" cy="48" r="3" fill="#373244" />
-        <!-- Sparkles in Eyes -->
-        <circle cx="42" cy="46.5" r="1.2" fill="#ffffff" />
-        <circle cx="56" cy="46.5" r="1.2" fill="#ffffff" />
-        <circle cx="44.2" cy="49" r="0.6" fill="#ffffff" />
-        <circle cx="58.2" cy="49" r="0.6" fill="#ffffff" />
-        <!-- Chubby Rosy Cheeks -->
-        <ellipse cx="38" cy="53" rx="3.5" ry="2" fill="${blush}" opacity="0.85" />
-        <ellipse cx="62" cy="53" rx="3.5" ry="2" fill="${blush}" opacity="0.85" />
-        <!-- Sweet Baby Pacifier (Chupie) -->
-        <ellipse cx="50" cy="56" rx="5.5" ry="4" fill="${grad[0]}" />
-        <circle cx="50" cy="56" r="2.2" fill="#ffffff" />
-        <path d="M 47 59 Q 50 64 53 59" stroke="${grad[0]}" stroke-width="2" fill="none" stroke-linecap="round" />
-        <!-- Sparkle Accent -->
-        <path d="M 80 44 Q 82 48 86 49 Q 82 50 80 54 Q 79 50 75 49 Q 79 48 80 44 Z" fill="#fff375" opacity="0.9" />
-      </svg>
-    `;
-  }
-
-  // --- Sound Synthesizer (Web Audio API) ---
+  // ==========================================================================
+  // 1. SOUND CONTROLLER (Procedural Web Audio API)
+  // ==========================================================================
   class SoundController {
     constructor() {
-      this.enabled = localStorage.getItem('kawaii_sound_enabled') !== 'false';
+      this.enabled = localStorage.getItem('arcade_sound_enabled') !== 'false';
       this.ctx = null;
     }
 
@@ -216,7 +30,7 @@
 
     toggle() {
       this.enabled = !this.enabled;
-      localStorage.setItem('kawaii_sound_enabled', this.enabled);
+      localStorage.setItem('arcade_sound_enabled', this.enabled);
       return this.enabled;
     }
 
@@ -247,14 +61,40 @@
       }
     }
 
+    playShoot() {
+      if (!this.enabled) return;
+      this.init();
+      if (!this.ctx) return;
+
+      try {
+        const now = this.ctx.currentTime;
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(420, now);
+        osc.frequency.exponentialRampToValueAtTime(840, now + 0.18);
+
+        gain.gain.setValueAtTime(0.25, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.18);
+
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+
+        osc.start(now);
+        osc.stop(now + 0.19);
+      } catch (e) {
+        console.warn('Audio error:', e);
+      }
+    }
+
     playWin() {
       if (!this.enabled) return;
       this.init();
       if (!this.ctx) return;
 
       try {
-        // Cheerful nursery music box arpeggio: C5, E5, G5, C6
-        const notes = [523.25, 659.25, 783.99, 1046.50];
+        const notes = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6
         notes.forEach((freq, idx) => {
           const startTime = this.ctx.currentTime + idx * 0.09;
           const osc = this.ctx.createOscillator();
@@ -283,7 +123,7 @@
       if (!this.ctx) return;
 
       try {
-        const notes = [440, 392, 349.23]; // Soft sweet sigh chords
+        const notes = [440, 392, 349.23];
         notes.forEach((freq, idx) => {
           const startTime = this.ctx.currentTime + idx * 0.11;
           const osc = this.ctx.createOscillator();
@@ -334,7 +174,9 @@
     }
   }
 
-  // --- Confetti Particle System ---
+  // ==========================================================================
+  // 2. CANVAS CONFETTI ENGINE
+  // ==========================================================================
   class ConfettiEngine {
     constructor(canvas) {
       this.canvas = canvas;
@@ -381,7 +223,7 @@
         const p = this.particles[i];
         p.x += p.vx;
         p.y += p.vy;
-        p.vy += 0.35; // gravity
+        p.vy += 0.35;
         p.rotation += p.rotationSpeed;
         p.alpha -= p.decay;
 
@@ -415,64 +257,168 @@
     }
   }
 
-  // --- Main ZERO KATA Game Controller ---
-  class ZeroKataGame {
-    constructor() {
-      this.boardState = Array(9).fill(null);
-      this.currentTurn = 'p1'; // 'p1' (Baby Kata) or 'p2' (Baby Zero)
-      this.gameMode = 'pve'; // 'pve' (vs Baby Bot) or 'pvp' (2 players)
-      this.difficulty = 'medium'; // 'easy' (Crawling), 'medium' (Babbling), 'hard' (Genius)
-      this.firstTurnPref = 'p1'; // 'p1', 'p2', or 'random'
-      this.isGameOver = false;
-      this.isAiThinking = false;
-      this.history = [];
-      this.paletteIndex = 0;
-      this.streak = 0;
-      this.streakWinner = null;
+  // ==========================================================================
+  // 3. ZERO KATA GAME LOGIC
+  // ==========================================================================
+  const ZK_PALETTES = [
+    {
+      id: 'baby-girl-boy',
+      name: 'Baby Girl & Boy',
+      p1: { label: 'Baby Kata', name: 'Baby Kata', color: '#ff6584', grad: ['#ff7597', '#ff5277'], blush: '#ff7597' },
+      p2: { label: 'Baby Zero', name: 'Baby Zero', botName: 'Baby Bot', color: '#0284c7', grad: ['#38bdf8', '#0284c7'], blush: '#ff7675' }
+    },
+    {
+      id: 'teddy-duckling',
+      name: 'Teddy & Duckling',
+      p1: { label: 'Teddy Kata', name: 'Teddy Kata', color: '#c27803', grad: ['#e59819', '#b45309'], blush: '#f87171' },
+      p2: { label: 'Duckling Zero', name: 'Duckling Zero', botName: 'Baby Bot', color: '#eab308', grad: ['#fde047', '#eab308'], blush: '#fb7185' }
+    },
+    {
+      id: 'baby-bunny-kitty',
+      name: 'Bunny & Kitty',
+      p1: { label: 'Baby Bunny', name: 'Baby Bunny', color: '#f43f5e', grad: ['#fb7185', '#e11d48'], blush: '#fb7185' },
+      p2: { label: 'Baby Kitty', name: 'Baby Kitty', botName: 'Kitty Bot', color: '#8b5cf6', grad: ['#a78bfa', '#7c3aed'], blush: '#f472b6' }
+    },
+    {
+      id: 'pacifier-rattle',
+      name: 'Pacifier & Rattle',
+      p1: { label: 'Pacifier Kata', name: 'Pacifier Kata', color: '#ec4899', grad: ['#f472b6', '#db2777'], blush: '#fb7185' },
+      p2: { label: 'Rattle Zero', name: 'Rattle Zero', botName: 'Rattle Bot', color: '#10b981', grad: ['#34d399', '#059669'], blush: '#f87171' }
+    }
+  ];
 
-      this.scores = this.loadScores();
+  const WINNING_COMBOS = [
+    [0, 1, 2], [3, 4, 5], [6, 7, 8],
+    [0, 3, 6], [1, 4, 7], [2, 5, 8],
+    [0, 4, 8], [2, 4, 6]
+  ];
+
+  function getCuteBabyKataSvg(palette, idSuffix = 'main') {
+    const grad = palette.p1.grad;
+    const blush = palette.p1.blush;
+    const gradId = `kataBabyGrad_${idSuffix}`;
+    const shadowId = `kShadow_${idSuffix}`;
+
+    return `
+      <svg class="mark-svg mark-kata" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="${gradId}" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="${grad[0]}" />
+            <stop offset="100%" stop-color="${grad[1]}" />
+          </linearGradient>
+          <filter id="${shadowId}" x="-20%" y="-20%" width="140%" height="140%">
+            <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="${grad[1]}" flood-opacity="0.32"/>
+          </filter>
+        </defs>
+        <line x1="22" y1="22" x2="78" y2="78" stroke="url(#${gradId})" stroke-width="17" stroke-linecap="round" filter="url(#${shadowId})" />
+        <line x1="78" y1="22" x2="22" y2="78" stroke="url(#${gradId})" stroke-width="17" stroke-linecap="round" filter="url(#${shadowId})" />
+        <circle cx="50" cy="50" r="19" fill="#fff6ec" filter="url(#${shadowId})" />
+        <path d="M 50 31 Q 54 26 48 24 Q 45 28 50 31" fill="#c48a56" />
+        <circle cx="43" cy="48" r="3" fill="#373244" />
+        <circle cx="57" cy="48" r="3" fill="#373244" />
+        <circle cx="42" cy="46.5" r="1.2" fill="#ffffff" />
+        <circle cx="56" cy="46.5" r="1.2" fill="#ffffff" />
+        <ellipse cx="38" cy="53" rx="3.5" ry="2" fill="${blush}" opacity="0.85" />
+        <ellipse cx="62" cy="53" rx="3.5" ry="2" fill="${blush}" opacity="0.85" />
+        <ellipse cx="50" cy="56" rx="5.5" ry="4" fill="${grad[0]}" />
+        <circle cx="50" cy="56" r="2.2" fill="#ffffff" />
+        <path d="M 47 59 Q 50 64 53 59" stroke="${grad[0]}" stroke-width="2" fill="none" stroke-linecap="round" />
+        <path d="M 75 16 Q 78 21 83 22 Q 78 23 75 28 Q 74 23 69 22 Q 74 21 75 16 Z" fill="#fff375" opacity="0.9" />
+      </svg>
+    `;
+  }
+
+  function getCuteBabyZeroSvg(palette, idSuffix = 'main') {
+    const grad = palette.p2.grad;
+    const blush = palette.p2.blush;
+    const gradId = `zeroBabyGrad_${idSuffix}`;
+    const shadowId = `zShadow_${idSuffix}`;
+
+    return `
+      <svg class="mark-svg mark-zero" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="${gradId}" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="${grad[0]}" />
+            <stop offset="100%" stop-color="${grad[1]}" />
+          </linearGradient>
+          <filter id="${shadowId}" x="-20%" y="-20%" width="140%" height="140%">
+            <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="${grad[1]}" flood-opacity="0.32"/>
+          </filter>
+        </defs>
+        <circle cx="50" cy="50" r="32" stroke="url(#${gradId})" stroke-width="16" fill="none" filter="url(#${shadowId})" />
+        <path d="M 36 21 Q 50 11 64 21 Q 50 17 36 21 Z" fill="${grad[0]}" />
+        <circle cx="50" cy="12" r="3.5" fill="#fde047" />
+        <circle cx="50" cy="50" r="19" fill="#fff6ec" filter="url(#${shadowId})" />
+        <path d="M 50 31 Q 46 26 52 24 Q 55 28 50 31" fill="#c48a56" />
+        <circle cx="43" cy="48" r="3" fill="#373244" />
+        <circle cx="57" cy="48" r="3" fill="#373244" />
+        <circle cx="42" cy="46.5" r="1.2" fill="#ffffff" />
+        <circle cx="56" cy="46.5" r="1.2" fill="#ffffff" />
+        <ellipse cx="38" cy="53" rx="3.5" ry="2" fill="${blush}" opacity="0.85" />
+        <ellipse cx="62" cy="53" rx="3.5" ry="2" fill="${blush}" opacity="0.85" />
+        <ellipse cx="50" cy="56" rx="5.5" ry="4" fill="${grad[0]}" />
+        <circle cx="50" cy="56" r="2.2" fill="#ffffff" />
+        <path d="M 47 59 Q 50 64 53 59" stroke="${grad[0]}" stroke-width="2" fill="none" stroke-linecap="round" />
+        <path d="M 80 44 Q 82 48 86 49 Q 82 50 80 54 Q 79 50 75 49 Q 79 48 80 44 Z" fill="#fff375" opacity="0.9" />
+      </svg>
+    `;
+  }
+
+  // ==========================================================================
+  // 4. STONE PAPER SCISSOR GAME ENGINE (1P, 2P & 3P)
+  // ==========================================================================
+  const RPS_ICONS = {
+    rock: '🪨',
+    paper: '📄',
+    scissors: '✂️'
+  };
+
+  const RPS_NAMES = {
+    rock: 'Stone',
+    paper: 'Paper',
+    scissors: 'Scissor'
+  };
+
+  // Helper to determine winner in 2-choice head to head:
+  // Returns 1 if a beats b, -1 if b beats a, 0 if tie
+  function rpsCompare(a, b) {
+    if (a === b) return 0;
+    if (
+      (a === 'rock' && b === 'scissors') ||
+      (a === 'paper' && b === 'rock') ||
+      (a === 'scissors' && b === 'paper')
+    ) {
+      return 1;
+    }
+    return -1;
+  }
+
+  // ==========================================================================
+  // 5. BONUS MEMORY CARDS LOGIC
+  // ==========================================================================
+  const MEMO_ICONS = ['🧸', '🐥', '🐰', '🐱', '🍼', '👶', '⭐', '💖'];
+
+  // ==========================================================================
+  // 6. MASTER ARCADE APPLICATION
+  // ==========================================================================
+  class KawaiiArcadeApp {
+    constructor() {
+      // Global Controllers
       this.sound = new SoundController();
       this.confetti = new ConfettiEngine(document.getElementById('confetti-canvas'));
 
       // DOM Elements Cache
       this.dom = {
-        board: document.getElementById('board'),
-        cells: Array.from(document.querySelectorAll('.cell')),
-        winLineSvg: document.getElementById('win-line-svg'),
-        winLine: document.getElementById('win-line'),
-
-        modePve: document.getElementById('mode-pve'),
-        modePvp: document.getElementById('mode-pvp'),
-        aiControls: document.getElementById('ai-controls'),
-        diffButtons: document.querySelectorAll('.diff-btn'),
-        turnButtons: document.querySelectorAll('.turn-choice-btn'),
-
-        cardP1: document.getElementById('card-p1'),
-        cardP2: document.getElementById('card-p2'),
-        avatarP1: document.getElementById('avatar-p1'),
-        avatarP2: document.getElementById('avatar-p2'),
-        nameP1: document.getElementById('name-p1'),
-        nameP2: document.getElementById('name-p2'),
-        iconP1: document.getElementById('icon-p1'),
-        iconP2: document.getElementById('icon-p2'),
-        scoreP1: document.getElementById('score-p1'),
-        scoreP2: document.getElementById('score-p2'),
-        scoreDraw: document.getElementById('score-draw'),
-
-        turnBanner: document.getElementById('turn-banner'),
-        statusAvatar: document.getElementById('status-avatar'),
-        statusText: document.getElementById('status-text'),
-
-        themeBtn: document.getElementById('theme-btn'),
-        themeLabel: document.getElementById('theme-label'),
-        soundBtn: document.getElementById('sound-btn'),
+        // Nav & Views
+        views: document.querySelectorAll('.view-panel'),
+        tabButtons: document.querySelectorAll('.nav-tab-btn'),
+        navHomeBtn: document.getElementById('nav-home-btn'),
+        globalSoundBtn: document.getElementById('global-sound-btn'),
         soundIcon: document.getElementById('sound-icon'),
-        helpBtn: document.getElementById('help-btn'),
+        globalHelpBtn: document.getElementById('global-help-btn'),
+        playButtons: document.querySelectorAll('[data-open]'),
 
-        restartRoundBtn: document.getElementById('restart-round-btn'),
-        undoBtn: document.getElementById('undo-btn'),
-        resetScoreBtn: document.getElementById('reset-score-btn'),
-
+        // Modals
         victoryModal: document.getElementById('victory-modal'),
         modalAvatar: document.getElementById('modal-avatar'),
         modalTitle: document.getElementById('modal-title'),
@@ -484,131 +430,183 @@
 
         helpModal: document.getElementById('help-modal'),
         helpCloseX: document.getElementById('help-close-x'),
-        helpOkBtn: document.getElementById('help-ok-btn')
+        helpOkBtn: document.getElementById('help-ok-btn'),
+
+        // Zero Kata Elements
+        zkBoard: document.getElementById('zk-board'),
+        zkCells: Array.from(document.querySelectorAll('#zk-board .cell')),
+        zkWinLineSvg: document.getElementById('zk-win-line-svg'),
+        zkWinLine: document.getElementById('zk-win-line'),
+        zkModePve: document.getElementById('zk-mode-pve'),
+        zkModePvp: document.getElementById('zk-mode-pvp'),
+        zkAiControls: document.getElementById('zk-ai-controls'),
+        zkDiffButtons: document.querySelectorAll('.zk-diff-btn'),
+        zkTurnButtons: document.querySelectorAll('.zk-turn-btn'),
+        zkCardP1: document.getElementById('zk-card-p1'),
+        zkCardP2: document.getElementById('zk-card-p2'),
+        zkNameP1: document.getElementById('zk-name-p1'),
+        zkNameP2: document.getElementById('zk-name-p2'),
+        zkIconP1: document.getElementById('zk-icon-p1'),
+        zkIconP2: document.getElementById('zk-icon-p2'),
+        zkScoreP1: document.getElementById('zk-score-p1'),
+        zkScoreP2: document.getElementById('zk-score-p2'),
+        zkScoreDraw: document.getElementById('zk-score-draw'),
+        zkTurnBanner: document.getElementById('zk-turn-banner'),
+        zkStatusAvatar: document.getElementById('zk-status-avatar'),
+        zkStatusText: document.getElementById('zk-status-text'),
+        zkThemeBtn: document.getElementById('zk-theme-btn'),
+        zkThemeLabel: document.getElementById('zk-theme-label'),
+        zkRestartBtn: document.getElementById('zk-restart-btn'),
+        zkUndoBtn: document.getElementById('zk-undo-btn'),
+        zkResetScoreBtn: document.getElementById('zk-reset-score-btn'),
+
+        // Stone Paper Scissor Elements
+        rpsMode1p: document.getElementById('rps-mode-1p'),
+        rpsMode2p: document.getElementById('rps-mode-2p'),
+        rpsMode3p: document.getElementById('rps-mode-3p'),
+        rps3pSubcontrols: document.getElementById('rps-3p-subcontrols'),
+        rpsSubButtons: document.querySelectorAll('.rps-sub-btn'),
+        rpsScoreP1: document.getElementById('rps-score-p1'),
+        rpsScoreP2: document.getElementById('rps-score-p2'),
+        rpsScoreP3: document.getElementById('rps-score-p3'),
+        rpsScoreDraw: document.getElementById('rps-score-draw'),
+        rpsBadgeP1: document.getElementById('rps-badge-p1'),
+        rpsBadgeP2: document.getElementById('rps-badge-p2'),
+        rpsBadgeP3: document.getElementById('rps-badge-p3'),
+        rpsCardP3: document.getElementById('rps-card-p3'),
+        rpsTurnBanner: document.getElementById('rps-turn-banner'),
+        rpsStatusAvatar: document.getElementById('rps-status-avatar'),
+        rpsStatusText: document.getElementById('rps-status-text'),
+        rpsPodiumP1: document.getElementById('rps-podium-p1'),
+        rpsPodiumP2: document.getElementById('rps-podium-p2'),
+        rpsPodiumP3: document.getElementById('rps-podium-p3'),
+        podiumLabelP1: document.getElementById('podium-label-p1'),
+        podiumLabelP2: document.getElementById('podium-label-p2'),
+        podiumLabelP3: document.getElementById('podium-label-p3'),
+        handDisplayP1: document.getElementById('hand-display-p1'),
+        handDisplayP2: document.getElementById('hand-display-p2'),
+        handDisplayP3: document.getElementById('hand-display-p3'),
+        choiceNameP1: document.getElementById('choice-name-p1'),
+        choiceNameP2: document.getElementById('choice-name-p2'),
+        choiceNameP3: document.getElementById('choice-name-p3'),
+        rpsCountdown: document.getElementById('rps-countdown'),
+        choicePromptLabel: document.getElementById('choice-prompt-label'),
+        choiceButtons: document.querySelectorAll('.choice-btn'),
+        rpsNextRoundBtn: document.getElementById('rps-next-round-btn'),
+        rpsResetScoresBtn: document.getElementById('rps-reset-scores-btn'),
+        rpsModeInfoBtn: document.getElementById('rps-mode-info-btn'),
+
+        // Memory Mini-Game Elements
+        memoGrid: document.getElementById('memo-grid'),
+        memoMoves: document.getElementById('memo-moves'),
+        memoMatches: document.getElementById('memo-matches'),
+        memoTimer: document.getElementById('memo-timer'),
+        memoRestartBtn: document.getElementById('memo-restart-btn'),
+        memoRestartTopBtn: document.getElementById('memo-restart-top-btn')
       };
 
-      // Load saved palette
-      const savedPalette = localStorage.getItem('zerokata_baby_palette');
-      if (savedPalette !== null) {
-        this.paletteIndex = parseInt(savedPalette, 10) % PALETTES.length;
-      }
+      // App State
+      this.currentView = 'view-hub';
+
+      // Zero Kata State
+      this.zkBoardState = Array(9).fill(null);
+      this.zkCurrentTurn = 'p1';
+      this.zkGameMode = 'pve';
+      this.zkDifficulty = 'medium';
+      this.zkFirstTurnPref = 'p1';
+      this.zkIsGameOver = false;
+      this.zkIsAiThinking = false;
+      this.zkHistory = [];
+      this.zkPaletteIndex = 0;
+      this.zkStreak = 0;
+      this.zkStreakWinner = null;
+      this.zkScores = this.loadZkScores();
+
+      // RPS State
+      this.rpsMode = '1p'; // '1p', '2p', '3p'
+      this.rpsSubMode = '1h2b'; // '1h2b', '3h', '2h1b'
+      this.rpsScores = { p1: 0, p2: 0, p3: 0, draw: 0 };
+      this.rpsStreak = 0;
+      this.rpsIsAnimating = false;
+      this.rpsTurnWaiting = 1; // In 2P/3P Human pass mode: which player's turn to pick
+      this.rpsP1Choice = null;
+      this.rpsP2Choice = null;
+      this.rpsP3Choice = null;
+
+      // Memory State
+      this.memoCards = [];
+      this.memoFlipped = [];
+      this.memoMatchedCount = 0;
+      this.memoMoveCount = 0;
+      this.memoTimerInterval = null;
+      this.memoSeconds = 0;
+      this.memoIsLocked = false;
 
       this.initEvents();
-      this.applyPalette();
-      this.updateScoreboard();
-      this.resetRound(true);
       this.updateSoundButton();
+      this.initZeroKata();
+      this.initRps();
+      this.initMemory();
     }
 
-    get currentPalette() {
-      return PALETTES[this.paletteIndex];
-    }
+    // ========================================================================
+    // GLOBAL NAVIGATION & ROUTER
+    // ========================================================================
+    switchView(targetId) {
+      this.currentView = targetId;
 
-    loadScores() {
-      try {
-        const stored = localStorage.getItem('zerokata_baby_scores');
-        if (stored) {
-          return JSON.parse(stored);
+      this.dom.views.forEach(v => {
+        v.classList.remove('active');
+        if (v.id === targetId) {
+          v.classList.add('active');
         }
-      } catch (e) {
-        console.warn('Could not parse scores:', e);
-      }
-      return { p1: 0, p2: 0, draw: 0 };
-    }
+      });
 
-    saveScores() {
-      try {
-        localStorage.setItem('zerokata_baby_scores', JSON.stringify(this.scores));
-      } catch (e) {
-        console.warn('Could not save scores:', e);
+      this.dom.tabButtons.forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.target === targetId);
+      });
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      // If switching to view, refresh display
+      if (targetId === 'view-zerokata' && this.zkWinningCombo) {
+        setTimeout(() => this.drawZkWinningLine(this.zkWinningCombo), 100);
       }
     }
 
     initEvents() {
-      // Cell clicks
-      this.dom.cells.forEach(cell => {
-        cell.addEventListener('click', (e) => this.handleCellClick(e));
-        cell.addEventListener('keydown', (e) => {
-          if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            this.handleCellClick(e);
-          }
-        });
-      });
-
-      // Mode Selection
-      this.dom.modePve.addEventListener('click', () => this.switchMode('pve'));
-      this.dom.modePvp.addEventListener('click', () => this.switchMode('pvp'));
-
-      // AI Difficulty Selection
-      this.dom.diffButtons.forEach(btn => {
+      // Nav Tabs
+      this.dom.tabButtons.forEach(btn => {
         btn.addEventListener('click', () => {
-          this.dom.diffButtons.forEach(b => b.classList.remove('active'));
-          btn.classList.add('active');
-          this.difficulty = btn.dataset.diff;
           this.sound.playClick();
+          this.switchView(btn.dataset.target);
         });
       });
 
-      // First Turn Selection
-      this.dom.turnButtons.forEach(btn => {
-        btn.addEventListener('click', () => {
-          this.dom.turnButtons.forEach(b => b.classList.remove('active'));
-          btn.classList.add('active');
-          this.firstTurnPref = btn.dataset.turn;
-          this.sound.playClick();
-          this.resetRound(false);
-        });
-      });
-
-      // Palette toggle
-      this.dom.themeBtn.addEventListener('click', () => {
-        this.paletteIndex = (this.paletteIndex + 1) % PALETTES.length;
-        localStorage.setItem('zerokata_baby_palette', this.paletteIndex);
+      this.dom.navHomeBtn.addEventListener('click', () => {
         this.sound.playClick();
-        this.applyPalette();
-        this.renderBoard();
-        this.updateStatusBanner();
+        this.switchView('view-hub');
       });
 
-      // Sound toggle
-      this.dom.soundBtn.addEventListener('click', () => {
+      // Quick Play buttons on cards & back buttons
+      this.dom.playButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          this.sound.playClick();
+          this.switchView(btn.dataset.open);
+        });
+      });
+
+      // Global Sound Toggle
+      this.dom.globalSoundBtn.addEventListener('click', () => {
         const enabled = this.sound.toggle();
         this.updateSoundButton();
         if (enabled) this.sound.playClick();
       });
 
-      // Actions buttons
-      this.dom.restartRoundBtn.addEventListener('click', () => {
+      // Help Modal
+      this.dom.globalHelpBtn.addEventListener('click', () => {
         this.sound.playClick();
-        this.resetRound(false);
-      });
-
-      this.dom.undoBtn.addEventListener('click', () => {
-        this.sound.playClick();
-        this.undoMove();
-      });
-
-      this.dom.resetScoreBtn.addEventListener('click', () => {
-        this.sound.playClick();
-        this.resetScores();
-      });
-
-      // Victory Modal actions
-      this.dom.modalPlayAgainBtn.addEventListener('click', () => {
-        this.closeVictoryModal();
-        this.resetRound(false);
-      });
-
-      this.dom.modalCloseBtn.addEventListener('click', () => {
-        this.closeVictoryModal();
-      });
-
-      // Help Modal actions
-      this.dom.helpBtn.addEventListener('click', () => {
-        this.sound.playClick();
-        this.dom.helpModal.classList.add('active');
-        this.dom.helpModal.setAttribute('aria-hidden', 'false');
+        this.openHelpModal();
       });
 
       const closeHelp = () => {
@@ -616,212 +614,304 @@
         this.dom.helpModal.classList.remove('active');
         this.dom.helpModal.setAttribute('aria-hidden', 'true');
       };
-
       this.dom.helpCloseX.addEventListener('click', closeHelp);
       this.dom.helpOkBtn.addEventListener('click', closeHelp);
       this.dom.helpModal.addEventListener('click', (e) => {
         if (e.target === this.dom.helpModal) closeHelp();
       });
 
-      // Window resize: recompute SVG winning strike line
-      window.addEventListener('resize', () => {
-        if (this.winningCombo) {
-          this.drawWinningLine(this.winningCombo);
+      // Victory Modal actions
+      this.dom.modalCloseBtn.addEventListener('click', () => {
+        this.dom.victoryModal.classList.remove('active');
+        this.dom.victoryModal.setAttribute('aria-hidden', 'true');
+      });
+
+      this.dom.modalPlayAgainBtn.addEventListener('click', () => {
+        this.dom.victoryModal.classList.remove('active');
+        this.dom.victoryModal.setAttribute('aria-hidden', 'true');
+        if (this.currentView === 'view-zerokata') {
+          this.resetZkRound(false);
+        } else if (this.currentView === 'view-rps') {
+          this.resetRpsRound();
+        } else if (this.currentView === 'view-memo') {
+          this.restartMemory();
         }
       });
     }
 
     updateSoundButton() {
       this.dom.soundIcon.textContent = this.sound.enabled ? '🔊' : '🔇';
-      this.dom.soundBtn.title = this.sound.enabled ? 'Sound: On' : 'Sound: Off';
+      this.dom.globalSoundBtn.title = this.sound.enabled ? 'Sound: On' : 'Sound: Off';
     }
 
-    applyPalette() {
-      const p = this.currentPalette;
-      this.dom.themeLabel.textContent = p.name;
+    openHelpModal() {
+      this.dom.helpModal.classList.add('active');
+      this.dom.helpModal.setAttribute('aria-hidden', 'false');
+    }
 
-      // Update Card 1 (Baby Kata)
-      this.dom.nameP1.textContent = p.p1.name;
-      this.dom.iconP1.innerHTML = getCuteBabyKataSvg(p, 'icon_p1');
+    // ========================================================================
+    // ZERO KATA IMPLEMENTATION
+    // ========================================================================
+    get currentZkPalette() {
+      return ZK_PALETTES[this.zkPaletteIndex];
+    }
 
-      // Update Card 2 (Baby Zero or Baby Bot)
-      if (this.gameMode === 'pve') {
-        this.dom.nameP2.textContent = p.p2.botName;
-        this.dom.iconP2.innerHTML = getCuteBabyZeroSvg(p, 'icon_p2');
+    loadZkScores() {
+      try {
+        const stored = localStorage.getItem('arcade_zk_scores');
+        if (stored) return JSON.parse(stored);
+      } catch (e) {}
+      return { p1: 0, p2: 0, draw: 0 };
+    }
+
+    saveZkScores() {
+      try {
+        localStorage.setItem('arcade_zk_scores', JSON.stringify(this.zkScores));
+      } catch (e) {}
+    }
+
+    initZeroKata() {
+      // Cells
+      this.dom.zkCells.forEach(cell => {
+        cell.addEventListener('click', (e) => this.handleZkCellClick(e));
+        cell.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            this.handleZkCellClick(e);
+          }
+        });
+      });
+
+      // Modes
+      this.dom.zkModePve.addEventListener('click', () => this.switchZkMode('pve'));
+      this.dom.zkModePvp.addEventListener('click', () => this.switchZkMode('pvp'));
+
+      // Difficulties
+      this.dom.zkDiffButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          this.dom.zkDiffButtons.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          this.zkDifficulty = btn.dataset.diff;
+          this.sound.playClick();
+        });
+      });
+
+      // First Turn
+      this.dom.zkTurnButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          this.dom.zkTurnButtons.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          this.zkFirstTurnPref = btn.dataset.turn;
+          this.sound.playClick();
+          this.resetZkRound(false);
+        });
+      });
+
+      // Palette toggle
+      this.dom.zkThemeBtn.addEventListener('click', () => {
+        this.zkPaletteIndex = (this.zkPaletteIndex + 1) % ZK_PALETTES.length;
+        this.sound.playClick();
+        this.applyZkPalette();
+        this.renderZkBoard();
+        this.updateZkStatusBanner();
+      });
+
+      // Actions
+      this.dom.zkRestartBtn.addEventListener('click', () => {
+        this.sound.playClick();
+        this.resetZkRound(false);
+      });
+
+      this.dom.zkUndoBtn.addEventListener('click', () => {
+        this.sound.playClick();
+        this.undoZkMove();
+      });
+
+      this.dom.zkResetScoreBtn.addEventListener('click', () => {
+        this.sound.playClick();
+        this.zkScores = { p1: 0, p2: 0, draw: 0 };
+        this.zkStreak = 0;
+        this.zkStreakWinner = null;
+        this.saveZkScores();
+        this.updateZkScoreboard();
+      });
+
+      window.addEventListener('resize', () => {
+        if (this.zkWinningCombo && this.currentView === 'view-zerokata') {
+          this.drawZkWinningLine(this.zkWinningCombo);
+        }
+      });
+
+      this.applyZkPalette();
+      this.updateZkScoreboard();
+      this.resetZkRound(true);
+    }
+
+    applyZkPalette() {
+      const p = this.currentZkPalette;
+      this.dom.zkThemeLabel.textContent = p.name;
+      this.dom.zkNameP1.textContent = p.p1.name;
+      this.dom.zkIconP1.innerHTML = getCuteBabyKataSvg(p, 'nav_zk_p1');
+
+      if (this.zkGameMode === 'pve') {
+        this.dom.zkNameP2.textContent = p.p2.botName;
+        this.dom.zkIconP2.innerHTML = getCuteBabyZeroSvg(p, 'nav_zk_p2');
       } else {
-        this.dom.nameP2.textContent = p.p2.name;
-        this.dom.iconP2.innerHTML = getCuteBabyZeroSvg(p, 'icon_p2');
+        this.dom.zkNameP2.textContent = p.p2.name;
+        this.dom.zkIconP2.innerHTML = getCuteBabyZeroSvg(p, 'nav_zk_p2');
       }
 
       document.documentElement.style.setProperty('--player1-color', p.p1.color);
       document.documentElement.style.setProperty('--player2-color', p.p2.color);
     }
 
-    switchMode(mode) {
-      if (this.gameMode === mode) return;
+    switchZkMode(mode) {
+      if (this.zkGameMode === mode) return;
       this.sound.playClick();
-      this.gameMode = mode;
+      this.zkGameMode = mode;
 
       if (mode === 'pve') {
-        this.dom.modePve.classList.add('active');
-        this.dom.modePvp.classList.remove('active');
-        this.dom.aiControls.classList.remove('hidden');
+        this.dom.zkModePve.classList.add('active');
+        this.dom.zkModePvp.classList.remove('active');
+        this.dom.zkAiControls.classList.remove('hidden');
       } else {
-        this.dom.modePvp.classList.add('active');
-        this.dom.modePve.classList.remove('active');
-        this.dom.aiControls.classList.add('hidden');
+        this.dom.zkModePvp.classList.add('active');
+        this.dom.zkModePve.classList.remove('active');
+        this.dom.zkAiControls.classList.add('hidden');
       }
 
-      this.applyPalette();
-      this.resetRound(false);
+      this.applyZkPalette();
+      this.resetZkRound(false);
     }
 
-    resetScores() {
-      this.scores = { p1: 0, p2: 0, draw: 0 };
-      this.streak = 0;
-      this.streakWinner = null;
-      this.saveScores();
-      this.updateScoreboard();
+    updateZkScoreboard() {
+      this.dom.zkScoreP1.textContent = this.zkScores.p1;
+      this.dom.zkScoreP2.textContent = this.zkScores.p2;
+      this.dom.zkScoreDraw.textContent = this.zkScores.draw;
     }
 
-    updateScoreboard() {
-      this.dom.scoreP1.textContent = this.scores.p1;
-      this.dom.scoreP2.textContent = this.scores.p2;
-      this.dom.scoreDraw.textContent = this.scores.draw;
-    }
+    resetZkRound(isInitial = false) {
+      this.zkBoardState = Array(9).fill(null);
+      this.zkIsGameOver = false;
+      this.zkIsAiThinking = false;
+      this.zkWinningCombo = null;
+      this.zkHistory = [];
 
-    resetRound(isInitial = false) {
-      this.boardState = Array(9).fill(null);
-      this.isGameOver = false;
-      this.isAiThinking = false;
-      this.winningCombo = null;
-      this.history = [];
-
-      // Determine starting player
-      if (this.firstTurnPref === 'p1') {
-        this.currentTurn = 'p1';
-      } else if (this.firstTurnPref === 'p2') {
-        this.currentTurn = 'p2';
+      if (this.zkFirstTurnPref === 'p1') {
+        this.zkCurrentTurn = 'p1';
+      } else if (this.zkFirstTurnPref === 'p2') {
+        this.zkCurrentTurn = 'p2';
       } else {
-        this.currentTurn = Math.random() < 0.5 ? 'p1' : 'p2';
+        this.zkCurrentTurn = Math.random() < 0.5 ? 'p1' : 'p2';
       }
 
-      // Hide Win Line and clear cell classes
-      this.dom.winLineSvg.classList.remove('active');
-      this.dom.cells.forEach(cell => {
+      this.dom.zkWinLineSvg.classList.remove('active');
+      this.dom.zkCells.forEach(cell => {
         cell.innerHTML = '';
         cell.className = 'cell';
         cell.disabled = false;
       });
 
-      this.updateActiveCard();
-      this.updateStatusBanner();
-      this.updateUndoButton();
+      this.updateZkActiveCard();
+      this.updateZkStatusBanner();
+      this.updateZkUndoButton();
 
-      // If AI goes first in PvE
-      if (this.gameMode === 'pve' && this.currentTurn === 'p2') {
-        this.triggerAiMove(500);
+      if (this.zkGameMode === 'pve' && this.zkCurrentTurn === 'p2') {
+        this.triggerZkAiMove(500);
       }
     }
 
-    updateActiveCard() {
-      if (this.isGameOver) {
-        this.dom.cardP1.classList.remove('active-turn');
-        this.dom.cardP2.classList.remove('active-turn');
+    updateZkActiveCard() {
+      if (this.zkIsGameOver) {
+        this.dom.zkCardP1.classList.remove('active-turn');
+        this.dom.zkCardP2.classList.remove('active-turn');
         return;
       }
 
-      if (this.currentTurn === 'p1') {
-        this.dom.cardP1.classList.add('active-turn');
-        this.dom.cardP2.classList.remove('active-turn');
+      if (this.zkCurrentTurn === 'p1') {
+        this.dom.zkCardP1.classList.add('active-turn');
+        this.dom.zkCardP2.classList.remove('active-turn');
       } else {
-        this.dom.cardP2.classList.add('active-turn');
-        this.dom.cardP1.classList.remove('active-turn');
+        this.dom.zkCardP2.classList.add('active-turn');
+        this.dom.zkCardP1.classList.remove('active-turn');
       }
     }
 
-    updateStatusBanner(customText = null) {
-      const p = this.currentPalette;
+    updateZkStatusBanner(customText = null) {
+      const p = this.currentZkPalette;
 
       if (customText) {
-        this.dom.statusText.textContent = customText;
+        this.dom.zkStatusText.textContent = customText;
         return;
       }
 
-      if (this.isGameOver) return;
+      if (this.zkIsGameOver) return;
 
-      if (this.currentTurn === 'p1') {
-        this.dom.statusAvatar.innerHTML = '👶';
-        this.dom.statusText.textContent = `${p.p1.name}'s turn! Tap an empty tile~`;
+      if (this.zkCurrentTurn === 'p1') {
+        this.dom.zkStatusAvatar.innerHTML = '👶';
+        this.dom.zkStatusText.textContent = `${p.p1.name}'s turn! Tap a tile~`;
       } else {
-        if (this.gameMode === 'pve') {
-          this.dom.statusAvatar.innerHTML = '🤖';
-          this.dom.statusText.textContent = `${p.p2.botName} is babbling happily... ✨`;
+        if (this.zkGameMode === 'pve') {
+          this.dom.zkStatusAvatar.innerHTML = '🤖';
+          this.dom.zkStatusText.textContent = `${p.p2.botName} is babbling happily... ✨`;
         } else {
-          this.dom.statusAvatar.innerHTML = '🍼';
-          this.dom.statusText.textContent = `${p.p2.name}'s turn! Make a cozy move~`;
+          this.dom.zkStatusAvatar.innerHTML = '🍼';
+          this.dom.zkStatusText.textContent = `${p.p2.name}'s turn! Make a cozy move~`;
         }
       }
     }
 
-    updateUndoButton() {
-      this.dom.undoBtn.disabled = this.history.length === 0 || this.isAiThinking;
+    updateZkUndoButton() {
+      this.dom.zkUndoBtn.disabled = this.zkHistory.length === 0 || this.zkIsAiThinking;
     }
 
-    handleCellClick(e) {
-      if (this.isGameOver || this.isAiThinking) return;
+    handleZkCellClick(e) {
+      if (this.zkIsGameOver || this.zkIsAiThinking) return;
 
       const cell = e.currentTarget;
       const index = parseInt(cell.dataset.index, 10);
 
-      if (this.boardState[index] !== null) return;
+      if (this.zkBoardState[index] !== null) return;
+      if (this.zkGameMode === 'pve' && this.zkCurrentTurn !== 'p1') return;
 
-      // In PvE mode, user plays as Kata (p1)
-      if (this.gameMode === 'pve' && this.currentTurn !== 'p1') return;
-
-      this.executeMove(index, this.currentTurn);
+      this.executeZkMove(index, this.zkCurrentTurn);
     }
 
-    executeMove(index, player) {
-      // Save history snapshot for undo
-      this.history.push({
-        board: [...this.boardState],
-        turn: this.currentTurn
+    executeZkMove(index, player) {
+      this.zkHistory.push({
+        board: [...this.zkBoardState],
+        turn: this.zkCurrentTurn
       });
 
-      this.boardState[index] = player;
-      this.renderCell(index, player);
+      this.zkBoardState[index] = player;
+      this.renderZkCell(index, player);
 
-      // Cute pop sound: higher pitch for Baby Kata, deeper pop for Baby Zero
       this.sound.playPop(player === 'p1' ? 560 : 440);
 
-      // Check win or tie
-      const win = this.checkWin(this.boardState);
+      const win = this.checkZkWin(this.zkBoardState);
       if (win) {
-        this.handleGameWin(win);
+        this.handleZkWin(win);
         return;
       }
 
-      if (this.checkTie(this.boardState)) {
-        this.handleGameDraw();
+      if (this.checkZkTie(this.zkBoardState)) {
+        this.handleZkDraw();
         return;
       }
 
-      // Switch turn
-      this.currentTurn = player === 'p1' ? 'p2' : 'p1';
-      this.updateActiveCard();
-      this.updateStatusBanner();
-      this.updateUndoButton();
+      this.zkCurrentTurn = player === 'p1' ? 'p2' : 'p1';
+      this.updateZkActiveCard();
+      this.updateZkStatusBanner();
+      this.updateZkUndoButton();
 
-      // Trigger AI if PvE
-      if (this.gameMode === 'pve' && this.currentTurn === 'p2') {
-        this.triggerAiMove(420);
+      if (this.zkGameMode === 'pve' && this.zkCurrentTurn === 'p2') {
+        this.triggerZkAiMove(420);
       }
     }
 
-    renderCell(index, player) {
-      const cell = this.dom.cells[index];
-      const p = this.currentPalette;
+    renderZkCell(index, player) {
+      const cell = this.dom.zkCells[index];
+      const p = this.currentZkPalette;
       cell.classList.add('taken');
 
       const markDiv = document.createElement('div');
@@ -837,53 +927,53 @@
       cell.appendChild(markDiv);
     }
 
-    renderBoard() {
-      this.dom.cells.forEach((cell, idx) => {
+    renderZkBoard() {
+      this.dom.zkCells.forEach((cell, idx) => {
         cell.innerHTML = '';
         cell.classList.remove('taken');
-        const player = this.boardState[idx];
+        const player = this.zkBoardState[idx];
         if (player) {
-          this.renderCell(idx, player);
+          this.renderZkCell(idx, player);
         }
       });
     }
 
-    undoMove() {
-      if (this.history.length === 0 || this.isAiThinking) return;
+    undoZkMove() {
+      if (this.zkHistory.length === 0 || this.zkIsAiThinking) return;
 
-      if (this.gameMode === 'pve') {
+      if (this.zkGameMode === 'pve') {
         let snapshot = null;
-        while (this.history.length > 0) {
-          snapshot = this.history.pop();
+        while (this.zkHistory.length > 0) {
+          snapshot = this.zkHistory.pop();
           if (snapshot.turn === 'p1') break;
         }
         if (snapshot) {
-          this.boardState = snapshot.board;
-          this.currentTurn = 'p1';
+          this.zkBoardState = snapshot.board;
+          this.zkCurrentTurn = 'p1';
         }
       } else {
-        const snapshot = this.history.pop();
+        const snapshot = this.zkHistory.pop();
         if (snapshot) {
-          this.boardState = snapshot.board;
-          this.currentTurn = snapshot.turn;
+          this.zkBoardState = snapshot.board;
+          this.zkCurrentTurn = snapshot.turn;
         }
       }
 
-      this.isGameOver = false;
-      this.winningCombo = null;
-      this.dom.winLineSvg.classList.remove('active');
-      this.dom.cells.forEach(c => {
+      this.zkIsGameOver = false;
+      this.zkWinningCombo = null;
+      this.dom.zkWinLineSvg.classList.remove('active');
+      this.dom.zkCells.forEach(c => {
         c.classList.remove('win-cell');
         c.disabled = false;
       });
 
-      this.renderBoard();
-      this.updateActiveCard();
-      this.updateStatusBanner();
-      this.updateUndoButton();
+      this.renderZkBoard();
+      this.updateZkActiveCard();
+      this.updateZkStatusBanner();
+      this.updateZkUndoButton();
     }
 
-    checkWin(board) {
+    checkZkWin(board) {
       for (const combo of WINNING_COMBOS) {
         const [a, b, c] = combo;
         if (board[a] && board[a] === board[b] && board[a] === board[c]) {
@@ -893,79 +983,68 @@
       return null;
     }
 
-    checkTie(board) {
+    checkZkTie(board) {
       return board.every(cell => cell !== null);
     }
 
-    handleGameWin(win) {
-      this.isGameOver = true;
-      this.winningCombo = win.combo;
+    handleZkWin(win) {
+      this.zkIsGameOver = true;
+      this.zkWinningCombo = win.combo;
 
-      // Highlight winning cells
       win.combo.forEach(idx => {
-        this.dom.cells[idx].classList.add('win-cell');
+        this.dom.zkCells[idx].classList.add('win-cell');
       });
 
-      // Draw SVG strike line
-      this.drawWinningLine(win.combo);
+      this.drawZkWinningLine(win.combo);
+      this.dom.zkCells.forEach(c => c.disabled = true);
 
-      // Disable remaining cells
-      this.dom.cells.forEach(c => c.disabled = true);
-
-      // Update Scores & Streaks
       if (win.player === 'p1') {
-        this.scores.p1++;
-        if (this.streakWinner === 'p1') {
-          this.streak++;
-        } else {
-          this.streak = 1;
-          this.streakWinner = 'p1';
-        }
+        this.zkScores.p1++;
+        if (this.zkStreakWinner === 'p1') this.zkStreak++;
+        else { this.zkStreak = 1; this.zkStreakWinner = 'p1'; }
       } else {
-        this.scores.p2++;
-        if (this.streakWinner === 'p2') {
-          this.streak++;
-        } else {
-          this.streak = 1;
-          this.streakWinner = 'p2';
-        }
+        this.zkScores.p2++;
+        if (this.zkStreakWinner === 'p2') this.zkStreak++;
+        else { this.zkStreak = 1; this.zkStreakWinner = 'p2'; }
       }
-      this.saveScores();
-      this.updateScoreboard();
-      this.updateActiveCard();
 
-      // Sound & Confetti celebration
+      this.saveZkScores();
+      this.updateZkScoreboard();
+      this.updateZkActiveCard();
+
       this.sound.playWin();
-      this.confetti.burst(85);
+      this.confetti.burst(80);
 
-      // Show Victory Modal
       setTimeout(() => {
-        this.openVictoryModal(win.player);
-      }, 550);
+        const p = this.currentZkPalette;
+        const avatar = win.player === 'p1' ? getCuteBabyKataSvg(p, 'win_m') : getCuteBabyZeroSvg(p, 'win_m');
+        const winnerName = win.player === 'p1' ? p.p1.name : (this.zkGameMode === 'pve' ? p.p2.botName : p.p2.name);
+        this.openVictoryModal(avatar, `Yay! ${winnerName} Won!`, 'What a sensational cute victory! 🎈', this.zkStreak);
+      }, 500);
     }
 
-    handleGameDraw() {
-      this.isGameOver = true;
-      this.streak = 0;
-      this.streakWinner = null;
-      this.scores.draw++;
-      this.saveScores();
-      this.updateScoreboard();
-      this.updateActiveCard();
+    handleZkDraw() {
+      this.zkIsGameOver = true;
+      this.zkStreak = 0;
+      this.zkStreakWinner = null;
+      this.zkScores.draw++;
+      this.saveZkScores();
+      this.updateZkScoreboard();
+      this.updateZkActiveCard();
 
       this.sound.playDraw();
-      this.dom.statusAvatar.innerHTML = '🍼';
-      this.dom.statusText.textContent = "It's a cozy tie! You both played so sweetly!";
+      this.dom.zkStatusAvatar.innerHTML = '🍼';
+      this.dom.zkStatusText.textContent = "It's a cozy tie! You both played so sweetly!";
 
       setTimeout(() => {
-        this.openDrawModal();
-      }, 550);
+        this.openVictoryModal('🍼', "It's a Cozy Tie!", "Two sweet little babies matched each other move for move! 🎀", 0);
+      }, 500);
     }
 
-    drawWinningLine(combo) {
-      const boardRect = this.dom.board.getBoundingClientRect();
-      const cellA = this.dom.cells[combo[0]].getBoundingClientRect();
-      const cellC = this.dom.cells[combo[2]].getBoundingClientRect();
+    drawZkWinningLine(combo) {
+      const boardRect = this.dom.zkBoard.getBoundingClientRect();
+      const cellA = this.dom.zkCells[combo[0]].getBoundingClientRect();
+      const cellC = this.dom.zkCells[combo[2]].getBoundingClientRect();
 
       let x1 = cellA.left + cellA.width / 2 - boardRect.left;
       let y1 = cellA.top + cellA.height / 2 - boardRect.top;
@@ -983,119 +1062,60 @@
         y2 += (dy / len) * extend;
       }
 
-      this.dom.winLine.setAttribute('x1', x1);
-      this.dom.winLine.setAttribute('y1', y1);
-      this.dom.winLine.setAttribute('x2', x2);
-      this.dom.winLine.setAttribute('y2', y2);
+      this.dom.zkWinLine.setAttribute('x1', x1);
+      this.dom.zkWinLine.setAttribute('y1', y1);
+      this.dom.zkWinLine.setAttribute('x2', x2);
+      this.dom.zkWinLine.setAttribute('y2', y2);
 
-      this.dom.winLineSvg.classList.add('active');
+      this.dom.zkWinLineSvg.classList.add('active');
     }
 
-    openVictoryModal(winner) {
-      const p = this.currentPalette;
-      let avatarHtml, title, message;
-
-      if (winner === 'p1') {
-        avatarHtml = getCuteBabyKataSvg(p, 'modal_win');
-        title = `Yay! ${p.p1.name} Won!`;
-        message = this.gameMode === 'pve'
-          ? "You outsmarted the cute Baby Bot! So adorable! 💖"
-          : `Sensational victory! Congratulations ${p.p1.name}! 🎉`;
-      } else {
-        if (this.gameMode === 'pve') {
-          avatarHtml = getCuteBabyZeroSvg(p, 'modal_win');
-          title = `Giggle! Baby Bot Won!`;
-          message = "The cute Baby Bot got super lucky! Want another snuggly round? 🌸";
-        } else {
-          avatarHtml = getCuteBabyZeroSvg(p, 'modal_win');
-          title = `Hooray! ${p.p2.name} Won!`;
-          message = `Sensational victory! Beautifully played ${p.p2.name}! 🎈`;
-        }
-      }
-
-      this.dom.modalAvatar.innerHTML = avatarHtml;
-      this.dom.modalTitle.textContent = title;
-      this.dom.modalMessage.textContent = message;
-
-      if (this.streak > 1) {
-        this.dom.modalStreakBadge.style.display = 'inline-block';
-        this.dom.modalStreakText.textContent = `Win Streak: ${this.streak} in a row! 🔥`;
-      } else {
-        this.dom.modalStreakBadge.style.display = 'none';
-      }
-
-      this.dom.victoryModal.classList.add('active');
-      this.dom.victoryModal.setAttribute('aria-hidden', 'false');
-    }
-
-    openDrawModal() {
-      this.dom.modalAvatar.innerHTML = '🍼';
-      this.dom.modalTitle.textContent = "It's a Cozy Tie!";
-      this.dom.modalMessage.textContent = "Two sweet little babies matched each other move for move! 🎀";
-      this.dom.modalStreakBadge.style.display = 'none';
-
-      this.dom.victoryModal.classList.add('active');
-      this.dom.victoryModal.setAttribute('aria-hidden', 'false');
-    }
-
-    closeVictoryModal() {
-      this.dom.victoryModal.classList.remove('active');
-      this.dom.victoryModal.setAttribute('aria-hidden', 'true');
-    }
-
-    // --- Cute Baby AI Engine ---
-    triggerAiMove(delay = 400) {
-      this.isAiThinking = true;
-      this.updateUndoButton();
-      this.dom.statusAvatar.innerHTML = '🤖';
-      this.dom.statusText.textContent = `${this.currentPalette.p2.botName} is thinking super hard... ✨`;
+    triggerZkAiMove(delay = 400) {
+      this.zkIsAiThinking = true;
+      this.updateZkUndoButton();
+      this.dom.zkStatusAvatar.innerHTML = '🤖';
+      this.dom.zkStatusText.textContent = `${this.currentZkPalette.p2.botName} is thinking super hard... ✨`;
 
       setTimeout(() => {
-        if (this.isGameOver) {
-          this.isAiThinking = false;
+        if (this.zkIsGameOver) {
+          this.zkIsAiThinking = false;
           return;
         }
 
-        const bestMove = this.computeAiMove();
-        this.isAiThinking = false;
+        const bestMove = this.computeZkAiMove();
+        this.zkIsAiThinking = false;
 
         if (bestMove !== -1) {
-          this.executeMove(bestMove, 'p2');
+          this.executeZkMove(bestMove, 'p2');
         }
       }, delay);
     }
 
-    computeAiMove() {
-      const emptyIndices = this.boardState
+    computeZkAiMove() {
+      const emptyIndices = this.zkBoardState
         .map((val, idx) => (val === null ? idx : null))
         .filter(idx => idx !== null);
 
       if (emptyIndices.length === 0) return -1;
 
-      // 🌸 1. Crawling Mode: Playful and cute
-      if (this.difficulty === 'easy') {
+      if (this.zkDifficulty === 'easy') {
         if (Math.random() < 0.25) {
-          const winMove = this.findWinningMove(this.boardState, 'p2');
+          const winMove = this.findZkWinningMove(this.zkBoardState, 'p2');
           if (winMove !== -1) return winMove;
         }
         return emptyIndices[Math.floor(Math.random() * emptyIndices.length)];
       }
 
-      // ⚡ 2. Babbling Mode: Smart but beatable
-      if (this.difficulty === 'medium') {
-        // Take winning move if available
-        const winMove = this.findWinningMove(this.boardState, 'p2');
+      if (this.zkDifficulty === 'medium') {
+        const winMove = this.findZkWinningMove(this.zkBoardState, 'p2');
         if (winMove !== -1) return winMove;
 
-        // Block player from winning (82% chance)
-        const blockMove = this.findWinningMove(this.boardState, 'p1');
+        const blockMove = this.findZkWinningMove(this.zkBoardState, 'p1');
         if (blockMove !== -1 && Math.random() < 0.82) return blockMove;
 
-        // Take center if available
-        if (this.boardState[4] === null && Math.random() < 0.6) return 4;
+        if (this.zkBoardState[4] === null && Math.random() < 0.6) return 4;
 
-        // Else pick corner or random
-        const corners = [0, 2, 6, 8].filter(idx => this.boardState[idx] === null);
+        const corners = [0, 2, 6, 8].filter(idx => this.zkBoardState[idx] === null);
         if (corners.length > 0 && Math.random() < 0.5) {
           return corners[Math.floor(Math.random() * corners.length)];
         }
@@ -1103,7 +1123,7 @@
         return emptyIndices[Math.floor(Math.random() * emptyIndices.length)];
       }
 
-      // 👑 3. Baby Genius: Perfect Unbeatable Minimax Algorithm
+      // Genius Unbeatable Minimax
       let bestScore = -Infinity;
       let move = emptyIndices[0];
 
@@ -1112,9 +1132,9 @@
       }
 
       for (const idx of emptyIndices) {
-        this.boardState[idx] = 'p2';
-        const score = this.minimax(this.boardState, 0, false, -Infinity, Infinity);
-        this.boardState[idx] = null;
+        this.zkBoardState[idx] = 'p2';
+        const score = this.minimaxZk(this.zkBoardState, 0, false, -Infinity, Infinity);
+        this.zkBoardState[idx] = null;
 
         if (score > bestScore) {
           bestScore = score;
@@ -1125,7 +1145,7 @@
       return move;
     }
 
-    findWinningMove(board, player) {
+    findZkWinningMove(board, player) {
       for (const combo of WINNING_COMBOS) {
         const [a, b, c] = combo;
         const vals = [board[a], board[b], board[c]];
@@ -1141,12 +1161,12 @@
       return -1;
     }
 
-    minimax(board, depth, isMaximizing, alpha, beta) {
-      const win = this.checkWin(board);
+    minimaxZk(board, depth, isMaximizing, alpha, beta) {
+      const win = this.checkZkWin(board);
       if (win) {
         return win.player === 'p2' ? 10 - depth : depth - 10;
       }
-      if (this.checkTie(board)) {
+      if (this.checkZkTie(board)) {
         return 0;
       }
 
@@ -1155,11 +1175,11 @@
         for (let i = 0; i < 9; i++) {
           if (board[i] === null) {
             board[i] = 'p2';
-            const evaluation = this.minimax(board, depth + 1, false, alpha, beta);
+            const evaluation = this.minimaxZk(board, depth + 1, false, alpha, beta);
             board[i] = null;
             maxEval = Math.max(maxEval, evaluation);
             alpha = Math.max(alpha, evaluation);
-            if (beta <= alpha) break; // Alpha-beta pruning
+            if (beta <= alpha) break;
           }
         }
         return maxEval;
@@ -1168,24 +1188,525 @@
         for (let i = 0; i < 9; i++) {
           if (board[i] === null) {
             board[i] = 'p1';
-            const evaluation = this.minimax(board, depth + 1, true, alpha, beta);
+            const evaluation = this.minimaxZk(board, depth + 1, true, alpha, beta);
             board[i] = null;
             minEval = Math.min(minEval, evaluation);
             beta = Math.min(beta, evaluation);
-            if (beta <= alpha) break; // Alpha-beta pruning
+            if (beta <= alpha) break;
           }
         }
         return minEval;
       }
+    }
+
+    // ========================================================================
+    // STONE PAPER SCISSOR IMPLEMENTATION (1P, 2P & 3P)
+    // ========================================================================
+    initRps() {
+      // Mode tabs
+      this.dom.rpsMode1p.addEventListener('click', () => this.switchRpsMode('1p'));
+      this.dom.rpsMode2p.addEventListener('click', () => this.switchRpsMode('2p'));
+      this.dom.rpsMode3p.addEventListener('click', () => this.switchRpsMode('3p'));
+
+      // 3P Sub options
+      this.dom.rpsSubButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          this.dom.rpsSubButtons.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          this.rpsSubMode = btn.dataset.sub;
+          this.sound.playClick();
+          this.setupRpsUi();
+          this.resetRpsRound();
+        });
+      });
+
+      // Human Choice Buttons (Stone, Paper, Scissor)
+      this.dom.choiceButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          if (this.rpsIsAnimating) return;
+          const choice = btn.dataset.choice;
+          this.handleRpsChoiceClick(choice);
+        });
+      });
+
+      // Actions
+      this.dom.rpsNextRoundBtn.addEventListener('click', () => {
+        this.sound.playClick();
+        this.resetRpsRound();
+      });
+
+      this.dom.rpsResetScoresBtn.addEventListener('click', () => {
+        this.sound.playClick();
+        this.rpsScores = { p1: 0, p2: 0, p3: 0, draw: 0 };
+        this.rpsStreak = 0;
+        this.updateRpsScoreboard();
+      });
+
+      this.dom.rpsModeInfoBtn.addEventListener('click', () => {
+        this.sound.playClick();
+        this.openHelpModal();
+      });
+
+      this.setupRpsUi();
+      this.updateRpsScoreboard();
+      this.resetRpsRound();
+    }
+
+    switchRpsMode(mode) {
+      if (this.rpsMode === mode) return;
+      this.sound.playClick();
+      this.rpsMode = mode;
+
+      this.dom.rpsMode1p.classList.toggle('active', mode === '1p');
+      this.dom.rpsMode2p.classList.toggle('active', mode === '2p');
+      this.dom.rpsMode3p.classList.toggle('active', mode === '3p');
+
+      this.dom.rps3pSubcontrols.classList.toggle('hidden', mode !== '3p');
+
+      this.rpsScores = { p1: 0, p2: 0, p3: 0, draw: 0 };
+      this.rpsStreak = 0;
+      this.setupRpsUi();
+      this.updateRpsScoreboard();
+      this.resetRpsRound();
+    }
+
+    setupRpsUi() {
+      if (this.rpsMode === '1p') {
+        this.dom.rpsBadgeP1.textContent = '👶 You';
+        this.dom.rpsBadgeP2.textContent = '🤖 Machine';
+        this.dom.podiumLabelP1.textContent = 'You';
+        this.dom.podiumLabelP2.textContent = 'Machine';
+        this.dom.rpsCardP3.classList.add('hidden');
+        this.dom.rpsPodiumP3.classList.add('hidden');
+      } else if (this.rpsMode === '2p') {
+        this.dom.rpsBadgeP1.textContent = '👶 Player 1';
+        this.dom.rpsBadgeP2.textContent = '🍼 Player 2';
+        this.dom.podiumLabelP1.textContent = 'Player 1';
+        this.dom.podiumLabelP2.textContent = 'Player 2';
+        this.dom.rpsCardP3.classList.add('hidden');
+        this.dom.rpsPodiumP3.classList.add('hidden');
+      } else if (this.rpsMode === '3p') {
+        this.dom.rpsCardP3.classList.remove('hidden');
+        this.dom.rpsPodiumP3.classList.remove('hidden');
+
+        if (this.rpsSubMode === '1h2b') {
+          this.dom.rpsBadgeP1.textContent = '👶 You';
+          this.dom.rpsBadgeP2.textContent = '🤖 Bot 1';
+          this.dom.rpsBadgeP3.textContent = '🤖 Bot 2';
+          this.dom.podiumLabelP1.textContent = 'You';
+          this.dom.podiumLabelP2.textContent = 'Bot 1';
+          this.dom.podiumLabelP3.textContent = 'Bot 2';
+        } else if (this.rpsSubMode === '3h') {
+          this.dom.rpsBadgeP1.textContent = '👶 Player 1';
+          this.dom.rpsBadgeP2.textContent = '🍼 Player 2';
+          this.dom.rpsBadgeP3.textContent = '🧸 Player 3';
+          this.dom.podiumLabelP1.textContent = 'Player 1';
+          this.dom.podiumLabelP2.textContent = 'Player 2';
+          this.dom.podiumLabelP3.textContent = 'Player 3';
+        } else if (this.rpsSubMode === '2h1b') {
+          this.dom.rpsBadgeP1.textContent = '👶 Player 1';
+          this.dom.rpsBadgeP2.textContent = '🍼 Player 2';
+          this.dom.rpsBadgeP3.textContent = '🤖 Bot 3';
+          this.dom.podiumLabelP1.textContent = 'Player 1';
+          this.dom.podiumLabelP2.textContent = 'Player 2';
+          this.dom.podiumLabelP3.textContent = 'Bot 3';
+        }
+      }
+    }
+
+    updateRpsScoreboard() {
+      this.dom.rpsScoreP1.textContent = this.rpsScores.p1;
+      this.dom.rpsScoreP2.textContent = this.rpsScores.p2;
+      this.dom.rpsScoreP3.textContent = this.rpsScores.p3;
+      this.dom.rpsScoreDraw.textContent = this.rpsScores.draw;
+    }
+
+    resetRpsRound() {
+      this.rpsIsAnimating = false;
+      this.rpsTurnWaiting = 1;
+      this.rpsP1Choice = null;
+      this.rpsP2Choice = null;
+      this.rpsP3Choice = null;
+
+      // Reset podium displays
+      this.dom.handDisplayP1.innerHTML = '<span class="hand-placeholder">❔</span>';
+      this.dom.handDisplayP2.innerHTML = '<span class="hand-placeholder">❔</span>';
+      this.dom.handDisplayP3.innerHTML = '<span class="hand-placeholder">❔</span>';
+      this.dom.choiceNameP1.textContent = '-';
+      this.dom.choiceNameP2.textContent = '-';
+      this.dom.choiceNameP3.textContent = '-';
+      this.dom.rpsCountdown.textContent = '';
+
+      this.dom.rpsPodiumP1.classList.remove('winner');
+      this.dom.rpsPodiumP2.classList.remove('winner');
+      this.dom.rpsPodiumP3.classList.remove('winner');
+
+      this.dom.choiceButtons.forEach(btn => btn.disabled = false);
+
+      // Prompt label update
+      if (this.rpsMode === '1p') {
+        this.dom.choicePromptLabel.textContent = 'Choose your throw:';
+        this.dom.rpsStatusAvatar.innerHTML = '🪨';
+        this.dom.rpsStatusText.textContent = 'Ready! Choose Stone, Paper, or Scissor!';
+      } else if (this.rpsMode === '2p') {
+        this.dom.choicePromptLabel.textContent = "Player 1: Secretly make your pick!";
+        this.dom.rpsStatusAvatar.innerHTML = '👶';
+        this.dom.rpsStatusText.textContent = "Player 1's turn to pick secretly!";
+      } else if (this.rpsMode === '3p') {
+        if (this.rpsSubMode === '1h2b') {
+          this.dom.choicePromptLabel.textContent = 'Choose your throw vs Both Bots:';
+          this.dom.rpsStatusAvatar.innerHTML = '🌟';
+          this.dom.rpsStatusText.textContent = 'Ready! Pick to battle both Bots!';
+        } else {
+          this.dom.choicePromptLabel.textContent = "Player 1: Pick secretly!";
+          this.dom.rpsStatusAvatar.innerHTML = '👶';
+          this.dom.rpsStatusText.textContent = "Player 1's secret pick!";
+        }
+      }
+    }
+
+    handleRpsChoiceClick(choice) {
+      this.sound.playClick();
+
+      // Mode 1: 1P vs Machine
+      if (this.rpsMode === '1p') {
+        this.rpsP1Choice = choice;
+        const choices = ['rock', 'paper', 'scissors'];
+        this.rpsP2Choice = choices[Math.floor(Math.random() * choices.length)];
+        this.runRpsShowdown(2);
+        return;
+      }
+
+      // Mode 2: 2 Players Pass & Play
+      if (this.rpsMode === '2p') {
+        if (this.rpsTurnWaiting === 1) {
+          this.rpsP1Choice = choice;
+          this.rpsTurnWaiting = 2;
+          this.dom.handDisplayP1.innerHTML = '<span class="hand-placeholder">🔒</span>';
+          this.dom.choiceNameP1.textContent = 'Locked in!';
+          this.dom.choicePromptLabel.textContent = "Player 2: Secretly make your pick!";
+          this.dom.rpsStatusAvatar.innerHTML = '🍼';
+          this.dom.rpsStatusText.textContent = "Player 2's turn to pick!";
+        } else if (this.rpsTurnWaiting === 2) {
+          this.rpsP2Choice = choice;
+          this.runRpsShowdown(2);
+        }
+        return;
+      }
+
+      // Mode 3: 3 Players Mode
+      if (this.rpsMode === '3p') {
+        const choices = ['rock', 'paper', 'scissors'];
+
+        if (this.rpsSubMode === '1h2b') {
+          // 1 Human + 2 Bots
+          this.rpsP1Choice = choice;
+          this.rpsP2Choice = choices[Math.floor(Math.random() * choices.length)];
+          this.rpsP3Choice = choices[Math.floor(Math.random() * choices.length)];
+          this.runRpsShowdown(3);
+        } else if (this.rpsSubMode === '3h') {
+          // 3 Humans pass & pick
+          if (this.rpsTurnWaiting === 1) {
+            this.rpsP1Choice = choice;
+            this.rpsTurnWaiting = 2;
+            this.dom.handDisplayP1.innerHTML = '<span class="hand-placeholder">🔒</span>';
+            this.dom.choiceNameP1.textContent = 'Locked in!';
+            this.dom.choicePromptLabel.textContent = "Player 2: Pick secretly!";
+            this.dom.rpsStatusText.textContent = "Player 2's secret pick!";
+          } else if (this.rpsTurnWaiting === 2) {
+            this.rpsP2Choice = choice;
+            this.rpsTurnWaiting = 3;
+            this.dom.handDisplayP2.innerHTML = '<span class="hand-placeholder">🔒</span>';
+            this.dom.choiceNameP2.textContent = 'Locked in!';
+            this.dom.choicePromptLabel.textContent = "Player 3: Pick secretly!";
+            this.dom.rpsStatusText.textContent = "Player 3's secret pick!";
+          } else if (this.rpsTurnWaiting === 3) {
+            this.rpsP3Choice = choice;
+            this.runRpsShowdown(3);
+          }
+        } else if (this.rpsSubMode === '2h1b') {
+          // 2 Humans + 1 Bot
+          if (this.rpsTurnWaiting === 1) {
+            this.rpsP1Choice = choice;
+            this.rpsTurnWaiting = 2;
+            this.dom.handDisplayP1.innerHTML = '<span class="hand-placeholder">🔒</span>';
+            this.dom.choiceNameP1.textContent = 'Locked in!';
+            this.dom.choicePromptLabel.textContent = "Player 2: Pick secretly!";
+            this.dom.rpsStatusText.textContent = "Player 2's secret pick!";
+          } else if (this.rpsTurnWaiting === 2) {
+            this.rpsP2Choice = choice;
+            this.rpsP3Choice = choices[Math.floor(Math.random() * choices.length)];
+            this.runRpsShowdown(3);
+          }
+        }
+      }
+    }
+
+    runRpsShowdown(playerCount) {
+      this.rpsIsAnimating = true;
+      this.dom.choiceButtons.forEach(btn => btn.disabled = true);
+      this.dom.choicePromptLabel.textContent = 'SHOOTING...';
+
+      // Countdown: 3, 2, 1, SHOOT!
+      const steps = ['3...', '2...', '1...', 'SHOOT!'];
+      let stepIdx = 0;
+
+      const countdownInterval = setInterval(() => {
+        if (stepIdx < steps.length) {
+          this.dom.rpsCountdown.textContent = steps[stepIdx];
+          this.sound.playShoot();
+
+          // Shake hands
+          this.dom.handDisplayP1.innerHTML = '✊';
+          this.dom.handDisplayP2.innerHTML = '✊';
+          if (playerCount === 3) {
+            this.dom.handDisplayP3.innerHTML = '✊';
+          }
+          stepIdx++;
+        } else {
+          clearInterval(countdownInterval);
+          this.dom.rpsCountdown.textContent = '';
+          this.revealRpsOutcome(playerCount);
+        }
+      }, 350);
+    }
+
+    revealRpsOutcome(playerCount) {
+      // Reveal throws
+      this.dom.handDisplayP1.innerHTML = RPS_ICONS[this.rpsP1Choice];
+      this.dom.choiceNameP1.textContent = RPS_NAMES[this.rpsP1Choice];
+
+      this.dom.handDisplayP2.innerHTML = RPS_ICONS[this.rpsP2Choice];
+      this.dom.choiceNameP2.textContent = RPS_NAMES[this.rpsP2Choice];
+
+      if (playerCount === 3) {
+        this.dom.handDisplayP3.innerHTML = RPS_ICONS[this.rpsP3Choice];
+        this.dom.choiceNameP3.textContent = RPS_NAMES[this.rpsP3Choice];
+      }
+
+      // Evaluate 2-Player Match
+      if (playerCount === 2) {
+        const res = rpsCompare(this.rpsP1Choice, this.rpsP2Choice);
+        const nameP1 = this.dom.podiumLabelP1.textContent;
+        const nameP2 = this.dom.podiumLabelP2.textContent;
+
+        if (res === 0) {
+          // Draw
+          this.rpsScores.draw++;
+          this.rpsStreak = 0;
+          this.sound.playDraw();
+          this.dom.rpsStatusAvatar.innerHTML = '🤝';
+          this.dom.rpsStatusText.textContent = `Both threw ${RPS_NAMES[this.rpsP1Choice]}! It's a Draw!`;
+        } else if (res === 1) {
+          // P1 wins
+          this.rpsScores.p1++;
+          this.rpsStreak++;
+          this.dom.rpsPodiumP1.classList.add('winner');
+          this.sound.playWin();
+          this.confetti.burst(65);
+          this.dom.rpsStatusAvatar.innerHTML = '🎉';
+          this.dom.rpsStatusText.textContent = `${RPS_NAMES[this.rpsP1Choice]} beats ${RPS_NAMES[this.rpsP2Choice]}! ${nameP1} Wins!`;
+        } else {
+          // P2 wins
+          this.rpsScores.p2++;
+          this.rpsStreak = 0;
+          this.dom.rpsPodiumP2.classList.add('winner');
+          this.sound.playWin();
+          this.confetti.burst(65);
+          this.dom.rpsStatusAvatar.innerHTML = '🎉';
+          this.dom.rpsStatusText.textContent = `${RPS_NAMES[this.rpsP2Choice]} beats ${RPS_NAMES[this.rpsP1Choice]}! ${nameP2} Wins!`;
+        }
+      }
+
+      // Evaluate 3-Player Match
+      if (playerCount === 3) {
+        const c1 = this.rpsP1Choice;
+        const c2 = this.rpsP2Choice;
+        const c3 = this.rpsP3Choice;
+        const name1 = this.dom.podiumLabelP1.textContent;
+        const name2 = this.dom.podiumLabelP2.textContent;
+        const name3 = this.dom.podiumLabelP3.textContent;
+
+        const uniqueChoices = Array.from(new Set([c1, c2, c3]));
+
+        if (uniqueChoices.length === 1) {
+          // All 3 picked identical
+          this.rpsScores.draw++;
+          this.sound.playDraw();
+          this.dom.rpsStatusAvatar.innerHTML = '🤝';
+          this.dom.rpsStatusText.textContent = `All 3 threw ${RPS_NAMES[c1]}! It's a 3-way Draw!`;
+        } else if (uniqueChoices.length === 3) {
+          // All 3 picked different (Rock, Paper, Scissors)
+          this.rpsScores.draw++;
+          this.sound.playDraw();
+          this.dom.rpsStatusAvatar.innerHTML = '🤝';
+          this.dom.rpsStatusText.textContent = `Rock, Paper & Scissor all appeared! Perfect Draw!`;
+        } else {
+          // Exactly 2 distinct choices appeared!
+          // Find which of the two choices wins
+          const [optA, optB] = uniqueChoices;
+          const winningOption = rpsCompare(optA, optB) === 1 ? optA : optB;
+          const losingOption = winningOption === optA ? optB : optA;
+
+          const winners = [];
+          if (c1 === winningOption) {
+            winners.push({ id: 1, name: name1 });
+            this.rpsScores.p1++;
+            this.dom.rpsPodiumP1.classList.add('winner');
+          }
+          if (c2 === winningOption) {
+            winners.push({ id: 2, name: name2 });
+            this.rpsScores.p2++;
+            this.dom.rpsPodiumP2.classList.add('winner');
+          }
+          if (c3 === winningOption) {
+            winners.push({ id: 3, name: name3 });
+            this.rpsScores.p3++;
+            this.dom.rpsPodiumP3.classList.add('winner');
+          }
+
+          this.sound.playWin();
+          this.confetti.burst(75);
+          this.dom.rpsStatusAvatar.innerHTML = '🎉';
+
+          const winnerNames = winners.map(w => w.name).join(' & ');
+          this.dom.rpsStatusText.textContent = `${RPS_NAMES[winningOption]} beats ${RPS_NAMES[losingOption]}! ${winnerNames} Win!`;
+        }
+      }
+
+      this.updateRpsScoreboard();
+      this.rpsIsAnimating = false;
+      this.dom.choiceButtons.forEach(btn => btn.disabled = false);
+    }
+
+    // ========================================================================
+    // MEMORY MATCH BONUS MINI-GAME
+    // ========================================================================
+    initMemory() {
+      this.dom.memoRestartBtn.addEventListener('click', () => {
+        this.sound.playClick();
+        this.restartMemory();
+      });
+
+      this.dom.memoRestartTopBtn.addEventListener('click', () => {
+        this.sound.playClick();
+        this.restartMemory();
+      });
+
+      this.restartMemory();
+    }
+
+    restartMemory() {
+      clearInterval(this.memoTimerInterval);
+      this.memoSeconds = 0;
+      this.memoMoveCount = 0;
+      this.memoMatchedCount = 0;
+      this.memoFlipped = [];
+      this.memoIsLocked = false;
+
+      this.dom.memoMoves.textContent = '0';
+      this.dom.memoMatches.textContent = '0 / 8';
+      this.dom.memoTimer.textContent = '00:00';
+
+      this.memoTimerInterval = setInterval(() => {
+        this.memoSeconds++;
+        const mins = String(Math.floor(this.memoSeconds / 60)).padStart(2, '0');
+        const secs = String(this.memoSeconds % 60).padStart(2, '0');
+        this.dom.memoTimer.textContent = `${mins}:${secs}`;
+      }, 1000);
+
+      // 16 cards (8 pairs)
+      const deck = [...MEMO_ICONS, ...MEMO_ICONS].sort(() => Math.random() - 0.5);
+
+      this.dom.memoGrid.innerHTML = '';
+      deck.forEach((icon, idx) => {
+        const card = document.createElement('div');
+        card.className = 'memo-card';
+        card.dataset.icon = icon;
+        card.dataset.index = idx;
+
+        card.innerHTML = `
+          <div class="memo-face front">🎀</div>
+          <div class="memo-face back">${icon}</div>
+        `;
+
+        card.addEventListener('click', () => this.handleMemoCardClick(card));
+        this.dom.memoGrid.appendChild(card);
+      });
+    }
+
+    handleMemoCardClick(card) {
+      if (this.memoIsLocked || card.classList.contains('flipped') || card.classList.contains('matched')) {
+        return;
+      }
+
+      this.sound.playPop(520);
+      card.classList.add('flipped');
+      this.memoFlipped.push(card);
+
+      if (this.memoFlipped.length === 2) {
+        this.memoMoveCount++;
+        this.dom.memoMoves.textContent = this.memoMoveCount;
+        this.checkMemoMatch();
+      }
+    }
+
+    checkMemoMatch() {
+      const [cardA, cardB] = this.memoFlipped;
+      const isMatch = cardA.dataset.icon === cardB.dataset.icon;
+
+      if (isMatch) {
+        this.sound.playWin();
+        cardA.classList.add('matched');
+        cardB.classList.add('matched');
+        this.memoMatchedCount++;
+        this.dom.memoMatches.textContent = `${this.memoMatchedCount} / 8`;
+        this.memoFlipped = [];
+
+        if (this.memoMatchedCount === 8) {
+          clearInterval(this.memoTimerInterval);
+          this.confetti.burst(85);
+          setTimeout(() => {
+            this.openVictoryModal('🧸', 'Memory Master!', `You matched all pairs in ${this.memoMoveCount} moves! 🎉`, 1);
+          }, 450);
+        }
+      } else {
+        this.memoIsLocked = true;
+        setTimeout(() => {
+          cardA.classList.remove('flipped');
+          cardB.classList.remove('flipped');
+          this.memoFlipped = [];
+          this.memoIsLocked = false;
+        }, 900);
+      }
+    }
+
+    // ========================================================================
+    // MODAL WINDOWS
+    // ========================================================================
+    openVictoryModal(avatar, title, message, streak = 0) {
+      this.dom.modalAvatar.innerHTML = typeof avatar === 'string' && avatar.includes('<svg') ? avatar : `<span style="font-size:2.8rem">${avatar}</span>`;
+      this.dom.modalTitle.textContent = title;
+      this.dom.modalMessage.textContent = message;
+
+      if (streak > 1) {
+        this.dom.modalStreakBadge.style.display = 'inline-block';
+        this.dom.modalStreakText.textContent = `Win Streak: ${streak} in a row! 🔥`;
+      } else {
+        this.dom.modalStreakBadge.style.display = 'none';
+      }
+
+      this.dom.victoryModal.classList.add('active');
+      this.dom.victoryModal.setAttribute('aria-hidden', 'false');
     }
   }
 
   // Initialize once DOM is ready
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
-      window.game = new ZeroKataGame();
+      window.arcade = new KawaiiArcadeApp();
     });
   } else {
-    window.game = new ZeroKataGame();
+    window.arcade = new KawaiiArcadeApp();
   }
 })();

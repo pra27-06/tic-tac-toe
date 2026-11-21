@@ -1,59 +1,50 @@
-# 👶 ZERO KATA • CUTE BABIES EDITION 🍼
+# 🎮 KAWAII ARCADE 🎀 • ZERO KATA & STONE PAPER SCISSOR
 
-An adorable, joyful Zero Kata web game featuring custom smiling baby vector graphics with pacifiers, chubby blush cheeks, soft pastel nursery gradients, celebratory confetti, gentle floating bubbles, playful synthesized Web Audio sound effects, and two complete game modes: **vs Baby Bot** and **2 Little Babies (2P)**!
+An adorable, joyful Multi-Game Arcade web application featuring a central **Games Hub**, **Zero Kata (Tic-Tac-Toe)**, **Stone Paper Scissors (1P, 2P & 3P Modes)**, and a bonus **Baby Memory Match** game! Built with custom smiling baby graphics, pastel nursery gradients, celebratory confetti, gentle floating bubbles, playful synthesized Web Audio sound effects, and zero external dependencies!
 
 🎮 **Play Online**: [https://pra27-06.github.io/tic-tac-toe/](https://pra27-06.github.io/tic-tac-toe/)
 
 ---
 
-## ✨ Features
+## 🕹️ Featured Games
 
-- 💖 **Aesthetic Pastel Kawaii Baby Design**: Soft nursery gradients, glassmorphism cards, gentle floating pacifiers, teddy bears, bottles, and clouds with spring-physics bounce animations.
-- 👶 **Cute Baby Vector Graphics**:
-  - **Baby Kata**: Soft rounded pastel cross with a sweet smiling baby face in the center, shiny sparkling eyes `(◕ ‿ ◕)`, chubby blush cheeks, and a cute pink pacifier.
-  - **Baby Zero**: Soft rounded pastel donut ring with a baby bonnet cap on top, shiny sparkling eyes, chubby blush cheeks, and a baby blue pacifier.
+### 1. 🌸 Zero Kata (Cute Baby Edition)
+The beloved classic 3×3 game reinvented with sweet smiling babies!
 - 🤖 **1-Player Mode (vs Baby Bot)**:
-  - **🌸 Crawling (Easy)**: Relaxed, friendly, and playful.
-  - **⚡ Babbling (Medium)**: Smart, blocks winning lines, and plays tactically.
-  - **👑 Baby Genius (Unbeatable Bot)**: Powered by the Minimax algorithm with depth scoring — mathematically unbeatable!
-  - **First-Turn Selection**: Choose whether Baby Kata starts first, Baby Zero starts first, or pick randomly (`🎲 Random`).
-- 👥 **2-Player Mode (2 Little Babies)**:
-  - Play with a friend on the same phone, tablet, or laptop.
-  - Active turn glow badge and dynamic turn announcement banner.
-- 🎨 **4 Cute Baby Themes** (Switch anytime with the 👶 button):
-  1. 👶 **Baby Girl & Boy** (Pink Pacifier Kata & Blue Pacifier Zero)
-  2. 🧸 **Teddy & Duckling** (Cozy Teddy Kata & Sweet Duckling Zero)
-  3. 🐰 **Bunny & Kitty** (Baby Bunny Kata & Baby Kitty Zero)
-  4. 🍼 **Pacifier & Rattle** (Sweet Pacifier Kata & Musical Rattle Zero)
-- 🔊 **Synthesized Web Audio FX**:
-  - Zero external sound files — 100% reliable offline sound synthesizer.
-  - Sweet baby pops, joyful nursery music box arpeggios, soft cozy sighs, and tactile clicks.
-  - Sound toggle button (`🔊 / 🔇`) with preference saved.
-- 🎊 **Celebration & Effects**:
-  - Full-screen colorful confetti cannons on victory.
-  - Dynamic animated SVG line striking through the 3 winning tiles.
-  - Winning tiles perform a cute celebration wiggle.
-  - Victory modal with custom winner message and win streaks counter!
-- 🏆 **Scoreboard & Streaks**:
-  - Tracks Baby Kata wins, Baby Zero / Bot wins, and Cozy Ties.
-  - Remembers win streaks (`🔥 Win Streak: 3`).
-  - Saved automatically in `localStorage` so your score is never lost on refresh.
-- ↩️ **Undo Move**:
-  - Made a mistake? Press the Undo button anytime to take back your move.
-- 📱 **100% Mobile & Touch Friendly**:
-  - Designed mobile-first with touch-action optimizations to prevent accidental double-tap zoom delays.
+  - **🌸 Crawling (Easy)**: Friendly, relaxed baby steps.
+  - **⚡ Babbling (Medium)**: Tactical, blocks lines, and seeks winning moves.
+  - **👑 Baby Genius (Unbeatable Bot)**: Powered by the Minimax algorithm with depth evaluation — mathematically unbeatable!
+  - **First-Turn Selection**: Baby Kata first, Baby Zero first, or random.
+- 👥 **2-Player Mode (2 Little Babies)**: Pass & play on the same screen with live turn glow indicator.
+- 🎨 **4 Cute Themes**: Switch anytime (Baby Girl & Boy, Teddy & Duckling, Bunny & Kitty, Pacifier & Rattle).
+- ↩️ **Undo Move**: Retract mistakes at any time.
+
+### 2. ✂️ Stone Paper Scissor (1P, 2P & 3P Battle Royale!)
+A feature-packed Stone Paper Scissor arena with dynamic 3-podium layout, animated shake-and-throw countdown ("3... 2... 1... SHOOT!"), and complete game modes:
+- 🤖 **1-Player vs Machine**: Duel the smart AI computer.
+- 👥 **2-Player Duel**: Secret pass-and-pick mode where Player 1 locks in their throw before Player 2 chooses!
+- 🌟 **3-Player Battle Royale Mode**:
+  - **1 Human + 2 Bots**: Battle two computer opponents simultaneously!
+  - **3 Humans (Pass & Play)**: Secretly lock in 3 picks on one phone or tablet.
+  - **2 Humans + 1 Bot**: Two friends join forces or battle against a third AI bot!
+- 📜 **Official 3-Player Outcome Rules**:
+  - All 3 choose the same symbol (e.g. 🪨 + 🪨 + 🪨) ➔ **Draw!**
+  - All 3 choose different symbols (🪨 + 📄 + ✂️) ➔ **Draw!**
+  - Two distinct symbols appear (e.g. 🪨 + 🪨 + ✂️) ➔ Winning symbol beats losing symbol (Stone crushes Scissor ➔ both Stone players win together!).
+
+### 3. 🧸 Baby Memory Match (Bonus Mini-Game)
+- 4×4 card grid with cute baby animals (Teddy 🧸, Duckling 🐥, Kitty 🐱, Bunny 🐰, Milk 🍼, and more).
+- Tracks moves, matched pairs, and real-time stopwatch.
 
 ---
 
-## 🕹️ How to Play
+## ✨ Arcade Highlights
 
-1. Choose your game mode:
-   - Tap **🤖 vs Baby Bot** to play as Baby Kata against the computer.
-   - Tap **👥 2 Babies** to play with a friend.
-2. If playing against the Baby Bot, select your desired difficulty: **Crawling**, **Babbling**, or **Baby Genius**.
-3. Take turns tapping an empty tile on the 3×3 grid.
-4. The first player to connect 3 of their symbols horizontally, vertically, or diagonally wins the round! 🎉
-5. If all 9 tiles are filled and nobody has 3 in a row, the round ends in a cozy Tie! 🤝
+- 💖 **Kawaii Pastel Aesthetic**: Soft glassmorphism cards, cheerful floating bubbles, bounce animations, and smiling face vector icons.
+- 🔊 **Procedural Web Audio FX**: Zero external audio files — 100% reliable offline sound synthesizer for pops, shoot rhythms, victory melodies, and draw chimes.
+- 🎊 **Full-Screen Confetti Cannons**: Dynamic canvas particles burst in pastel pink, mint, yellow, sky-blue, and violet upon winning.
+- 📱 **Responsive & Mobile-First**: Works seamlessly across iPhones, Android devices, iPads, tablets, and desktop computers.
+- 💾 **Persistent Scoreboards**: Automatically preserves your wins and streaks across browser refreshes via `localStorage`.
 
 ---
 
@@ -65,7 +56,8 @@ Anyone in the world can play your game for free using **GitHub Pages**:
 2. Click on the **⚙️ Settings** tab at the top right.
 3. On the left sidebar, click on **Pages** (under the "Code and automation" section).
 4. Under **Build and deployment**:
-   - **Source**: Select `GitHub Actions` (or `Deploy from a branch` ➔ branch `main` or `gh-pages` ➔ `/ (root)`).
+   - **Source**: Select `Deploy from a branch` (or `GitHub Actions`).
+   - Branch: Select `gh-pages` (or `main`) and folder `/ (root)`.
    - Click **Save**.
 5. Wait 1–2 minutes, and your game will be live for everyone at:
    👉 **`https://pra27-06.github.io/tic-tac-toe/`**

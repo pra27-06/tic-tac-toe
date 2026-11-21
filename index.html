@@ -6,203 +6,506 @@
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
   <meta http-equiv="Pragma" content="no-cache" />
   <meta http-equiv="Expires" content="0" />
-  <title>👶 ZERO KATA 🍼 | Cute Babies Edition</title>
-  <meta name="description" content="A super cute Zero Kata game with adorable smiling baby graphics, sweet pacifiers, lovely animations, sounds, 1-Player vs Baby Bot and 2-Player modes!" />
+  <title>🎮 Kawaii Arcade 🎀 | Zero Kata &amp; Stone Paper Scissor</title>
+  <meta name="description" content="A cute game arcade app featuring Zero Kata and Stone Paper Scissors with 1-Player vs Machine, 2-Player, and 3-Player modes!" />
   <meta name="theme-color" content="#ffd1dc" />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css?v=cute-babies-v3" />
+  <link rel="stylesheet" href="style.css?v=arcade-hub-v4" />
 </head>
 <body>
-  <!-- Ambient Floating Background Baby Decorations -->
+  <!-- Ambient Floating Background Decorations -->
   <div class="bg-decorations" aria-hidden="true">
     <span class="bubble b1">👶</span>
-    <span class="bubble b2">🍼</span>
-    <span class="bubble b3">💖</span>
-    <span class="bubble b4">🧸</span>
-    <span class="bubble b5">🐥</span>
-    <span class="bubble b6">🎀</span>
-    <span class="bubble b7">⭐</span>
-    <span class="bubble b8">☁️</span>
+    <span class="bubble b2">🪨</span>
+    <span class="bubble b3">📄</span>
+    <span class="bubble b4">✂️</span>
+    <span class="bubble b5">🍼</span>
+    <span class="bubble b6">💖</span>
+    <span class="bubble b7">🧸</span>
+    <span class="bubble b8">⭐</span>
     <span class="bubble b9">✨</span>
-    <span class="bubble b10">🍼</span>
+    <span class="bubble b10">🎀</span>
   </div>
 
   <!-- Fullscreen Confetti Canvas -->
   <canvas id="confetti-canvas" aria-hidden="true"></canvas>
 
-  <main class="app-container">
-    <!-- Header -->
-    <header class="header">
-      <div class="logo-wrapper">
-        <span class="sparkle-icon">👶</span>
-        <h1 class="game-title">ZERO KATA</h1>
-        <span class="sparkle-icon">🍼</span>
-      </div>
-      <p class="game-subtitle">THE CUTEST BABIES ZERO KATA GAME!</p>
+  <div class="app-wrapper">
+    <!-- Top Global Navigation Bar -->
+    <nav class="global-navbar" aria-label="Arcade Navigation">
+      <button id="nav-home-btn" class="nav-brand-btn" title="Back to Games Hub">
+        <span class="nav-logo">🎮</span>
+        <span class="nav-brand-text">Kawaii Arcade</span>
+      </button>
 
-      <!-- Quick Action Bar -->
-      <div class="top-bar">
-        <button id="theme-btn" class="pill-btn theme-toggle" title="Switch Cute Baby Theme" aria-label="Switch Baby Theme">
-          <span class="btn-icon">👶</span>
-          <span class="btn-label" id="theme-label">Baby Girl &amp; Boy</span>
+      <div class="nav-links">
+        <button id="tab-hub-btn" class="nav-tab-btn active" data-target="view-hub">
+          <span>🏠 Hub</span>
         </button>
+        <button id="tab-zk-btn" class="nav-tab-btn" data-target="view-zerokata">
+          <span>🌸 Zero Kata</span>
+        </button>
+        <button id="tab-rps-btn" class="nav-tab-btn" data-target="view-rps">
+          <span>✂️ Stone Paper Scissor</span>
+        </button>
+      </div>
 
-        <button id="sound-btn" class="pill-btn icon-only" title="Toggle Sound Effects" aria-label="Toggle Sound">
+      <div class="nav-actions">
+        <button id="global-sound-btn" class="icon-circle-btn" title="Toggle Sound" aria-label="Toggle Sound">
           <span id="sound-icon">🔊</span>
         </button>
-
-        <button id="help-btn" class="pill-btn icon-only" title="Game Rules &amp; Info" aria-label="Help and Info">
+        <button id="global-help-btn" class="icon-circle-btn" title="Game Rules &amp; Info" aria-label="Rules and Info">
           <span>❔</span>
         </button>
       </div>
-    </header>
+    </nav>
 
-    <!-- Game Mode Selection -->
-    <section class="mode-section" aria-label="Game Mode Selection">
-      <div class="mode-tabs">
-        <button id="mode-pve" class="mode-tab active" data-mode="pve">
-          <span class="tab-icon">🤖</span>
-          <span class="tab-text">vs Baby Bot</span>
-        </button>
-        <button id="mode-pvp" class="mode-tab" data-mode="pvp">
-          <span class="tab-icon">👥</span>
-          <span class="tab-text">2 Babies (2P)</span>
-        </button>
-      </div>
+    <!-- ====================================================================
+         VIEW 1: GAMES HUB (MENU SCREEN)
+         ==================================================================== -->
+    <main id="view-hub" class="view-panel active">
+      <header class="hub-hero">
+        <div class="hero-badge">✨ WELCOME TO THE ARCADE ✨</div>
+        <h1 class="hub-title">Pick a Game &amp; Play!</h1>
+        <p class="hub-subtitle">Choose from sweet Zero Kata, Stone Paper Scissors, and more!</p>
+      </header>
 
-      <!-- AI Options (Only visible in PvE Mode) -->
-      <div id="ai-controls" class="ai-controls-panel">
-        <div class="control-row">
-          <span class="control-label">🍼 Baby Bot Level:</span>
-          <div class="difficulty-group">
-            <button class="diff-btn" data-diff="easy" title="Casual & crawling">🌸 Crawling</button>
-            <button class="diff-btn active" data-diff="medium" title="Smart & babbling">⚡ Babbling</button>
-            <button class="diff-btn" data-diff="hard" title="Genius Baby Bot">👑 Baby Genius</button>
+      <section class="games-grid" aria-label="Available Games">
+        <!-- Game Card 1: Zero Kata -->
+        <article class="game-card">
+          <div class="card-art zk-art">
+            <span class="art-badge">👶 1P &bull; 2P</span>
+            <div class="art-icons">
+              <span class="art-icon float-icon">🌸</span>
+              <span class="art-icon bounce-icon">✖️</span>
+              <span class="art-icon pulse-icon">⭕</span>
+              <span class="art-icon float-icon">🍼</span>
+            </div>
           </div>
-        </div>
-
-        <div class="control-row">
-          <span class="control-label">🎯 First Turn:</span>
-          <div class="first-turn-group">
-            <button class="turn-choice-btn active" data-turn="p1">Baby Kata First</button>
-            <button class="turn-choice-btn" data-turn="p2">Baby Zero First</button>
-            <button class="turn-choice-btn" data-turn="random">🎲 Random</button>
+          <div class="card-content">
+            <div class="card-header">
+              <h2 class="card-title">Zero Kata</h2>
+              <span class="card-tag tag-pink">Cute Baby Edition</span>
+            </div>
+            <p class="card-desc">The beloved 3×3 strategy duel with adorable smiling babies, pacifiers, 4 color themes, and smart AI bot!</p>
+            <div class="card-meta">
+              <span>🤖 vs Baby Bot (3 Levels)</span>
+              <span>👥 2 Players (Pass &amp; Play)</span>
+            </div>
+            <button class="play-btn zk-play-btn" data-open="view-zerokata">
+              <span>Play Zero Kata 🌸</span>
+            </button>
           </div>
+        </article>
+
+        <!-- Game Card 2: Stone Paper Scissor -->
+        <article class="game-card featured">
+          <div class="card-art rps-art">
+            <span class="art-badge highlight">🔥 1P &bull; 2P &bull; 3P MODE!</span>
+            <div class="art-icons">
+              <span class="art-icon float-icon">🪨</span>
+              <span class="art-icon bounce-icon">📄</span>
+              <span class="art-icon pulse-icon">✂️</span>
+              <span class="art-icon float-icon">✨</span>
+            </div>
+          </div>
+          <div class="card-content">
+            <div class="card-header">
+              <h2 class="card-title">Stone Paper Scissor</h2>
+              <span class="card-tag tag-cyan">1P, 2P &amp; 3P Battle</span>
+            </div>
+            <p class="card-desc">Throw Rock, Paper, or Scissors! Play vs Machine, duel a friend, or jump into an epic 3-player battle royale!</p>
+            <div class="card-meta">
+              <span>🤖 vs Machine</span>
+              <span>👥 2 Players</span>
+              <span>🌟 3 Players Mode</span>
+            </div>
+            <button class="play-btn rps-play-btn" data-open="view-rps">
+              <span>Play Stone Paper Scissor ✂️</span>
+            </button>
+          </div>
+        </article>
+
+        <!-- Game Card 3: Memory Cards Bonus -->
+        <article class="game-card">
+          <div class="card-art memo-art">
+            <span class="art-badge">🧸 BONUS MINI-GAME</span>
+            <div class="art-icons">
+              <span class="art-icon float-icon">🧸</span>
+              <span class="art-icon bounce-icon">🐥</span>
+              <span class="art-icon pulse-icon">🐰</span>
+              <span class="art-icon float-icon">🐱</span>
+            </div>
+          </div>
+          <div class="card-content">
+            <div class="card-header">
+              <h2 class="card-title">Baby Memory Cards</h2>
+              <span class="card-tag tag-yellow">Brain Relax</span>
+            </div>
+            <p class="card-desc">Flip and match sweet baby animals (Teddy, Duckling, Kitty, and Bunny) to test your cute memory!</p>
+            <div class="card-meta">
+              <span>🎴 4x4 Grid Matching</span>
+              <span>⏱️ Track Moves &amp; Time</span>
+            </div>
+            <button class="play-btn memo-play-btn" data-open="view-memo">
+              <span>Play Memory Cards 🃏</span>
+            </button>
+          </div>
+        </article>
+      </section>
+    </main>
+
+    <!-- ====================================================================
+         VIEW 2: ZERO KATA GAME SCREEN
+         ==================================================================== -->
+    <main id="view-zerokata" class="view-panel">
+      <div class="game-view-container">
+        <!-- Subheader with Back Button -->
+        <div class="view-top-header">
+          <button class="back-to-hub-btn" data-open="view-hub">
+            <span>← All Games</span>
+          </button>
+          <div class="view-title-pill">🌸 Zero Kata</div>
+          <button id="zk-theme-btn" class="pill-btn small" title="Switch Cute Palette">
+            <span>🎨</span>
+            <span id="zk-theme-label">Baby Girl &amp; Boy</span>
+          </button>
         </div>
+
+        <!-- Mode Selection -->
+        <section class="mode-section" aria-label="Zero Kata Mode">
+          <div class="mode-tabs">
+            <button id="zk-mode-pve" class="mode-tab active" data-mode="pve">
+              <span class="tab-icon">🤖</span>
+              <span class="tab-text">vs Baby Bot</span>
+            </button>
+            <button id="zk-mode-pvp" class="mode-tab" data-mode="pvp">
+              <span class="tab-icon">👥</span>
+              <span class="tab-text">2 Babies</span>
+            </button>
+          </div>
+
+          <!-- AI Controls (Only visible in PvE Mode) -->
+          <div id="zk-ai-controls" class="ai-controls-panel">
+            <div class="control-row">
+              <span class="control-label">🍼 Bot Level:</span>
+              <div class="difficulty-group">
+                <button class="zk-diff-btn" data-diff="easy" title="Casual & crawling">🌸 Crawling</button>
+                <button class="zk-diff-btn active" data-diff="medium" title="Smart & babbling">⚡ Babbling</button>
+                <button class="zk-diff-btn" data-diff="hard" title="Genius Baby Bot">👑 Baby Genius</button>
+              </div>
+            </div>
+
+            <div class="control-row">
+              <span class="control-label">🎯 First Turn:</span>
+              <div class="first-turn-group">
+                <button class="zk-turn-btn active" data-turn="p1">Kata First</button>
+                <button class="zk-turn-btn" data-turn="p2">Zero First</button>
+                <button class="zk-turn-btn" data-turn="random">🎲 Random</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Scoreboard -->
+        <section class="scoreboard" aria-label="Zero Kata Scoreboard">
+          <div class="score-card player-1" id="zk-card-p1">
+            <div class="avatar-badge" id="zk-avatar-p1">
+              <span class="char-icon" id="zk-icon-p1"></span>
+              <span class="turn-indicator-dot" title="Current Turn"></span>
+            </div>
+            <div class="score-info">
+              <div class="player-name" id="zk-name-p1">Baby Kata</div>
+              <div class="score-val" id="zk-score-p1">0</div>
+            </div>
+          </div>
+
+          <div class="vs-card">
+            <span class="vs-heart">💖</span>
+            <div class="tie-badge">
+              <span class="tie-label">Ties</span>
+              <span class="tie-val" id="zk-score-draw">0</span>
+            </div>
+          </div>
+
+          <div class="score-card player-2" id="zk-card-p2">
+            <div class="avatar-badge" id="zk-avatar-p2">
+              <span class="char-icon" id="zk-icon-p2"></span>
+              <span class="turn-indicator-dot" title="Current Turn"></span>
+            </div>
+            <div class="score-info">
+              <div class="player-name" id="zk-name-p2">Baby Zero</div>
+              <div class="score-val" id="zk-score-p2">0</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Turn Banner -->
+        <div class="turn-banner" id="zk-turn-banner" role="status" aria-live="polite">
+          <span class="status-avatar" id="zk-status-avatar">👶</span>
+          <span class="status-text" id="zk-status-text">Baby Kata's turn! Tap a tile~</span>
+        </div>
+
+        <!-- 3x3 Board -->
+        <section class="board-wrapper">
+          <div class="board" id="zk-board" role="grid" aria-label="Zero Kata 3 by 3 Grid">
+            <button class="cell" data-index="0" role="gridcell" aria-label="Top-Left cell"></button>
+            <button class="cell" data-index="1" role="gridcell" aria-label="Top-Center cell"></button>
+            <button class="cell" data-index="2" role="gridcell" aria-label="Top-Right cell"></button>
+            <button class="cell" data-index="3" role="gridcell" aria-label="Middle-Left cell"></button>
+            <button class="cell" data-index="4" role="gridcell" aria-label="Center cell"></button>
+            <button class="cell" data-index="5" role="gridcell" aria-label="Middle-Right cell"></button>
+            <button class="cell" data-index="6" role="gridcell" aria-label="Bottom-Left cell"></button>
+            <button class="cell" data-index="7" role="gridcell" aria-label="Bottom-Center cell"></button>
+            <button class="cell" data-index="8" role="gridcell" aria-label="Bottom-Right cell"></button>
+
+            <!-- Dynamic Animated SVG Winning Strike Line -->
+            <svg class="win-line-overlay" id="zk-win-line-svg" aria-hidden="true">
+              <defs>
+                <linearGradient id="winGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#ff7597" />
+                  <stop offset="50%" stop-color="#ff5e85" />
+                  <stop offset="100%" stop-color="#38bdf8" />
+                </linearGradient>
+              </defs>
+              <line id="zk-win-line" x1="0" y1="0" x2="0" y2="0" />
+            </svg>
+          </div>
+        </section>
+
+        <!-- Actions Panel -->
+        <section class="actions-panel">
+          <button id="zk-restart-btn" class="action-btn primary" title="Next round">
+            <span class="btn-icon">🌸</span>
+            <span>New Round</span>
+          </button>
+          <button id="zk-undo-btn" class="action-btn secondary" title="Undo move">
+            <span class="btn-icon">↩️</span>
+            <span>Undo</span>
+          </button>
+          <button id="zk-reset-score-btn" class="action-btn subtle" title="Reset score">
+            <span class="btn-icon">🧹</span>
+            <span>Reset</span>
+          </button>
+        </section>
       </div>
-    </section>
+    </main>
 
-    <!-- Scoreboard -->
-    <section class="scoreboard" aria-label="Scoreboard">
-      <!-- Player 1 Card (Baby Kata) -->
-      <div class="score-card player-1" id="card-p1">
-        <div class="avatar-badge" id="avatar-p1">
-          <span class="char-icon" id="icon-p1"></span>
-          <span class="turn-indicator-dot" title="Current Turn"></span>
+    <!-- ====================================================================
+         VIEW 3: STONE PAPER SCISSOR GAME SCREEN (1P, 2P & 3P!)
+         ==================================================================== -->
+    <main id="view-rps" class="view-panel">
+      <div class="game-view-container">
+        <!-- Subheader with Back Button -->
+        <div class="view-top-header">
+          <button class="back-to-hub-btn" data-open="view-hub">
+            <span>← All Games</span>
+          </button>
+          <div class="view-title-pill">✂️ Stone Paper Scissor</div>
+          <button id="rps-mode-info-btn" class="pill-btn small" title="Mode Details">
+            <span>💡 Tips</span>
+          </button>
         </div>
-        <div class="score-info">
-          <div class="player-name" id="name-p1">Baby Kata</div>
-          <div class="score-val" id="score-p1">0</div>
+
+        <!-- Mode Selector: 1P, 2P, 3P -->
+        <section class="mode-section" aria-label="Stone Paper Scissor Modes">
+          <div class="mode-tabs rps-mode-tabs">
+            <button id="rps-mode-1p" class="mode-tab active" data-mode="1p">
+              <span class="tab-icon">🤖</span>
+              <span class="tab-text">vs Machine</span>
+            </button>
+            <button id="rps-mode-2p" class="mode-tab" data-mode="2p">
+              <span class="tab-icon">👥</span>
+              <span class="tab-text">2 Players</span>
+            </button>
+            <button id="rps-mode-3p" class="mode-tab" data-mode="3p">
+              <span class="tab-icon">🌟</span>
+              <span class="tab-text">3 Players!</span>
+            </button>
+          </div>
+
+          <!-- 3-Player Type Selector (Visible only in 3P mode) -->
+          <div id="rps-3p-subcontrols" class="ai-controls-panel hidden">
+            <div class="control-row">
+              <span class="control-label">🌟 3-Player Setup:</span>
+              <div class="difficulty-group">
+                <button class="rps-sub-btn active" data-sub="1h2b">1 Human + 2 Bots</button>
+                <button class="rps-sub-btn" data-sub="3h">3 Humans (Pass)</button>
+                <button class="rps-sub-btn" data-sub="2h1b">2 Humans + 1 Bot</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- RPS Scoreboard -->
+        <section class="rps-scoreboard" id="rps-scoreboard" aria-label="Scores">
+          <!-- Dynamically filled: 2 cards in 1P/2P, 3 cards in 3P -->
+          <div class="rps-score-card p1" id="rps-card-p1">
+            <div class="rps-badge" id="rps-badge-p1">👶 You</div>
+            <div class="rps-score-val" id="rps-score-p1">0</div>
+          </div>
+
+          <div class="rps-score-card draw" id="rps-card-draw">
+            <div class="rps-badge">🤝 Draws</div>
+            <div class="rps-score-val" id="rps-score-draw">0</div>
+          </div>
+
+          <div class="rps-score-card p2" id="rps-card-p2">
+            <div class="rps-badge" id="rps-badge-p2">🤖 Machine</div>
+            <div class="rps-score-val" id="rps-score-p2">0</div>
+          </div>
+
+          <div class="rps-score-card p3 hidden" id="rps-card-p3">
+            <div class="rps-badge" id="rps-badge-p3">🤖 Bot 2</div>
+            <div class="rps-score-val" id="rps-score-p3">0</div>
+          </div>
+        </section>
+
+        <!-- RPS Status / Prompt Banner -->
+        <div class="turn-banner" id="rps-turn-banner" role="status" aria-live="polite">
+          <span class="status-avatar" id="rps-status-avatar">🪨</span>
+          <span class="status-text" id="rps-status-text">Pick Stone, Paper, or Scissors!</span>
         </div>
+
+        <!-- RPS Battle Arena / Showdown Stage -->
+        <section class="rps-arena" id="rps-arena">
+          <!-- Player 1 Podium -->
+          <div class="rps-podium" id="rps-podium-p1">
+            <div class="podium-label" id="podium-label-p1">You</div>
+            <div class="podium-hand-display" id="hand-display-p1">
+              <span class="hand-placeholder">❔</span>
+            </div>
+            <div class="podium-choice-name" id="choice-name-p1">-</div>
+          </div>
+
+          <div class="rps-arena-center">
+            <span class="rps-vs-burst">VS</span>
+            <div class="countdown-display" id="rps-countdown"></div>
+          </div>
+
+          <!-- Player 2 Podium -->
+          <div class="rps-podium" id="rps-podium-p2">
+            <div class="podium-label" id="podium-label-p2">Machine</div>
+            <div class="podium-hand-display" id="hand-display-p2">
+              <span class="hand-placeholder">❔</span>
+            </div>
+            <div class="podium-choice-name" id="choice-name-p2">-</div>
+          </div>
+
+          <!-- Player 3 Podium (Only in 3-Player mode) -->
+          <div class="rps-podium hidden" id="rps-podium-p3">
+            <div class="podium-label" id="podium-label-p3">Bot 2</div>
+            <div class="podium-hand-display" id="hand-display-p3">
+              <span class="hand-placeholder">❔</span>
+            </div>
+            <div class="podium-choice-name" id="choice-name-p3">-</div>
+          </div>
+        </section>
+
+        <!-- RPS Human Selection Controls -->
+        <section class="rps-choices-panel" id="rps-choices-panel">
+          <div class="choice-prompt-label" id="choice-prompt-label">Make your move:</div>
+          <div class="choices-button-group">
+            <button class="choice-btn" data-choice="rock" title="Stone / Rock">
+              <span class="choice-icon">🪨</span>
+              <span class="choice-title">Stone</span>
+              <span class="choice-beats">Beats Scissor</span>
+            </button>
+
+            <button class="choice-btn" data-choice="paper" title="Paper">
+              <span class="choice-icon">📄</span>
+              <span class="choice-title">Paper</span>
+              <span class="choice-beats">Beats Stone</span>
+            </button>
+
+            <button class="choice-btn" data-choice="scissors" title="Scissors">
+              <span class="choice-icon">✂️</span>
+              <span class="choice-title">Scissor</span>
+              <span class="choice-beats">Beats Paper</span>
+            </button>
+          </div>
+        </section>
+
+        <!-- RPS Action Controls -->
+        <section class="actions-panel">
+          <button id="rps-next-round-btn" class="action-btn primary" title="Next shoot">
+            <span class="btn-icon">⚡</span>
+            <span>Next Round</span>
+          </button>
+          <button id="rps-reset-scores-btn" class="action-btn subtle" title="Clear scores">
+            <span class="btn-icon">🧹</span>
+            <span>Reset Scores</span>
+          </button>
+        </section>
       </div>
+    </main>
 
-      <!-- VS & Tie Card -->
-      <div class="vs-card">
-        <span class="vs-heart">💖</span>
-        <div class="tie-badge">
-          <span class="tie-label">Cozy Ties</span>
-          <span class="tie-val" id="score-draw">0</span>
+    <!-- ====================================================================
+         VIEW 4: BONUS MEMORY MATCH MINI-GAME
+         ==================================================================== -->
+    <main id="view-memo" class="view-panel">
+      <div class="game-view-container">
+        <div class="view-top-header">
+          <button class="back-to-hub-btn" data-open="view-hub">
+            <span>← All Games</span>
+          </button>
+          <div class="view-title-pill">🧸 Memory Cards</div>
+          <button id="memo-restart-top-btn" class="pill-btn small" title="Shuffle &amp; Restart">
+            <span>🔄 Shuffle</span>
+          </button>
         </div>
+
+        <section class="memo-stats-bar">
+          <div class="memo-stat">
+            <span class="stat-lbl">Moves:</span>
+            <span class="stat-val" id="memo-moves">0</span>
+          </div>
+          <div class="memo-stat">
+            <span class="stat-lbl">Matches:</span>
+            <span class="stat-val" id="memo-matches">0 / 8</span>
+          </div>
+          <div class="memo-stat">
+            <span class="stat-lbl">Time:</span>
+            <span class="stat-val" id="memo-timer">00:00</span>
+          </div>
+        </section>
+
+        <!-- 4x4 Memory Cards Grid -->
+        <section class="memo-grid" id="memo-grid" aria-label="Memory Cards Grid">
+          <!-- 16 cards generated dynamically -->
+        </section>
+
+        <section class="actions-panel single">
+          <button id="memo-restart-btn" class="action-btn primary">
+            <span>🔄 Restart Memory Cards</span>
+          </button>
+        </section>
       </div>
-
-      <!-- Player 2 / AI Card (Baby Zero) -->
-      <div class="score-card player-2" id="card-p2">
-        <div class="avatar-badge" id="avatar-p2">
-          <span class="char-icon" id="icon-p2"></span>
-          <span class="turn-indicator-dot" title="Current Turn"></span>
-        </div>
-        <div class="score-info">
-          <div class="player-name" id="name-p2">Baby Zero</div>
-          <div class="score-val" id="score-p2">0</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Game Status & Turn Banner -->
-    <div class="turn-banner" id="turn-banner" role="status" aria-live="polite">
-      <span class="status-avatar" id="status-avatar">👶</span>
-      <span class="status-text" id="status-text">Baby Kata's turn! Tap a tile to start~</span>
-    </div>
-
-    <!-- Main Game Board Container -->
-    <section class="board-wrapper">
-      <div class="board" id="board" role="grid" aria-label="Zero Kata 3 by 3 Grid">
-        <!-- 9 clickable grid cells -->
-        <button class="cell" data-index="0" role="gridcell" aria-label="Top-Left cell"></button>
-        <button class="cell" data-index="1" role="gridcell" aria-label="Top-Center cell"></button>
-        <button class="cell" data-index="2" role="gridcell" aria-label="Top-Right cell"></button>
-        <button class="cell" data-index="3" role="gridcell" aria-label="Middle-Left cell"></button>
-        <button class="cell" data-index="4" role="gridcell" aria-label="Center cell"></button>
-        <button class="cell" data-index="5" role="gridcell" aria-label="Middle-Right cell"></button>
-        <button class="cell" data-index="6" role="gridcell" aria-label="Bottom-Left cell"></button>
-        <button class="cell" data-index="7" role="gridcell" aria-label="Bottom-Center cell"></button>
-        <button class="cell" data-index="8" role="gridcell" aria-label="Bottom-Right cell"></button>
-
-        <!-- Dynamic Animated SVG Winning Strike Line -->
-        <svg class="win-line-overlay" id="win-line-svg" aria-hidden="true">
-          <defs>
-            <linearGradient id="winGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#ff7597" />
-              <stop offset="50%" stop-color="#ff5e85" />
-              <stop offset="100%" stop-color="#38bdf8" />
-            </linearGradient>
-          </defs>
-          <line id="win-line" x1="0" y1="0" x2="0" y2="0" />
-        </svg>
-      </div>
-    </section>
-
-    <!-- Control Actions -->
-    <section class="actions-panel">
-      <button id="restart-round-btn" class="action-btn primary" title="Clear board and start next round">
-        <span class="btn-icon">🌸</span>
-        <span>New Round</span>
-      </button>
-
-      <button id="undo-btn" class="action-btn secondary" title="Take back your last move">
-        <span class="btn-icon">↩️</span>
-        <span>Undo</span>
-      </button>
-
-      <button id="reset-score-btn" class="action-btn subtle" title="Reset all match scores to 0">
-        <span class="btn-icon">🧹</span>
-        <span>Reset Score</span>
-      </button>
-    </section>
+    </main>
 
     <!-- Footer -->
     <footer class="footer">
-      <p>Crafted with 💖 and baby smiles • Free to play &amp; share!</p>
+      <p>Kawaii Game Arcade • Zero Kata &amp; Stone Paper Scissor • Free to Play!</p>
     </footer>
-  </main>
+  </div>
 
-  <!-- Victory / Game Over Celebration Modal -->
+  <!-- Victory Celebration Modal -->
   <div class="modal-backdrop" id="victory-modal" aria-hidden="true" role="dialog" aria-modal="true">
     <div class="modal-card">
       <div class="modal-decorations" aria-hidden="true">
-        <span>👶</span><span>🎉</span><span>🍼</span><span>⭐</span>
+        <span>✨</span><span>🎉</span><span>🌸</span><span>⭐</span>
       </div>
       <div class="modal-badge-wrapper">
-        <div class="modal-avatar" id="modal-avatar"></div>
+        <div class="modal-avatar" id="modal-avatar">🏆</div>
       </div>
-      <h2 class="modal-title" id="modal-title">Yay! Baby Kata Won!</h2>
-      <p class="modal-subtitle" id="modal-message">What a sensational cute victory! 🎈</p>
+      <h2 class="modal-title" id="modal-title">Victory!</h2>
+      <p class="modal-subtitle" id="modal-message">Sensational playing! 🎈</p>
 
       <div class="modal-stats" id="modal-streak-badge">
-        🔥 <span id="modal-streak-text">Win Streak: 1</span>
+        🔥 <span id="modal-streak-text">Streak: 1</span>
       </div>
 
       <div class="modal-actions">
@@ -210,7 +513,7 @@
           <span>🎀 Play Next Round</span>
         </button>
         <button id="modal-close-btn" class="modal-btn secondary">
-          <span>Review Board 👀</span>
+          <span>Close 👀</span>
         </button>
       </div>
     </div>
@@ -222,42 +525,42 @@
       <button class="modal-close-corner" id="help-close-x" aria-label="Close Help">✕</button>
       <div class="help-header">
         <span class="help-icon">📖</span>
-        <h2>How to Play ZERO KATA: Cute Babies Edition</h2>
+        <h2>How to Play Our Games</h2>
       </div>
 
       <div class="help-content">
         <div class="help-item">
           <span class="help-badge">1</span>
           <div>
-            <strong>Goal:</strong>
-            <p>Connect 3 of your cute <strong>Baby Kata</strong> or <strong>Baby Zero</strong> in a row (horizontally, vertically, or diagonally) to win!</p>
+            <strong>🌸 ZERO KATA:</strong>
+            <p>Connect 3 of your cute Baby Kata or Baby Zero pieces in a row to win! Play against the smart Baby Bot or with a friend.</p>
           </div>
         </div>
 
         <div class="help-item">
           <span class="help-badge">2</span>
           <div>
-            <strong>Game Modes:</strong>
-            <p><strong>🤖 vs Baby Bot:</strong> Play as Baby Kata against the cute Baby Bot with Crawling, Babbling, or Baby Genius levels!</p>
-            <p><strong>👥 2 Babies:</strong> Play with a friend taking turns on the same screen.</p>
+            <strong>✂️ STONE PAPER SCISSOR (1P, 2P &amp; 3P):</strong>
+            <p><strong>Rules:</strong> Stone crushes Scissor, Scissor cuts Paper, Paper covers Stone!</p>
+            <p><strong>🌟 3-Player Rules:</strong> If all 3 pick the same or all 3 different, it's a draw. If two players throw the same winning sign, they both win!</p>
           </div>
         </div>
 
         <div class="help-item">
           <span class="help-badge">3</span>
           <div>
-            <strong>Baby Themes:</strong>
-            <p>Tap <strong>👶</strong> at the top to change cute themes (Baby Girl &amp; Boy, Teddy &amp; Duckling, Baby Bunny &amp; Kitty, or Pacifier &amp; Rattle)!</p>
+            <strong>🧸 BABY MEMORY:</strong>
+            <p>Flip two cards at a time to find matching pairs of cute baby animals!</p>
           </div>
         </div>
       </div>
 
       <button id="help-ok-btn" class="modal-btn primary" style="width: 100%; margin-top: 15px;">
-        <span>Yay! Let's Play! 🌸</span>
+        <span>Got it! Let's Play! 🌸</span>
       </button>
     </div>
   </div>
 
-  <script src="script.js?v=cute-babies-v3"></script>
+  <script src="script.js?v=arcade-hub-v4"></script>
 </body>
 </html>
