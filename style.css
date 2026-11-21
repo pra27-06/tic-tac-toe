@@ -635,13 +635,14 @@ html, body {
 }
 
 .win-line-overlay line {
+  stroke: #ff5e85;
   stroke: url(#winGradient);
-  stroke-width: 8;
+  stroke-width: 9;
   stroke-linecap: round;
-  filter: drop-shadow(0 0 8px rgba(255, 101, 132, 0.8));
-  stroke-dasharray: 500;
-  stroke-dashoffset: 500;
-  transition: stroke-dashoffset 0.45s ease-out;
+  filter: drop-shadow(0 0 10px rgba(255, 101, 132, 0.85));
+  stroke-dasharray: 600;
+  stroke-dashoffset: 600;
+  transition: stroke-dashoffset 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 .win-line-overlay.active {

@@ -694,6 +694,7 @@
     renderBoard() {
       this.dom.cells.forEach((cell, idx) => {
         cell.innerHTML = '';
+        cell.classList.remove('taken');
         const player = this.boardState[idx];
         if (player) {
           this.renderCell(idx, player);
@@ -822,10 +823,21 @@
       const cellA = this.dom.cells[combo[0]].getBoundingClientRect();
       const cellC = this.dom.cells[combo[2]].getBoundingClientRect();
 
-      const x1 = cellA.left + cellA.width / 2 - boardRect.left;
-      const y1 = cellA.top + cellA.height / 2 - boardRect.top;
-      const x2 = cellC.left + cellC.width / 2 - boardRect.left;
-      const y2 = cellC.top + cellC.height / 2 - boardRect.top;
+      let x1 = cellA.left + cellA.width / 2 - boardRect.left;
+      let y1 = cellA.top + cellA.height / 2 - boardRect.top;
+      let x2 = cellC.left + cellC.width / 2 - boardRect.left;
+      let y2 = cellC.top + cellC.height / 2 - boardRect.top;
+
+      const dx = x2 - x1;
+      const dy = y2 - y1;
+      const len = Math.hypot(dx, dy);
+      if (len > 0) {
+        const extend = 16;
+        x1 -= (dx / len) * extend;
+        y1 -= (dy / len) * extend;
+        x2 += (dx / len) * extend;
+        y2 += (dy / len) * extend;
+      }
 
       this.dom.winLine.setAttribute('x1', x1);
       this.dom.winLine.setAttribute('y1', y1);
@@ -1027,7 +1039,11 @@
   }
 
   // Initialize once DOM is ready
-  document.addEventListener('DOMContentLoaded', () => {
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+      window.game = new KawaiiTicTacToe();
+    });
+  } else {
     window.game = new KawaiiTicTacToe();
-  });
+  }
 })();

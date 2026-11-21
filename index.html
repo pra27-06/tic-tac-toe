@@ -150,6 +150,13 @@
 
         <!-- Dynamic Animated SVG Winning Strike Line -->
         <svg class="win-line-overlay" id="win-line-svg" aria-hidden="true">
+          <defs>
+            <linearGradient id="winGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#ff7597" />
+              <stop offset="50%" stop-color="#ff5e85" />
+              <stop offset="100%" stop-color="#8b5cf6" />
+            </linearGradient>
+          </defs>
           <line id="win-line" x1="0" y1="0" x2="0" y2="0" />
         </svg>
       </div>
