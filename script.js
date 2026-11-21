@@ -1,96 +1,88 @@
 /**
- * 🌸 KAWAII ZERO & CROSS (TIC-TAC-TOE) 🎀
- * Pure Vanilla JavaScript implementation with Custom Kawaii Vector Graphics,
- * Web Audio FX, Minimax AI, Canvas Confetti, and SVG Win-Line strike.
+ * 🌴 ZERO KATA • GTA VI VICE CITY EDITION ⚡
+ * Vanilla JavaScript Engine with Neon Vector Graphics, Retro Synthwave Audio,
+ * Kingpin Minimax AI, Neon Confetti, and High-Voltage Laser Strikes.
  */
 
 (() => {
   'use strict';
 
-  // --- Cute Zero & Cross Color Palettes ---
+  // --- GTA VI Vice City Neon Palettes ---
   const PALETTES = [
     {
-      id: 'sakura-sky',
-      name: 'Sakura & Sky',
+      id: 'vice-sunset',
+      name: 'Vice City Sunset',
       p1: {
-        label: 'Cross (X)',
-        name: 'Player X',
-        color: '#ff6584',
-        grad: ['#ff7597', '#ff5277'],
-        faceColor: '#ffffff',
-        blush: '#ff7597'
+        label: 'KATA',
+        name: 'KATA',
+        color: '#ff007f',
+        grad: ['#ff007f', '#ff5277'],
+        glow: 'rgba(255, 0, 127, 0.75)'
       },
       p2: {
-        label: 'Zero (O)',
-        name: 'Player O',
-        botName: 'Bot (O)',
-        color: '#0984e3',
-        grad: ['#4facfe', '#00c6ff'],
-        faceColor: '#ffffff',
-        blush: '#ff7675'
+        label: 'ZERO',
+        name: 'ZERO',
+        botName: 'VICE AI',
+        color: '#00f0ff',
+        grad: ['#00f0ff', '#00a8ff'],
+        glow: 'rgba(0, 240, 255, 0.75)'
       }
     },
     {
-      id: 'bubblegum-mint',
-      name: 'Bubblegum & Mint',
+      id: 'miami-midnight',
+      name: 'Miami Midnight',
       p1: {
-        label: 'Cross (X)',
-        name: 'Player X',
-        color: '#9b51e0',
-        grad: ['#b388ff', '#7c4dff'],
-        faceColor: '#ffffff',
-        blush: '#ea80fc'
+        label: 'KATA',
+        name: 'KATA',
+        color: '#bf55ec',
+        grad: ['#bf55ec', '#9b51e0'],
+        glow: 'rgba(191, 85, 236, 0.75)'
       },
       p2: {
-        label: 'Zero (O)',
-        name: 'Player O',
-        botName: 'Bot (O)',
-        color: '#10b981',
-        grad: ['#34d399', '#059669'],
-        faceColor: '#ffffff',
-        blush: '#f87171'
+        label: 'ZERO',
+        name: 'ZERO',
+        botName: 'VICE AI',
+        color: '#00ff88',
+        grad: ['#00ff88', '#00cc66'],
+        glow: 'rgba(0, 255, 136, 0.75)'
       }
     },
     {
-      id: 'peach-lavender',
-      name: 'Peach & Lavender',
+      id: 'gold-coast',
+      name: 'Gold Coast Heist',
       p1: {
-        label: 'Cross (X)',
-        name: 'Player X',
-        color: '#ff7675',
-        grad: ['#ff9999', '#ff5252'],
-        faceColor: '#ffffff',
-        blush: '#ff7675'
+        label: 'KATA',
+        name: 'KATA',
+        color: '#ffaa00',
+        grad: ['#ffaa00', '#ff6a00'],
+        glow: 'rgba(255, 170, 0, 0.75)'
       },
       p2: {
-        label: 'Zero (O)',
-        name: 'Player O',
-        botName: 'Bot (O)',
-        color: '#6c5ce7',
-        grad: ['#a29bfe', '#6c5ce7'],
-        faceColor: '#ffffff',
-        blush: '#fd79a8'
+        label: 'ZERO',
+        name: 'ZERO',
+        botName: 'VICE AI',
+        color: '#ff1744',
+        grad: ['#ff1744', '#d50000'],
+        glow: 'rgba(255, 23, 68, 0.75)'
       }
     },
     {
-      id: 'sunny-berry',
-      name: 'Sunny & Berry',
+      id: 'cyber-neon',
+      name: 'Cyber Neon',
       p1: {
-        label: 'Cross (X)',
-        name: 'Player X',
-        color: '#e84393',
-        grad: ['#fd79a8', '#e84393'],
-        faceColor: '#ffffff',
-        blush: '#ff7675'
+        label: 'KATA',
+        name: 'KATA',
+        color: '#ccff00',
+        grad: ['#ccff00', '#76ff03'],
+        glow: 'rgba(204, 255, 0, 0.75)'
       },
       p2: {
-        label: 'Zero (O)',
-        name: 'Player O',
-        botName: 'Bot (O)',
-        color: '#f59e0b',
-        grad: ['#fcd34d', '#f59e0b'],
-        faceColor: '#ffffff',
-        blush: '#ff7675'
+        label: 'ZERO',
+        name: 'ZERO',
+        botName: 'VICE AI',
+        color: '#2979ff',
+        grad: ['#2979ff', '#00b0ff'],
+        glow: 'rgba(41, 121, 255, 0.75)'
       }
     }
   ];
@@ -107,86 +99,75 @@
     [2, 4, 6]  // Diag 2
   ];
 
-  // --- SVG Kawaii Graphics Generators for Cross (X) & Zero (O) ---
-  function getCuteCrossSvg(grad, blush, idSuffix = 'main') {
-    const gradId = `xGrad_${idSuffix}`;
+  // --- GTA VI Neon Vector Graphics for Kata & Zero ---
+  function getGtaKataSvg(grad, glow, idSuffix = 'main') {
+    const gradId = `kataNeonGrad_${idSuffix}`;
+    const glowId = `kataNeonGlow_${idSuffix}`;
     return `
-      <svg class="mark-svg mark-x" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <svg class="mark-svg mark-kata" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <linearGradient id="${gradId}" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stop-color="${grad[0]}" />
             <stop offset="100%" stop-color="${grad[1]}" />
           </linearGradient>
-          <filter id="xShadow_${idSuffix}" x="-20%" y="-20%" width="140%" height="140%">
-            <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="${grad[1]}" flood-opacity="0.32"/>
+          <filter id="${glowId}" x="-30%" y="-30%" width="160%" height="160%">
+            <feDropShadow dx="0" dy="0" stdDeviation="5" flood-color="${grad[0]}" flood-opacity="0.9"/>
+            <feDropShadow dx="0" dy="0" stdDeviation="10" flood-color="${grad[1]}" flood-opacity="0.6"/>
           </filter>
         </defs>
-        <!-- Soft Rounded Diagonal Strokes of X -->
-        <line x1="22" y1="22" x2="78" y2="78" stroke="url(#${gradId})" stroke-width="17" stroke-linecap="round" filter="url(#xShadow_${idSuffix})" />
-        <line x1="78" y1="22" x2="22" y2="78" stroke="url(#${gradId})" stroke-width="17" stroke-linecap="round" filter="url(#xShadow_${idSuffix})" />
+        <!-- Outer Glowing Neon Laser Tube -->
+        <g filter="url(#${glowId})">
+          <line x1="20" y1="20" x2="80" y2="80" stroke="url(#${gradId})" stroke-width="16" stroke-linecap="round" />
+          <line x1="80" y1="20" x2="20" y2="80" stroke="url(#${gradId})" stroke-width="16" stroke-linecap="round" />
+        </g>
+        <!-- Inner Bright White-Hot Plasma Core -->
+        <line x1="20" y1="20" x2="80" y2="80" stroke="#ffffff" stroke-width="6" stroke-linecap="round" opacity="0.95" />
+        <line x1="80" y1="20" x2="20" y2="80" stroke="#ffffff" stroke-width="6" stroke-linecap="round" opacity="0.95" />
         
-        <!-- Center Kawaii Face Circle -->
-        <circle cx="50" cy="50" r="18" fill="#ffffff" filter="url(#xShadow_${idSuffix})" />
-        <!-- Happy Eyes -->
-        <circle cx="43.5" cy="48" r="2.6" fill="#373244" />
-        <circle cx="56.5" cy="48" r="2.6" fill="#373244" />
-        <!-- Eye Sparkles -->
-        <circle cx="42.5" cy="46.8" r="1" fill="#ffffff" />
-        <circle cx="55.5" cy="46.8" r="1" fill="#ffffff" />
-        <!-- Rosy Blush Cheeks -->
-        <ellipse cx="39" cy="53" rx="2.8" ry="1.5" fill="${blush}" opacity="0.85" />
-        <ellipse cx="61" cy="53" rx="2.8" ry="1.5" fill="${blush}" opacity="0.85" />
-        <!-- Sweet Smile -->
-        <path d="M 46.5 52 Q 50 56.5 53.5 52" stroke="#373244" stroke-width="2" stroke-linecap="round" fill="none" />
-        <!-- Little Sparkle on Tip -->
-        <path d="M 74 16 Q 77 21 82 22 Q 77 23 74 28 Q 73 23 68 22 Q 73 21 74 16 Z" fill="#fff375" opacity="0.9" />
+        <!-- Center Cyber Core Hub -->
+        <circle cx="50" cy="50" r="10" fill="#0c0418" stroke="url(#${gradId})" stroke-width="3" />
+        <circle cx="50" cy="50" r="4" fill="#ffffff" />
+        <!-- Electric Sparks -->
+        <polygon points="76,14 78,22 84,23 79,26 81,32 76,28 72,31 74,25 69,23 75,21" fill="#fff" opacity="0.9" />
       </svg>
     `;
   }
 
-  function getCuteZeroSvg(grad, blush, idSuffix = 'main') {
-    const gradId = `oGrad_${idSuffix}`;
+  function getGtaZeroSvg(grad, glow, idSuffix = 'main') {
+    const gradId = `zeroNeonGrad_${idSuffix}`;
+    const glowId = `zeroNeonGlow_${idSuffix}`;
     return `
-      <svg class="mark-svg mark-o" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <svg class="mark-svg mark-zero" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <linearGradient id="${gradId}" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stop-color="${grad[0]}" />
             <stop offset="100%" stop-color="${grad[1]}" />
           </linearGradient>
-          <filter id="oShadow_${idSuffix}" x="-20%" y="-20%" width="140%" height="140%">
-            <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="${grad[1]}" flood-opacity="0.32"/>
+          <filter id="${glowId}" x="-30%" y="-30%" width="160%" height="160%">
+            <feDropShadow dx="0" dy="0" stdDeviation="5" flood-color="${grad[0]}" flood-opacity="0.9"/>
+            <feDropShadow dx="0" dy="0" stdDeviation="10" flood-color="${grad[1]}" flood-opacity="0.6"/>
           </filter>
         </defs>
-        <!-- Plump Round Donut of O -->
-        <circle cx="50" cy="50" r="32" stroke="url(#${gradId})" stroke-width="16" fill="none" filter="url(#oShadow_${idSuffix})" />
+        <!-- Outer Glowing Neon Ring -->
+        <g filter="url(#${glowId})">
+          <circle cx="50" cy="50" r="30" stroke="url(#${gradId})" stroke-width="16" fill="none" />
+        </g>
+        <!-- Inner Bright White-Hot Plasma Core -->
+        <circle cx="50" cy="50" r="30" stroke="#ffffff" stroke-width="6" fill="none" opacity="0.95" />
         
-        <!-- Cute Little Ribbon Bow on Top -->
-        <path d="M 42 12 Q 50 17 50 19 Q 50 17 58 12 Q 55 21 50 19 Q 45 21 42 12 Z" fill="#ff7597" />
-        <circle cx="50" cy="18" r="2.8" fill="#ffe4eb" />
-
-        <!-- Center Kawaii Face Circle -->
-        <circle cx="50" cy="50" r="18" fill="#ffffff" filter="url(#oShadow_${idSuffix})" />
-        <!-- Happy Eyes -->
-        <circle cx="43.5" cy="48" r="2.6" fill="#373244" />
-        <circle cx="56.5" cy="48" r="2.6" fill="#373244" />
-        <!-- Eye Sparkles -->
-        <circle cx="42.5" cy="46.8" r="1" fill="#ffffff" />
-        <circle cx="55.5" cy="46.8" r="1" fill="#ffffff" />
-        <!-- Rosy Blush Cheeks -->
-        <ellipse cx="39" cy="53" rx="2.8" ry="1.5" fill="${blush}" opacity="0.85" />
-        <ellipse cx="61" cy="53" rx="2.8" ry="1.5" fill="${blush}" opacity="0.85" />
-        <!-- Sweet Smile -->
-        <path d="M 46.5 52 Q 50 56.5 53.5 52" stroke="#373244" stroke-width="2" stroke-linecap="round" fill="none" />
-        <!-- Little Sparkle on Side -->
-        <path d="M 80 44 Q 82 48 86 49 Q 82 50 80 54 Q 79 50 75 49 Q 79 48 80 44 Z" fill="#fff375" opacity="0.9" />
+        <!-- Center Cyber Radar Crosshair Hub -->
+        <circle cx="50" cy="50" r="8" fill="none" stroke="url(#${gradId})" stroke-width="2" />
+        <circle cx="50" cy="50" r="3" fill="#ffffff" />
+        <!-- Electric Pulse Accent -->
+        <polygon points="84,46 87,50 92,51 88,54 89,58 85,55 81,57 83,53 79,51 84,50" fill="#fff" opacity="0.9" />
       </svg>
     `;
   }
 
-  // --- Sound Synthesizer (Web Audio API) ---
-  class SoundController {
+  // --- Synthwave Sound Synthesizer (Web Audio API) ---
+  class SynthAudioController {
     constructor() {
-      this.enabled = localStorage.getItem('kawaii_sound_enabled') !== 'false';
+      this.enabled = localStorage.getItem('gta_sound_enabled') !== 'false';
       this.ctx = null;
     }
 
@@ -204,11 +185,11 @@
 
     toggle() {
       this.enabled = !this.enabled;
-      localStorage.setItem('kawaii_sound_enabled', this.enabled);
+      localStorage.setItem('gta_sound_enabled', this.enabled);
       return this.enabled;
     }
 
-    playPop(frequency = 540) {
+    playMove(isKata = true) {
       if (!this.enabled) return;
       this.init();
       if (!this.ctx) return;
@@ -218,36 +199,77 @@
         const osc = this.ctx.createOscillator();
         const gain = this.ctx.createGain();
 
-        osc.type = 'sine';
-        osc.frequency.setValueAtTime(frequency, now);
-        osc.frequency.exponentialRampToValueAtTime(frequency * 0.45, now + 0.12);
+        // High punchy 80s synth hit for Kata, deeper laser punch for Zero
+        if (isKata) {
+          osc.type = 'sawtooth';
+          osc.frequency.setValueAtTime(320, now);
+          osc.frequency.exponentialRampToValueAtTime(80, now + 0.15);
 
-        gain.gain.setValueAtTime(0.28, now);
-        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.12);
+          gain.gain.setValueAtTime(0.3, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.15);
+        } else {
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(480, now);
+          osc.frequency.exponentialRampToValueAtTime(110, now + 0.16);
+
+          gain.gain.setValueAtTime(0.32, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.16);
+        }
 
         osc.connect(gain);
         gain.connect(this.ctx.destination);
 
         osc.start(now);
-        osc.stop(now + 0.13);
+        osc.stop(now + 0.17);
       } catch (e) {
         console.warn('Audio error:', e);
       }
     }
 
-    playWin() {
+    playMissionPassed() {
       if (!this.enabled) return;
       this.init();
       if (!this.ctx) return;
 
       try {
-        const notes = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6 joyful arpeggio
-        notes.forEach((freq, idx) => {
-          const startTime = this.ctx.currentTime + idx * 0.09;
+        // High-energy Vice City Synthwave Fanfare: G3 -> C4 -> D4 -> G4 -> C5
+        const chords = [196.00, 261.63, 293.66, 392.00, 523.25];
+        chords.forEach((freq, idx) => {
+          const startTime = this.ctx.currentTime + idx * 0.08;
           const osc = this.ctx.createOscillator();
           const gain = this.ctx.createGain();
 
-          osc.type = 'triangle';
+          osc.type = 'sawtooth';
+          osc.frequency.setValueAtTime(freq, startTime);
+
+          gain.gain.setValueAtTime(0.22, startTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.42);
+
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+
+          osc.start(startTime);
+          osc.stop(startTime + 0.44);
+        });
+      } catch (e) {
+        console.warn('Audio error:', e);
+      }
+    }
+
+    playBusted() {
+      if (!this.enabled) return;
+      this.init();
+      if (!this.ctx) return;
+
+      try {
+        // Heavy low-pass synth drop for Stalemate
+        const notes = [220, 196, 174.61]; // A3, G3, F3
+        notes.forEach((freq, idx) => {
+          const startTime = this.ctx.currentTime + idx * 0.12;
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+
+          osc.type = 'sine';
           osc.frequency.setValueAtTime(freq, startTime);
 
           gain.gain.setValueAtTime(0.25, startTime);
@@ -264,35 +286,6 @@
       }
     }
 
-    playDraw() {
-      if (!this.enabled) return;
-      this.init();
-      if (!this.ctx) return;
-
-      try {
-        const notes = [440, 392, 349.23]; // Cute sigh chords
-        notes.forEach((freq, idx) => {
-          const startTime = this.ctx.currentTime + idx * 0.11;
-          const osc = this.ctx.createOscillator();
-          const gain = this.ctx.createGain();
-
-          osc.type = 'sine';
-          osc.frequency.setValueAtTime(freq, startTime);
-
-          gain.gain.setValueAtTime(0.2, startTime);
-          gain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.28);
-
-          osc.connect(gain);
-          gain.connect(this.ctx.destination);
-
-          osc.start(startTime);
-          osc.stop(startTime + 0.29);
-        });
-      } catch (e) {
-        console.warn('Audio error:', e);
-      }
-    }
-
     playClick() {
       if (!this.enabled) return;
       this.init();
@@ -303,32 +296,32 @@
         const osc = this.ctx.createOscillator();
         const gain = this.ctx.createGain();
 
-        osc.type = 'sine';
-        osc.frequency.setValueAtTime(800, now);
-        osc.frequency.exponentialRampToValueAtTime(400, now + 0.05);
+        osc.type = 'square';
+        osc.frequency.setValueAtTime(900, now);
+        osc.frequency.exponentialRampToValueAtTime(300, now + 0.04);
 
-        gain.gain.setValueAtTime(0.15, now);
-        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.05);
+        gain.gain.setValueAtTime(0.12, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.04);
 
         osc.connect(gain);
         gain.connect(this.ctx.destination);
 
         osc.start(now);
-        osc.stop(now + 0.06);
+        osc.stop(now + 0.05);
       } catch (e) {
         console.warn('Audio error:', e);
       }
     }
   }
 
-  // --- Confetti Particle System ---
-  class ConfettiEngine {
+  // --- Neon Cyber Confetti / Sparks Particle System ---
+  class NeonConfettiEngine {
     constructor(canvas) {
       this.canvas = canvas;
       this.ctx = canvas.getContext('2d');
       this.particles = [];
       this.animationFrame = null;
-      this.colors = ['#ff7597', '#4facfe', '#ffe082', '#a7f3d0', '#b39ddb', '#ff9ff3'];
+      this.colors = ['#ff007f', '#00f0ff', '#ffaa00', '#ffffff', '#ff5277', '#76ff03'];
       this.resize();
       window.addEventListener('resize', () => this.resize());
     }
@@ -338,19 +331,19 @@
       this.canvas.height = window.innerHeight;
     }
 
-    burst(count = 75) {
+    burst(count = 85) {
       this.resize();
       for (let i = 0; i < count; i++) {
         this.particles.push({
           x: this.canvas.width * (0.2 + Math.random() * 0.6),
-          y: this.canvas.height * 0.4,
-          vx: (Math.random() - 0.5) * 14,
-          vy: -Math.random() * 12 - 4,
-          size: Math.random() * 9 + 5,
+          y: this.canvas.height * 0.42,
+          vx: (Math.random() - 0.5) * 16,
+          vy: -Math.random() * 14 - 5,
+          size: Math.random() * 9 + 4,
           color: this.colors[Math.floor(Math.random() * this.colors.length)],
           rotation: Math.random() * 360,
-          rotationSpeed: (Math.random() - 0.5) * 10,
-          shape: Math.random() > 0.4 ? 'circle' : 'rect',
+          rotationSpeed: (Math.random() - 0.5) * 12,
+          shape: Math.random() > 0.35 ? 'diamond' : 'rect',
           alpha: 1,
           decay: Math.random() * 0.012 + 0.008
         });
@@ -368,7 +361,7 @@
         const p = this.particles[i];
         p.x += p.vx;
         p.y += p.vy;
-        p.vy += 0.35; // gravity
+        p.vy += 0.38; // gravity
         p.rotation += p.rotationSpeed;
         p.alpha -= p.decay;
 
@@ -382,13 +375,19 @@
         this.ctx.translate(p.x, p.y);
         this.ctx.rotate((p.rotation * Math.PI) / 180);
         this.ctx.fillStyle = p.color;
+        this.ctx.shadowColor = p.color;
+        this.ctx.shadowBlur = 8;
 
-        if (p.shape === 'circle') {
+        if (p.shape === 'diamond') {
           this.ctx.beginPath();
-          this.ctx.arc(0, 0, p.size / 2, 0, Math.PI * 2);
+          this.ctx.moveTo(0, -p.size);
+          this.ctx.lineTo(p.size * 0.7, 0);
+          this.ctx.lineTo(0, p.size);
+          this.ctx.lineTo(-p.size * 0.7, 0);
+          this.ctx.closePath();
           this.ctx.fill();
         } else {
-          this.ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size * 0.7);
+          this.ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size * 0.6);
         }
 
         this.ctx.restore();
@@ -402,13 +401,13 @@
     }
   }
 
-  // --- Main Kawaii Zero & Cross Game Controller ---
-  class KawaiiZeroAndCross {
+  // --- Main ZERO KATA Game Engine (GTA VI Edition) ---
+  class ZeroKataGame {
     constructor() {
       this.boardState = Array(9).fill(null);
-      this.currentTurn = 'p1'; // 'p1' (Cross X) or 'p2' (Zero O)
-      this.gameMode = 'pve'; // 'pve' (vs Machine) or 'pvp' (2 players)
-      this.difficulty = 'medium'; // 'easy', 'medium', 'hard' (genius)
+      this.currentTurn = 'p1'; // 'p1' (Kata) or 'p2' (Zero)
+      this.gameMode = 'pve'; // 'pve' (vs Vice AI) or 'pvp' (Street Duel)
+      this.difficulty = 'medium'; // 'easy' (Rookie), 'medium' (Hustler), 'hard' (Kingpin)
       this.firstTurnPref = 'p1'; // 'p1', 'p2', or 'random'
       this.isGameOver = false;
       this.isAiThinking = false;
@@ -418,8 +417,8 @@
       this.streakWinner = null;
 
       this.scores = this.loadScores();
-      this.sound = new SoundController();
-      this.confetti = new ConfettiEngine(document.getElementById('confetti-canvas'));
+      this.sound = new SynthAudioController();
+      this.confetti = new NeonConfettiEngine(document.getElementById('confetti-canvas'));
 
       // DOM Elements Cache
       this.dom = {
@@ -461,6 +460,7 @@
         resetScoreBtn: document.getElementById('reset-score-btn'),
 
         victoryModal: document.getElementById('victory-modal'),
+        missionTag: document.getElementById('mission-tag'),
         modalAvatar: document.getElementById('modal-avatar'),
         modalTitle: document.getElementById('modal-title'),
         modalMessage: document.getElementById('modal-message'),
@@ -475,7 +475,7 @@
       };
 
       // Load saved palette
-      const savedPalette = localStorage.getItem('kawaii_zc_palette');
+      const savedPalette = localStorage.getItem('gta_zerokata_palette');
       if (savedPalette !== null) {
         this.paletteIndex = parseInt(savedPalette, 10) % PALETTES.length;
       }
@@ -493,7 +493,7 @@
 
     loadScores() {
       try {
-        const stored = localStorage.getItem('kawaii_zc_scores');
+        const stored = localStorage.getItem('gta_zerokata_scores');
         if (stored) {
           return JSON.parse(stored);
         }
@@ -505,14 +505,14 @@
 
     saveScores() {
       try {
-        localStorage.setItem('kawaii_zc_scores', JSON.stringify(this.scores));
+        localStorage.setItem('gta_zerokata_scores', JSON.stringify(this.scores));
       } catch (e) {
         console.warn('Could not save scores:', e);
       }
     }
 
     initEvents() {
-      // Cell clicks & keyboard access
+      // Cell clicks
       this.dom.cells.forEach(cell => {
         cell.addEventListener('click', (e) => this.handleCellClick(e));
         cell.addEventListener('keydown', (e) => {
@@ -537,7 +537,7 @@
         });
       });
 
-      // First Turn Selection
+      // First Strike Selection
       this.dom.turnButtons.forEach(btn => {
         btn.addEventListener('click', () => {
           this.dom.turnButtons.forEach(b => b.classList.remove('active'));
@@ -551,7 +551,7 @@
       // Palette toggle
       this.dom.themeBtn.addEventListener('click', () => {
         this.paletteIndex = (this.paletteIndex + 1) % PALETTES.length;
-        localStorage.setItem('kawaii_zc_palette', this.paletteIndex);
+        localStorage.setItem('gta_zerokata_palette', this.paletteIndex);
         this.sound.playClick();
         this.applyPalette();
         this.renderBoard();
@@ -610,7 +610,7 @@
         if (e.target === this.dom.helpModal) closeHelp();
       });
 
-      // Window resize: recompute SVG winning strike line
+      // Window resize: recompute SVG winning laser line
       window.addEventListener('resize', () => {
         if (this.winningCombo) {
           this.drawWinningLine(this.winningCombo);
@@ -627,21 +627,23 @@
       const p = this.currentPalette;
       this.dom.themeLabel.textContent = p.name;
 
-      // Update Card 1 (Cross X)
+      // Update Card 1 (Kata)
       this.dom.nameP1.textContent = p.p1.name;
-      this.dom.iconP1.innerHTML = getCuteCrossSvg(p.p1.grad, p.p1.blush, 'icon_p1');
+      this.dom.iconP1.innerHTML = getGtaKataSvg(p.p1.grad, p.p1.glow, 'icon_p1');
 
-      // Update Card 2 (Zero O or Bot O)
+      // Update Card 2 (Zero or Vice AI)
       if (this.gameMode === 'pve') {
         this.dom.nameP2.textContent = p.p2.botName;
-        this.dom.iconP2.innerHTML = getCuteZeroSvg(p.p2.grad, p.p2.blush, 'icon_p2');
+        this.dom.iconP2.innerHTML = getGtaZeroSvg(p.p2.grad, p.p2.glow, 'icon_p2');
       } else {
         this.dom.nameP2.textContent = p.p2.name;
-        this.dom.iconP2.innerHTML = getCuteZeroSvg(p.p2.grad, p.p2.blush, 'icon_p2');
+        this.dom.iconP2.innerHTML = getGtaZeroSvg(p.p2.grad, p.p2.glow, 'icon_p2');
       }
 
       document.documentElement.style.setProperty('--player1-color', p.p1.color);
       document.documentElement.style.setProperty('--player2-color', p.p2.color);
+      document.documentElement.style.setProperty('--neon-pink', p.p1.color);
+      document.documentElement.style.setProperty('--neon-cyan', p.p2.color);
     }
 
     switchMode(mode) {
@@ -738,15 +740,15 @@
       if (this.isGameOver) return;
 
       if (this.currentTurn === 'p1') {
-        this.dom.statusAvatar.innerHTML = '✖️';
-        this.dom.statusText.textContent = "Cross (X)'s turn! Tap an empty tile~";
+        this.dom.statusAvatar.innerHTML = '⚡';
+        this.dom.statusText.textContent = "KATA'S TURN • SEIZE THE STREET";
       } else {
         if (this.gameMode === 'pve') {
           this.dom.statusAvatar.innerHTML = '🤖';
-          this.dom.statusText.textContent = `${p.p2.botName} is thinking super hard... ✨`;
+          this.dom.statusText.textContent = `${p.p2.botName} IS CALCULATING HEIST... ⚡`;
         } else {
           this.dom.statusAvatar.innerHTML = '⭕';
-          this.dom.statusText.textContent = "Zero (O)'s turn! Make your move~";
+          this.dom.statusText.textContent = "ZERO'S TURN • CLAIM THE DISTRICT";
         }
       }
     }
@@ -763,7 +765,7 @@
 
       if (this.boardState[index] !== null) return;
 
-      // In PvE mode, user plays as Cross (p1)
+      // In PvE mode, user plays as Kata (p1)
       if (this.gameMode === 'pve' && this.currentTurn !== 'p1') return;
 
       this.executeMove(index, this.currentTurn);
@@ -779,8 +781,8 @@
       this.boardState[index] = player;
       this.renderCell(index, player);
 
-      // Cute pop sound with higher pitch for X, deeper pop for O
-      this.sound.playPop(player === 'p1' ? 560 : 440);
+      // Punchy Synthwave move sound
+      this.sound.playMove(player === 'p1');
 
       // Check win or tie
       const win = this.checkWin(this.boardState);
@@ -802,7 +804,7 @@
 
       // Trigger AI if PvE
       if (this.gameMode === 'pve' && this.currentTurn === 'p2') {
-        this.triggerAiMove(420);
+        this.triggerAiMove(380);
       }
     }
 
@@ -815,9 +817,9 @@
       markDiv.className = 'cell-mark';
 
       if (player === 'p1') {
-        markDiv.innerHTML = getCuteCrossSvg(p.p1.grad, p.p1.blush, `cell_${index}`);
+        markDiv.innerHTML = getGtaKataSvg(p.p1.grad, p.p1.glow, `cell_${index}`);
       } else {
-        markDiv.innerHTML = getCuteZeroSvg(p.p2.grad, p.p2.blush, `cell_${index}`);
+        markDiv.innerHTML = getGtaZeroSvg(p.p2.grad, p.p2.glow, `cell_${index}`);
       }
 
       cell.innerHTML = '';
@@ -893,7 +895,7 @@
         this.dom.cells[idx].classList.add('win-cell');
       });
 
-      // Draw SVG strike line
+      // Draw SVG laser strike line
       this.drawWinningLine(win.combo);
 
       // Disable remaining cells
@@ -921,9 +923,9 @@
       this.updateScoreboard();
       this.updateActiveCard();
 
-      // Sound & Confetti celebration
-      this.sound.playWin();
-      this.confetti.burst(85);
+      // Sound & Neon Confetti celebration
+      this.sound.playMissionPassed();
+      this.confetti.burst(90);
 
       // Show Victory Modal
       setTimeout(() => {
@@ -940,9 +942,9 @@
       this.updateScoreboard();
       this.updateActiveCard();
 
-      this.sound.playDraw();
-      this.dom.statusAvatar.innerHTML = '🎀';
-      this.dom.statusText.textContent = "It's a tie! Both of you played so well!";
+      this.sound.playBusted();
+      this.dom.statusAvatar.innerHTML = '⚠️';
+      this.dom.statusText.textContent = "STALEMATE • NO ONE RULES THE STREETS";
 
       setTimeout(() => {
         this.openDrawModal();
@@ -963,7 +965,7 @@
       const dy = y2 - y1;
       const len = Math.hypot(dx, dy);
       if (len > 0) {
-        const extend = 16;
+        const extend = 18;
         x1 -= (dx / len) * extend;
         y1 -= (dy / len) * extend;
         x2 += (dx / len) * extend;
@@ -982,21 +984,24 @@
       const p = this.currentPalette;
       let avatarHtml, title, message;
 
+      this.dom.missionTag.textContent = "MISSION PASSED";
+      this.dom.missionTag.style.background = "linear-gradient(135deg, #ffaa00 0%, #ff5e00 100%)";
+
       if (winner === 'p1') {
-        avatarHtml = getCuteCrossSvg(p.p1.grad, p.p1.blush, 'modal_win');
-        title = `Yay! Cross (X) Won!`;
+        avatarHtml = getGtaKataSvg(p.p1.grad, p.p1.glow, 'modal_win');
+        title = `KATA RULES VICE CITY!`;
         message = this.gameMode === 'pve'
-          ? "You outsmarted the cute Bot! Sensational victory! 💖"
-          : `Brilliant moves! Congratulations Player X! 🎉`;
+          ? "RESPECT +100 • YOU OVERTHREW THE VICE SYNDICATE! 💰"
+          : "RESPECT +100 • KATA CONQUERED THE TURF! 🔥";
       } else {
         if (this.gameMode === 'pve') {
-          avatarHtml = getCuteZeroSvg(p.p2.grad, p.p2.blush, 'modal_win');
-          title = `Beep Boop! Bot (O) Won!`;
-          message = "The cute bot was very lucky this time! Ready for a rematch? 🌸";
+          avatarHtml = getGtaZeroSvg(p.p2.grad, p.p2.glow, 'modal_win');
+          title = `BUSTED! VICE AI PREVAILED!`;
+          message = "THE SYNDICATE DEFENDED THEIR EMPIRE. READY FOR RETALIATION? ⚡";
         } else {
-          avatarHtml = getCuteZeroSvg(p.p2.grad, p.p2.blush, 'modal_win');
-          title = `Hooray! Zero (O) Won!`;
-          message = `Sensational victory! Beautifully played Player O! 🎈`;
+          avatarHtml = getGtaZeroSvg(p.p2.grad, p.p2.glow, 'modal_win');
+          title = `ZERO RULES VICE CITY!`;
+          message = "RESPECT +100 • ZERO SEIZED TOTAL STREET CONTROL! 🌴";
         }
       }
 
@@ -1006,7 +1011,7 @@
 
       if (this.streak > 1) {
         this.dom.modalStreakBadge.style.display = 'inline-block';
-        this.dom.modalStreakText.textContent = `Win Streak: ${this.streak} in a row! 🔥`;
+        this.dom.modalStreakText.textContent = `HEAT LEVEL: ${Math.min(this.streak + 1, 5)} STARS 🔥 (${this.streak} WINS)`;
       } else {
         this.dom.modalStreakBadge.style.display = 'none';
       }
@@ -1016,9 +1021,12 @@
     }
 
     openDrawModal() {
-      this.dom.modalAvatar.innerHTML = '🤝';
-      this.dom.modalTitle.textContent = "It's a Lovely Draw!";
-      this.dom.modalMessage.textContent = "Two brilliant minds matched each other move for move! 🎀";
+      this.dom.missionTag.textContent = "STALEMATE";
+      this.dom.missionTag.style.background = "linear-gradient(135deg, #64748b 0%, #334155 100%)";
+
+      this.dom.modalAvatar.innerHTML = '<span style="font-size:2.8rem">⚠️</span>';
+      this.dom.modalTitle.textContent = "GRIDLOCKED!";
+      this.dom.modalMessage.textContent = "BOTH SYNDICATES MATCHED HEAT FOR HEAT. NO CASH WON.";
       this.dom.modalStreakBadge.style.display = 'none';
 
       this.dom.victoryModal.classList.add('active');
@@ -1030,12 +1038,12 @@
       this.dom.victoryModal.setAttribute('aria-hidden', 'true');
     }
 
-    // --- Cute AI Engine ---
-    triggerAiMove(delay = 400) {
+    // --- Vice AI Engine ---
+    triggerAiMove(delay = 380) {
       this.isAiThinking = true;
       this.updateUndoButton();
       this.dom.statusAvatar.innerHTML = '🤖';
-      this.dom.statusText.textContent = `${this.currentPalette.p2.botName} is thinking super hard... ✨`;
+      this.dom.statusText.textContent = `${this.currentPalette.p2.botName} IS CALCULATING TURF... ⚡`;
 
       setTimeout(() => {
         if (this.isGameOver) {
@@ -1059,7 +1067,7 @@
 
       if (emptyIndices.length === 0) return -1;
 
-      // 🌸 1. Easy Mode: Playful and cute
+      // 🌴 1. Rookie: Casual & chaotic street hustler
       if (this.difficulty === 'easy') {
         if (Math.random() < 0.25) {
           const winMove = this.findWinningMove(this.boardState, 'p2');
@@ -1068,7 +1076,7 @@
         return emptyIndices[Math.floor(Math.random() * emptyIndices.length)];
       }
 
-      // ⚡ 2. Medium Mode: Smart but beatable
+      // 🏎️ 2. Hustler: Aggressive & tactical
       if (this.difficulty === 'medium') {
         // Take winning move if available
         const winMove = this.findWinningMove(this.boardState, 'p2');
@@ -1078,10 +1086,10 @@
         const blockMove = this.findWinningMove(this.boardState, 'p1');
         if (blockMove !== -1 && Math.random() < 0.82) return blockMove;
 
-        // Take center if available
-        if (this.boardState[4] === null && Math.random() < 0.6) return 4;
+        // Seize center tile
+        if (this.boardState[4] === null && Math.random() < 0.65) return 4;
 
-        // Else pick corner or random
+        // Pick corners
         const corners = [0, 2, 6, 8].filter(idx => this.boardState[idx] === null);
         if (corners.length > 0 && Math.random() < 0.5) {
           return corners[Math.floor(Math.random() * corners.length)];
@@ -1090,7 +1098,7 @@
         return emptyIndices[Math.floor(Math.random() * emptyIndices.length)];
       }
 
-      // 👑 3. Genius Mode: Perfect Unbeatable Minimax Algorithm
+      // 👑 3. Kingpin: Mathematically Unbeatable Minimax Algorithm
       let bestScore = -Infinity;
       let move = emptyIndices[0];
 
@@ -1170,9 +1178,9 @@
   // Initialize once DOM is ready
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
-      window.game = new KawaiiZeroAndCross();
+      window.game = new ZeroKataGame();
     });
   } else {
-    window.game = new KawaiiZeroAndCross();
+    window.game = new ZeroKataGame();
   }
 })();
