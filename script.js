@@ -1,88 +1,88 @@
 /**
- * 🌸 ZERO KATA • KAWAII PASTEL EDITION 🎀
- * Pure Vanilla JavaScript implementation with Custom Kawaii Vector Graphics,
+ * 👶 ZERO KATA • CUTE BABIES EDITION 🍼
+ * Pure Vanilla JavaScript implementation with Adorable Baby Vector Graphics,
  * Web Audio FX, Minimax AI, Canvas Confetti, and SVG Win-Line strike.
  */
 
 (() => {
   'use strict';
 
-  // --- Cute Zero Kata Color Palettes ---
+  // --- Cute Baby Zero Kata Color Themes ---
   const PALETTES = [
     {
-      id: 'sakura-sky',
-      name: 'Sakura & Sky',
+      id: 'baby-girl-boy',
+      name: 'Baby Girl & Boy',
       p1: {
-        label: 'Kata',
-        name: 'Kata',
+        label: 'Baby Kata',
+        name: 'Baby Kata',
         color: '#ff6584',
         grad: ['#ff7597', '#ff5277'],
         blush: '#ff7597'
       },
       p2: {
-        label: 'Zero',
-        name: 'Zero',
-        botName: 'Cute Bot',
-        color: '#0984e3',
-        grad: ['#4facfe', '#00c6ff'],
+        label: 'Baby Zero',
+        name: 'Baby Zero',
+        botName: 'Baby Bot',
+        color: '#0284c7',
+        grad: ['#38bdf8', '#0284c7'],
         blush: '#ff7675'
       }
     },
     {
-      id: 'bubblegum-mint',
-      name: 'Bubblegum & Mint',
+      id: 'teddy-duckling',
+      name: 'Teddy & Duckling',
       p1: {
-        label: 'Kata',
-        name: 'Kata',
-        color: '#9b51e0',
-        grad: ['#b388ff', '#7c4dff'],
-        blush: '#ea80fc'
+        label: 'Teddy Kata',
+        name: 'Teddy Kata',
+        color: '#c27803',
+        grad: ['#e59819', '#b45309'],
+        blush: '#f87171'
       },
       p2: {
-        label: 'Zero',
-        name: 'Zero',
-        botName: 'Cute Bot',
+        label: 'Duckling Zero',
+        name: 'Duckling Zero',
+        botName: 'Baby Bot',
+        color: '#eab308',
+        grad: ['#fde047', '#eab308'],
+        blush: '#fb7185'
+      }
+    },
+    {
+      id: 'baby-bunny-kitty',
+      name: 'Bunny & Kitty',
+      p1: {
+        label: 'Baby Bunny',
+        name: 'Baby Bunny',
+        color: '#f43f5e',
+        grad: ['#fb7185', '#e11d48'],
+        blush: '#fb7185'
+      },
+      p2: {
+        label: 'Baby Kitty',
+        name: 'Baby Kitty',
+        botName: 'Kitty Bot',
+        color: '#8b5cf6',
+        grad: ['#a78bfa', '#7c3aed'],
+        blush: '#f472b6'
+      }
+    },
+    {
+      id: 'pacifier-rattle',
+      name: 'Pacifier & Rattle',
+      p1: {
+        label: 'Pacifier Kata',
+        name: 'Pacifier Kata',
+        color: '#ec4899',
+        grad: ['#f472b6', '#db2777'],
+        blush: '#fb7185'
+      },
+      p2: {
+        label: 'Rattle Zero',
+        name: 'Rattle Zero',
+        botName: 'Rattle Bot',
         color: '#10b981',
         grad: ['#34d399', '#059669'],
         blush: '#f87171'
-      }
-    },
-    {
-      id: 'peach-lavender',
-      name: 'Peach & Lavender',
-      p1: {
-        label: 'Kata',
-        name: 'Kata',
-        color: '#ff7675',
-        grad: ['#ff9999', '#ff5252'],
-        blush: '#ff7675'
-      },
-      p2: {
-        label: 'Zero',
-        name: 'Zero',
-        botName: 'Cute Bot',
-        color: '#6c5ce7',
-        grad: ['#a29bfe', '#6c5ce7'],
-        blush: '#fd79a8'
-      }
-    },
-    {
-      id: 'sunny-berry',
-      name: 'Sunny & Berry',
-      p1: {
-        label: 'Kata',
-        name: 'Kata',
-        color: '#e84393',
-        grad: ['#fd79a8', '#e84393'],
-        blush: '#ff7675'
-      },
-      p2: {
-        label: 'Zero',
-        name: 'Zero',
-        botName: 'Cute Bot',
-        color: '#f59e0b',
-        grad: ['#fcd34d', '#f59e0b'],
-        blush: '#ff7675'
       }
     }
   ];
@@ -99,9 +99,13 @@
     [2, 4, 6]  // Diag 2
   ];
 
-  // --- SVG Kawaii Graphics Generators for Kata & Zero ---
-  function getCuteKataSvg(grad, blush, idSuffix = 'main') {
-    const gradId = `kataGrad_${idSuffix}`;
+  // --- SVG Kawaii Cute Baby Graphics Generators for Kata & Zero ---
+  function getCuteBabyKataSvg(palette, idSuffix = 'main') {
+    const grad = palette.p1.grad;
+    const blush = palette.p1.blush;
+    const gradId = `kataBabyGrad_${idSuffix}`;
+    const shadowId = `kShadow_${idSuffix}`;
+
     return `
       <svg class="mark-svg mark-kata" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
         <defs>
@@ -109,35 +113,45 @@
             <stop offset="0%" stop-color="${grad[0]}" />
             <stop offset="100%" stop-color="${grad[1]}" />
           </linearGradient>
-          <filter id="kShadow_${idSuffix}" x="-20%" y="-20%" width="140%" height="140%">
+          <filter id="${shadowId}" x="-20%" y="-20%" width="140%" height="140%">
             <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="${grad[1]}" flood-opacity="0.32"/>
           </filter>
         </defs>
         <!-- Soft Rounded Diagonal Strokes of Kata -->
-        <line x1="22" y1="22" x2="78" y2="78" stroke="url(#${gradId})" stroke-width="17" stroke-linecap="round" filter="url(#kShadow_${idSuffix})" />
-        <line x1="78" y1="22" x2="22" y2="78" stroke="url(#${gradId})" stroke-width="17" stroke-linecap="round" filter="url(#kShadow_${idSuffix})" />
+        <line x1="22" y1="22" x2="78" y2="78" stroke="url(#${gradId})" stroke-width="17" stroke-linecap="round" filter="url(#${shadowId})" />
+        <line x1="78" y1="22" x2="22" y2="78" stroke="url(#${gradId})" stroke-width="17" stroke-linecap="round" filter="url(#${shadowId})" />
         
-        <!-- Center Kawaii Face Circle -->
-        <circle cx="50" cy="50" r="18" fill="#ffffff" filter="url(#kShadow_${idSuffix})" />
-        <!-- Happy Eyes -->
-        <circle cx="43.5" cy="48" r="2.6" fill="#373244" />
-        <circle cx="56.5" cy="48" r="2.6" fill="#373244" />
-        <!-- Eye Sparkles -->
-        <circle cx="42.5" cy="46.8" r="1" fill="#ffffff" />
-        <circle cx="55.5" cy="46.8" r="1" fill="#ffffff" />
-        <!-- Rosy Blush Cheeks -->
-        <ellipse cx="39" cy="53" rx="2.8" ry="1.5" fill="${blush}" opacity="0.85" />
-        <ellipse cx="61" cy="53" rx="2.8" ry="1.5" fill="${blush}" opacity="0.85" />
-        <!-- Sweet Smile -->
-        <path d="M 46.5 52 Q 50 56.5 53.5 52" stroke="#373244" stroke-width="2" stroke-linecap="round" fill="none" />
-        <!-- Little Sparkle on Tip -->
-        <path d="M 74 16 Q 77 21 82 22 Q 77 23 74 28 Q 73 23 68 22 Q 73 21 74 16 Z" fill="#fff375" opacity="0.9" />
+        <!-- Cute Baby Face in Center -->
+        <circle cx="50" cy="50" r="19" fill="#fff6ec" filter="url(#${shadowId})" />
+        <!-- Baby Hair Curl -->
+        <path d="M 50 31 Q 54 26 48 24 Q 45 28 50 31" fill="#c48a56" />
+        <!-- Big Shiny Baby Eyes -->
+        <circle cx="43" cy="48" r="3" fill="#373244" />
+        <circle cx="57" cy="48" r="3" fill="#373244" />
+        <!-- Sparkles in Eyes -->
+        <circle cx="42" cy="46.5" r="1.2" fill="#ffffff" />
+        <circle cx="56" cy="46.5" r="1.2" fill="#ffffff" />
+        <circle cx="44.2" cy="49" r="0.6" fill="#ffffff" />
+        <circle cx="58.2" cy="49" r="0.6" fill="#ffffff" />
+        <!-- Chubby Rosy Cheeks -->
+        <ellipse cx="38" cy="53" rx="3.5" ry="2" fill="${blush}" opacity="0.85" />
+        <ellipse cx="62" cy="53" rx="3.5" ry="2" fill="${blush}" opacity="0.85" />
+        <!-- Cute Baby Pacifier (Chupie) -->
+        <ellipse cx="50" cy="56" rx="5.5" ry="4" fill="${grad[0]}" />
+        <circle cx="50" cy="56" r="2.2" fill="#ffffff" />
+        <path d="M 47 59 Q 50 64 53 59" stroke="${grad[0]}" stroke-width="2" fill="none" stroke-linecap="round" />
+        <!-- Sparkle Accent -->
+        <path d="M 75 16 Q 78 21 83 22 Q 78 23 75 28 Q 74 23 69 22 Q 74 21 75 16 Z" fill="#fff375" opacity="0.9" />
       </svg>
     `;
   }
 
-  function getCuteZeroSvg(grad, blush, idSuffix = 'main') {
-    const gradId = `zeroGrad_${idSuffix}`;
+  function getCuteBabyZeroSvg(palette, idSuffix = 'main') {
+    const grad = palette.p2.grad;
+    const blush = palette.p2.blush;
+    const gradId = `zeroBabyGrad_${idSuffix}`;
+    const shadowId = `zShadow_${idSuffix}`;
+
     return `
       <svg class="mark-svg mark-zero" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
         <defs>
@@ -145,31 +159,37 @@
             <stop offset="0%" stop-color="${grad[0]}" />
             <stop offset="100%" stop-color="${grad[1]}" />
           </linearGradient>
-          <filter id="zShadow_${idSuffix}" x="-20%" y="-20%" width="140%" height="140%">
+          <filter id="${shadowId}" x="-20%" y="-20%" width="140%" height="140%">
             <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="${grad[1]}" flood-opacity="0.32"/>
           </filter>
         </defs>
-        <!-- Plump Round Donut of Zero -->
-        <circle cx="50" cy="50" r="32" stroke="url(#${gradId})" stroke-width="16" fill="none" filter="url(#zShadow_${idSuffix})" />
+        <!-- Plump Round Donut Ring of Zero -->
+        <circle cx="50" cy="50" r="32" stroke="url(#${gradId})" stroke-width="16" fill="none" filter="url(#${shadowId})" />
         
-        <!-- Cute Little Ribbon Bow on Top -->
-        <path d="M 42 12 Q 50 17 50 19 Q 50 17 58 12 Q 55 21 50 19 Q 45 21 42 12 Z" fill="#ff7597" />
-        <circle cx="50" cy="18" r="2.8" fill="#ffe4eb" />
+        <!-- Baby Cap / Bonnet on Top of Zero -->
+        <path d="M 36 21 Q 50 11 64 21 Q 50 17 36 21 Z" fill="${grad[0]}" />
+        <circle cx="50" cy="12" r="3.5" fill="#fde047" />
 
-        <!-- Center Kawaii Face Circle -->
-        <circle cx="50" cy="50" r="18" fill="#ffffff" filter="url(#zShadow_${idSuffix})" />
-        <!-- Happy Eyes -->
-        <circle cx="43.5" cy="48" r="2.6" fill="#373244" />
-        <circle cx="56.5" cy="48" r="2.6" fill="#373244" />
-        <!-- Eye Sparkles -->
-        <circle cx="42.5" cy="46.8" r="1" fill="#ffffff" />
-        <circle cx="55.5" cy="46.8" r="1" fill="#ffffff" />
-        <!-- Rosy Blush Cheeks -->
-        <ellipse cx="39" cy="53" rx="2.8" ry="1.5" fill="${blush}" opacity="0.85" />
-        <ellipse cx="61" cy="53" rx="2.8" ry="1.5" fill="${blush}" opacity="0.85" />
-        <!-- Sweet Smile -->
-        <path d="M 46.5 52 Q 50 56.5 53.5 52" stroke="#373244" stroke-width="2" stroke-linecap="round" fill="none" />
-        <!-- Little Sparkle on Side -->
+        <!-- Cute Baby Face in Center -->
+        <circle cx="50" cy="50" r="19" fill="#fff6ec" filter="url(#${shadowId})" />
+        <!-- Baby Hair Curl -->
+        <path d="M 50 31 Q 46 26 52 24 Q 55 28 50 31" fill="#c48a56" />
+        <!-- Big Shiny Baby Eyes -->
+        <circle cx="43" cy="48" r="3" fill="#373244" />
+        <circle cx="57" cy="48" r="3" fill="#373244" />
+        <!-- Sparkles in Eyes -->
+        <circle cx="42" cy="46.5" r="1.2" fill="#ffffff" />
+        <circle cx="56" cy="46.5" r="1.2" fill="#ffffff" />
+        <circle cx="44.2" cy="49" r="0.6" fill="#ffffff" />
+        <circle cx="58.2" cy="49" r="0.6" fill="#ffffff" />
+        <!-- Chubby Rosy Cheeks -->
+        <ellipse cx="38" cy="53" rx="3.5" ry="2" fill="${blush}" opacity="0.85" />
+        <ellipse cx="62" cy="53" rx="3.5" ry="2" fill="${blush}" opacity="0.85" />
+        <!-- Sweet Baby Pacifier (Chupie) -->
+        <ellipse cx="50" cy="56" rx="5.5" ry="4" fill="${grad[0]}" />
+        <circle cx="50" cy="56" r="2.2" fill="#ffffff" />
+        <path d="M 47 59 Q 50 64 53 59" stroke="${grad[0]}" stroke-width="2" fill="none" stroke-linecap="round" />
+        <!-- Sparkle Accent -->
         <path d="M 80 44 Q 82 48 86 49 Q 82 50 80 54 Q 79 50 75 49 Q 79 48 80 44 Z" fill="#fff375" opacity="0.9" />
       </svg>
     `;
@@ -233,7 +253,8 @@
       if (!this.ctx) return;
 
       try {
-        const notes = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6 joyful arpeggio
+        // Cheerful nursery music box arpeggio: C5, E5, G5, C6
+        const notes = [523.25, 659.25, 783.99, 1046.50];
         notes.forEach((freq, idx) => {
           const startTime = this.ctx.currentTime + idx * 0.09;
           const osc = this.ctx.createOscillator();
@@ -262,7 +283,7 @@
       if (!this.ctx) return;
 
       try {
-        const notes = [440, 392, 349.23]; // Cute sigh chords
+        const notes = [440, 392, 349.23]; // Soft sweet sigh chords
         notes.forEach((freq, idx) => {
           const startTime = this.ctx.currentTime + idx * 0.11;
           const osc = this.ctx.createOscillator();
@@ -320,7 +341,7 @@
       this.ctx = canvas.getContext('2d');
       this.particles = [];
       this.animationFrame = null;
-      this.colors = ['#ff7597', '#4facfe', '#ffe082', '#a7f3d0', '#b39ddb', '#ff9ff3'];
+      this.colors = ['#ff7597', '#38bdf8', '#fde047', '#a7f3d0', '#c084fc', '#fb7185'];
       this.resize();
       window.addEventListener('resize', () => this.resize());
     }
@@ -398,9 +419,9 @@
   class ZeroKataGame {
     constructor() {
       this.boardState = Array(9).fill(null);
-      this.currentTurn = 'p1'; // 'p1' (Kata) or 'p2' (Zero)
-      this.gameMode = 'pve'; // 'pve' (vs Cute Machine) or 'pvp' (2 players)
-      this.difficulty = 'medium'; // 'easy', 'medium', 'hard' (genius)
+      this.currentTurn = 'p1'; // 'p1' (Baby Kata) or 'p2' (Baby Zero)
+      this.gameMode = 'pve'; // 'pve' (vs Baby Bot) or 'pvp' (2 players)
+      this.difficulty = 'medium'; // 'easy' (Crawling), 'medium' (Babbling), 'hard' (Genius)
       this.firstTurnPref = 'p1'; // 'p1', 'p2', or 'random'
       this.isGameOver = false;
       this.isAiThinking = false;
@@ -467,7 +488,7 @@
       };
 
       // Load saved palette
-      const savedPalette = localStorage.getItem('zerokata_palette');
+      const savedPalette = localStorage.getItem('zerokata_baby_palette');
       if (savedPalette !== null) {
         this.paletteIndex = parseInt(savedPalette, 10) % PALETTES.length;
       }
@@ -485,7 +506,7 @@
 
     loadScores() {
       try {
-        const stored = localStorage.getItem('zerokata_scores');
+        const stored = localStorage.getItem('zerokata_baby_scores');
         if (stored) {
           return JSON.parse(stored);
         }
@@ -497,14 +518,14 @@
 
     saveScores() {
       try {
-        localStorage.setItem('zerokata_scores', JSON.stringify(this.scores));
+        localStorage.setItem('zerokata_baby_scores', JSON.stringify(this.scores));
       } catch (e) {
         console.warn('Could not save scores:', e);
       }
     }
 
     initEvents() {
-      // Cell clicks & keyboard access
+      // Cell clicks
       this.dom.cells.forEach(cell => {
         cell.addEventListener('click', (e) => this.handleCellClick(e));
         cell.addEventListener('keydown', (e) => {
@@ -543,7 +564,7 @@
       // Palette toggle
       this.dom.themeBtn.addEventListener('click', () => {
         this.paletteIndex = (this.paletteIndex + 1) % PALETTES.length;
-        localStorage.setItem('zerokata_palette', this.paletteIndex);
+        localStorage.setItem('zerokata_baby_palette', this.paletteIndex);
         this.sound.playClick();
         this.applyPalette();
         this.renderBoard();
@@ -619,17 +640,17 @@
       const p = this.currentPalette;
       this.dom.themeLabel.textContent = p.name;
 
-      // Update Card 1 (Kata)
+      // Update Card 1 (Baby Kata)
       this.dom.nameP1.textContent = p.p1.name;
-      this.dom.iconP1.innerHTML = getCuteKataSvg(p.p1.grad, p.p1.blush, 'icon_p1');
+      this.dom.iconP1.innerHTML = getCuteBabyKataSvg(p, 'icon_p1');
 
-      // Update Card 2 (Zero or Cute Bot)
+      // Update Card 2 (Baby Zero or Baby Bot)
       if (this.gameMode === 'pve') {
         this.dom.nameP2.textContent = p.p2.botName;
-        this.dom.iconP2.innerHTML = getCuteZeroSvg(p.p2.grad, p.p2.blush, 'icon_p2');
+        this.dom.iconP2.innerHTML = getCuteBabyZeroSvg(p, 'icon_p2');
       } else {
         this.dom.nameP2.textContent = p.p2.name;
-        this.dom.iconP2.innerHTML = getCuteZeroSvg(p.p2.grad, p.p2.blush, 'icon_p2');
+        this.dom.iconP2.innerHTML = getCuteBabyZeroSvg(p, 'icon_p2');
       }
 
       document.documentElement.style.setProperty('--player1-color', p.p1.color);
@@ -730,15 +751,15 @@
       if (this.isGameOver) return;
 
       if (this.currentTurn === 'p1') {
-        this.dom.statusAvatar.innerHTML = '🌸';
-        this.dom.statusText.textContent = "Kata's turn! Tap an empty tile~";
+        this.dom.statusAvatar.innerHTML = '👶';
+        this.dom.statusText.textContent = `${p.p1.name}'s turn! Tap an empty tile~`;
       } else {
         if (this.gameMode === 'pve') {
           this.dom.statusAvatar.innerHTML = '🤖';
-          this.dom.statusText.textContent = `${p.p2.botName} is thinking super hard... ✨`;
+          this.dom.statusText.textContent = `${p.p2.botName} is babbling happily... ✨`;
         } else {
-          this.dom.statusAvatar.innerHTML = '🎀';
-          this.dom.statusText.textContent = "Zero's turn! Make your move~";
+          this.dom.statusAvatar.innerHTML = '🍼';
+          this.dom.statusText.textContent = `${p.p2.name}'s turn! Make a cozy move~`;
         }
       }
     }
@@ -771,7 +792,7 @@
       this.boardState[index] = player;
       this.renderCell(index, player);
 
-      // Cute pop sound
+      // Cute pop sound: higher pitch for Baby Kata, deeper pop for Baby Zero
       this.sound.playPop(player === 'p1' ? 560 : 440);
 
       // Check win or tie
@@ -807,9 +828,9 @@
       markDiv.className = 'cell-mark';
 
       if (player === 'p1') {
-        markDiv.innerHTML = getCuteKataSvg(p.p1.grad, p.p1.blush, `cell_${index}`);
+        markDiv.innerHTML = getCuteBabyKataSvg(p, `cell_${index}`);
       } else {
-        markDiv.innerHTML = getCuteZeroSvg(p.p2.grad, p.p2.blush, `cell_${index}`);
+        markDiv.innerHTML = getCuteBabyZeroSvg(p, `cell_${index}`);
       }
 
       cell.innerHTML = '';
@@ -933,8 +954,8 @@
       this.updateActiveCard();
 
       this.sound.playDraw();
-      this.dom.statusAvatar.innerHTML = '🎀';
-      this.dom.statusText.textContent = "It's a tie! Both of you played so well!";
+      this.dom.statusAvatar.innerHTML = '🍼';
+      this.dom.statusText.textContent = "It's a cozy tie! You both played so sweetly!";
 
       setTimeout(() => {
         this.openDrawModal();
@@ -975,20 +996,20 @@
       let avatarHtml, title, message;
 
       if (winner === 'p1') {
-        avatarHtml = getCuteKataSvg(p.p1.grad, p.p1.blush, 'modal_win');
-        title = `Yay! Kata Won!`;
+        avatarHtml = getCuteBabyKataSvg(p, 'modal_win');
+        title = `Yay! ${p.p1.name} Won!`;
         message = this.gameMode === 'pve'
-          ? "You outsmarted the cute Bot! Sensational victory! 💖"
-          : "Brilliant moves! Congratulations Kata! 🎉";
+          ? "You outsmarted the cute Baby Bot! So adorable! 💖"
+          : `Sensational victory! Congratulations ${p.p1.name}! 🎉`;
       } else {
         if (this.gameMode === 'pve') {
-          avatarHtml = getCuteZeroSvg(p.p2.grad, p.p2.blush, 'modal_win');
-          title = `Beep Boop! Bot Won!`;
-          message = "The cute bot was very lucky this time! Ready for a rematch? 🌸";
+          avatarHtml = getCuteBabyZeroSvg(p, 'modal_win');
+          title = `Giggle! Baby Bot Won!`;
+          message = "The cute Baby Bot got super lucky! Want another snuggly round? 🌸";
         } else {
-          avatarHtml = getCuteZeroSvg(p.p2.grad, p.p2.blush, 'modal_win');
-          title = `Hooray! Zero Won!`;
-          message = "Sensational victory! Beautifully played Zero! 🎈";
+          avatarHtml = getCuteBabyZeroSvg(p, 'modal_win');
+          title = `Hooray! ${p.p2.name} Won!`;
+          message = `Sensational victory! Beautifully played ${p.p2.name}! 🎈`;
         }
       }
 
@@ -1008,9 +1029,9 @@
     }
 
     openDrawModal() {
-      this.dom.modalAvatar.innerHTML = '🤝';
-      this.dom.modalTitle.textContent = "It's a Lovely Draw!";
-      this.dom.modalMessage.textContent = "Two brilliant minds matched each other move for move! 🎀";
+      this.dom.modalAvatar.innerHTML = '🍼';
+      this.dom.modalTitle.textContent = "It's a Cozy Tie!";
+      this.dom.modalMessage.textContent = "Two sweet little babies matched each other move for move! 🎀";
       this.dom.modalStreakBadge.style.display = 'none';
 
       this.dom.victoryModal.classList.add('active');
@@ -1022,7 +1043,7 @@
       this.dom.victoryModal.setAttribute('aria-hidden', 'true');
     }
 
-    // --- Cute AI Engine ---
+    // --- Cute Baby AI Engine ---
     triggerAiMove(delay = 400) {
       this.isAiThinking = true;
       this.updateUndoButton();
@@ -1051,7 +1072,7 @@
 
       if (emptyIndices.length === 0) return -1;
 
-      // 🌸 1. Easy Mode: Playful and cute
+      // 🌸 1. Crawling Mode: Playful and cute
       if (this.difficulty === 'easy') {
         if (Math.random() < 0.25) {
           const winMove = this.findWinningMove(this.boardState, 'p2');
@@ -1060,7 +1081,7 @@
         return emptyIndices[Math.floor(Math.random() * emptyIndices.length)];
       }
 
-      // ⚡ 2. Medium Mode: Smart but beatable
+      // ⚡ 2. Babbling Mode: Smart but beatable
       if (this.difficulty === 'medium') {
         // Take winning move if available
         const winMove = this.findWinningMove(this.boardState, 'p2');
@@ -1082,7 +1103,7 @@
         return emptyIndices[Math.floor(Math.random() * emptyIndices.length)];
       }
 
-      // 👑 3. Genius Mode: Perfect Unbeatable Minimax Algorithm
+      // 👑 3. Baby Genius: Perfect Unbeatable Minimax Algorithm
       let bestScore = -Infinity;
       let move = emptyIndices[0];
 

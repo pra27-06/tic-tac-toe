@@ -3,28 +3,31 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>🌸 ZERO KATA 🎀 | Cute Tic-Tac-Toe Game</title>
-  <meta name="description" content="A super cute, joyful Zero Kata game with lovely graphics, sweet animations, sounds, 1-Player vs Cute AI and 2-Player Pass & Play modes!" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  <title>👶 ZERO KATA 🍼 | Cute Babies Edition</title>
+  <meta name="description" content="A super cute Zero Kata game with adorable smiling baby graphics, sweet pacifiers, lovely animations, sounds, 1-Player vs Baby Bot and 2-Player modes!" />
   <meta name="theme-color" content="#ffd1dc" />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css?v=cute-babies-v3" />
 </head>
 <body>
-  <!-- Ambient Floating Background Elements -->
+  <!-- Ambient Floating Background Baby Decorations -->
   <div class="bg-decorations" aria-hidden="true">
-    <span class="bubble b1">🌸</span>
-    <span class="bubble b2">✨</span>
+    <span class="bubble b1">👶</span>
+    <span class="bubble b2">🍼</span>
     <span class="bubble b3">💖</span>
-    <span class="bubble b4">⭐</span>
-    <span class="bubble b5">🍓</span>
+    <span class="bubble b4">🧸</span>
+    <span class="bubble b5">🐥</span>
     <span class="bubble b6">🎀</span>
-    <span class="bubble b7">🐾</span>
+    <span class="bubble b7">⭐</span>
     <span class="bubble b8">☁️</span>
     <span class="bubble b9">✨</span>
-    <span class="bubble b10">💖</span>
+    <span class="bubble b10">🍼</span>
   </div>
 
   <!-- Fullscreen Confetti Canvas -->
@@ -34,17 +37,17 @@
     <!-- Header -->
     <header class="header">
       <div class="logo-wrapper">
-        <span class="sparkle-icon">✨</span>
+        <span class="sparkle-icon">👶</span>
         <h1 class="game-title">ZERO KATA</h1>
-        <span class="sparkle-icon">🎀</span>
+        <span class="sparkle-icon">🍼</span>
       </div>
-      <p class="game-subtitle">The sweetest Zero Kata game to play with friends or AI!</p>
+      <p class="game-subtitle">THE CUTEST BABIES ZERO KATA GAME!</p>
 
       <!-- Quick Action Bar -->
       <div class="top-bar">
-        <button id="theme-btn" class="pill-btn theme-toggle" title="Switch Cute Pastel Colors" aria-label="Switch Color Theme">
-          <span class="btn-icon">🎨</span>
-          <span class="btn-label" id="theme-label">Sakura &amp; Sky</span>
+        <button id="theme-btn" class="pill-btn theme-toggle" title="Switch Cute Baby Theme" aria-label="Switch Baby Theme">
+          <span class="btn-icon">👶</span>
+          <span class="btn-label" id="theme-label">Baby Girl &amp; Boy</span>
         </button>
 
         <button id="sound-btn" class="pill-btn icon-only" title="Toggle Sound Effects" aria-label="Toggle Sound">
@@ -62,30 +65,30 @@
       <div class="mode-tabs">
         <button id="mode-pve" class="mode-tab active" data-mode="pve">
           <span class="tab-icon">🤖</span>
-          <span class="tab-text">vs Cute Machine</span>
+          <span class="tab-text">vs Baby Bot</span>
         </button>
         <button id="mode-pvp" class="mode-tab" data-mode="pvp">
           <span class="tab-icon">👥</span>
-          <span class="tab-text">2 Players</span>
+          <span class="tab-text">2 Babies (2P)</span>
         </button>
       </div>
 
       <!-- AI Options (Only visible in PvE Mode) -->
       <div id="ai-controls" class="ai-controls-panel">
         <div class="control-row">
-          <span class="control-label">🤖 Difficulty:</span>
+          <span class="control-label">🍼 Baby Bot Level:</span>
           <div class="difficulty-group">
-            <button class="diff-btn" data-diff="easy" title="Casual & playful">🌸 Easy</button>
-            <button class="diff-btn active" data-diff="medium" title="Smart & balanced">⚡ Medium</button>
-            <button class="diff-btn" data-diff="hard" title="Genius Unbeatable AI">👑 Genius</button>
+            <button class="diff-btn" data-diff="easy" title="Casual & crawling">🌸 Crawling</button>
+            <button class="diff-btn active" data-diff="medium" title="Smart & babbling">⚡ Babbling</button>
+            <button class="diff-btn" data-diff="hard" title="Genius Baby Bot">👑 Baby Genius</button>
           </div>
         </div>
 
         <div class="control-row">
           <span class="control-label">🎯 First Turn:</span>
           <div class="first-turn-group">
-            <button class="turn-choice-btn active" data-turn="p1">Kata First</button>
-            <button class="turn-choice-btn" data-turn="p2">Zero First</button>
+            <button class="turn-choice-btn active" data-turn="p1">Baby Kata First</button>
+            <button class="turn-choice-btn" data-turn="p2">Baby Zero First</button>
             <button class="turn-choice-btn" data-turn="random">🎲 Random</button>
           </div>
         </div>
@@ -94,14 +97,14 @@
 
     <!-- Scoreboard -->
     <section class="scoreboard" aria-label="Scoreboard">
-      <!-- Player 1 Card (Kata) -->
+      <!-- Player 1 Card (Baby Kata) -->
       <div class="score-card player-1" id="card-p1">
         <div class="avatar-badge" id="avatar-p1">
           <span class="char-icon" id="icon-p1"></span>
           <span class="turn-indicator-dot" title="Current Turn"></span>
         </div>
         <div class="score-info">
-          <div class="player-name" id="name-p1">Kata</div>
+          <div class="player-name" id="name-p1">Baby Kata</div>
           <div class="score-val" id="score-p1">0</div>
         </div>
       </div>
@@ -110,19 +113,19 @@
       <div class="vs-card">
         <span class="vs-heart">💖</span>
         <div class="tie-badge">
-          <span class="tie-label">Draws</span>
+          <span class="tie-label">Cozy Ties</span>
           <span class="tie-val" id="score-draw">0</span>
         </div>
       </div>
 
-      <!-- Player 2 / AI Card (Zero) -->
+      <!-- Player 2 / AI Card (Baby Zero) -->
       <div class="score-card player-2" id="card-p2">
         <div class="avatar-badge" id="avatar-p2">
           <span class="char-icon" id="icon-p2"></span>
           <span class="turn-indicator-dot" title="Current Turn"></span>
         </div>
         <div class="score-info">
-          <div class="player-name" id="name-p2">Zero</div>
+          <div class="player-name" id="name-p2">Baby Zero</div>
           <div class="score-val" id="score-p2">0</div>
         </div>
       </div>
@@ -130,8 +133,8 @@
 
     <!-- Game Status & Turn Banner -->
     <div class="turn-banner" id="turn-banner" role="status" aria-live="polite">
-      <span class="status-avatar" id="status-avatar">🌸</span>
-      <span class="status-text" id="status-text">Kata's turn! Tap a tile to start~</span>
+      <span class="status-avatar" id="status-avatar">👶</span>
+      <span class="status-text" id="status-text">Baby Kata's turn! Tap a tile to start~</span>
     </div>
 
     <!-- Main Game Board Container -->
@@ -154,7 +157,7 @@
             <linearGradient id="winGradient" x1="0%" y1="0%" x2="100%" y2="100%">
               <stop offset="0%" stop-color="#ff7597" />
               <stop offset="50%" stop-color="#ff5e85" />
-              <stop offset="100%" stop-color="#8b5cf6" />
+              <stop offset="100%" stop-color="#38bdf8" />
             </linearGradient>
           </defs>
           <line id="win-line" x1="0" y1="0" x2="0" y2="0" />
@@ -182,7 +185,7 @@
 
     <!-- Footer -->
     <footer class="footer">
-      <p>Crafted with 💖 and smiles • Free to play &amp; share!</p>
+      <p>Crafted with 💖 and baby smiles • Free to play &amp; share!</p>
     </footer>
   </main>
 
@@ -190,13 +193,13 @@
   <div class="modal-backdrop" id="victory-modal" aria-hidden="true" role="dialog" aria-modal="true">
     <div class="modal-card">
       <div class="modal-decorations" aria-hidden="true">
-        <span>✨</span><span>🎉</span><span>🌸</span><span>⭐</span>
+        <span>👶</span><span>🎉</span><span>🍼</span><span>⭐</span>
       </div>
       <div class="modal-badge-wrapper">
         <div class="modal-avatar" id="modal-avatar"></div>
       </div>
-      <h2 class="modal-title" id="modal-title">Yay! Kata Won!</h2>
-      <p class="modal-subtitle" id="modal-message">What a sensational victory! 🎈</p>
+      <h2 class="modal-title" id="modal-title">Yay! Baby Kata Won!</h2>
+      <p class="modal-subtitle" id="modal-message">What a sensational cute victory! 🎈</p>
 
       <div class="modal-stats" id="modal-streak-badge">
         🔥 <span id="modal-streak-text">Win Streak: 1</span>
@@ -219,7 +222,7 @@
       <button class="modal-close-corner" id="help-close-x" aria-label="Close Help">✕</button>
       <div class="help-header">
         <span class="help-icon">📖</span>
-        <h2>How to Play ZERO KATA</h2>
+        <h2>How to Play ZERO KATA: Cute Babies Edition</h2>
       </div>
 
       <div class="help-content">
@@ -227,7 +230,7 @@
           <span class="help-badge">1</span>
           <div>
             <strong>Goal:</strong>
-            <p>Connect 3 of your cute <strong>Kata</strong> or <strong>Zero</strong> in a row (horizontally, vertically, or diagonally) to win!</p>
+            <p>Connect 3 of your cute <strong>Baby Kata</strong> or <strong>Baby Zero</strong> in a row (horizontally, vertically, or diagonally) to win!</p>
           </div>
         </div>
 
@@ -235,26 +238,26 @@
           <span class="help-badge">2</span>
           <div>
             <strong>Game Modes:</strong>
-            <p><strong>🤖 vs Cute Machine:</strong> Play as Kata against the cute Bot (Zero) with Easy, Medium, or Unbeatable Genius levels!</p>
-            <p><strong>👥 2 Players:</strong> Play with a friend taking turns as Kata and Zero on the same screen.</p>
+            <p><strong>🤖 vs Baby Bot:</strong> Play as Baby Kata against the cute Baby Bot with Crawling, Babbling, or Baby Genius levels!</p>
+            <p><strong>👥 2 Babies:</strong> Play with a friend taking turns on the same screen.</p>
           </div>
         </div>
 
         <div class="help-item">
           <span class="help-badge">3</span>
           <div>
-            <strong>Color Palettes:</strong>
-            <p>Tap <strong>🎨</strong> at the top to change cute pastel color themes (Sakura &amp; Sky, Bubblegum &amp; Mint, Peach &amp; Lavender, or Sunny &amp; Berry)!</p>
+            <strong>Baby Themes:</strong>
+            <p>Tap <strong>👶</strong> at the top to change cute themes (Baby Girl &amp; Boy, Teddy &amp; Duckling, Baby Bunny &amp; Kitty, or Pacifier &amp; Rattle)!</p>
           </div>
         </div>
       </div>
 
       <button id="help-ok-btn" class="modal-btn primary" style="width: 100%; margin-top: 15px;">
-        <span>Got it! Let's Play! 🌸</span>
+        <span>Yay! Let's Play! 🌸</span>
       </button>
     </div>
   </div>
 
-  <script src="script.js"></script>
+  <script src="script.js?v=cute-babies-v3"></script>
 </body>
 </html>

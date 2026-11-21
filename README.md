@@ -1,6 +1,6 @@
-# 🌸 ZERO KATA • KAWAII PASTEL EDITION 🎀
+# 👶 ZERO KATA • CUTE BABIES EDITION 🍼
 
-A delightful, super-cute Zero Kata web game featuring custom smiling vector graphics with rosy blush cheeks, soft pastel dreamy gradients, celebratory confetti, gentle floating bubbles, playful Web Audio synthesized sounds, and two complete game modes: **vs Cute Machine** and **2-Player Pass & Play**!
+An adorable, joyful Zero Kata web game featuring custom smiling baby vector graphics with pacifiers, chubby blush cheeks, soft pastel nursery gradients, celebratory confetti, gentle floating bubbles, playful synthesized Web Audio sound effects, and two complete game modes: **vs Baby Bot** and **2 Little Babies (2P)**!
 
 🎮 **Play Online**: [https://pra27-06.github.io/tic-tac-toe/](https://pra27-06.github.io/tic-tac-toe/)
 
@@ -8,26 +8,26 @@ A delightful, super-cute Zero Kata web game featuring custom smiling vector grap
 
 ## ✨ Features
 
-- 💖 **Aesthetic Pastel Kawaii Design**: Soft gradients, glassmorphism cards, gentle floating sparkles, and spring-physics bounce animations.
-- 🌸 **Cute Kawaii Vector Graphics**:
-  - **Kata**: Soft rounded pastel cross with sparkly smiling eyes `(◕ ‿ ◕)`, rosy blush cheeks, sweet smile, and glitter star.
-  - **Zero**: Soft rounded pastel donut ring with a cute pink ribbon bow on top, smiling eyes, rosy blush cheeks, and sweet smile.
-- 🤖 **1-Player Mode (vs Cute Machine)**:
-  - **🌸 Easy (Baby Bot)**: Relaxed, friendly, and playful.
-  - **⚡ Medium (Clever Bot)**: Smart, blocks winning lines, and plays tactically.
-  - **👑 Genius (Unbeatable Bot)**: Powered by the Minimax algorithm with depth scoring — mathematically unbeatable!
-  - **First-Turn Selection**: Choose whether Kata starts first, Zero starts first, or pick randomly (`🎲 Random`).
-- 👥 **2-Player Mode (Pass & Play)**:
+- 💖 **Aesthetic Pastel Kawaii Baby Design**: Soft nursery gradients, glassmorphism cards, gentle floating pacifiers, teddy bears, bottles, and clouds with spring-physics bounce animations.
+- 👶 **Cute Baby Vector Graphics**:
+  - **Baby Kata**: Soft rounded pastel cross with a sweet smiling baby face in the center, shiny sparkling eyes `(◕ ‿ ◕)`, chubby blush cheeks, and a cute pink pacifier.
+  - **Baby Zero**: Soft rounded pastel donut ring with a baby bonnet cap on top, shiny sparkling eyes, chubby blush cheeks, and a baby blue pacifier.
+- 🤖 **1-Player Mode (vs Baby Bot)**:
+  - **🌸 Crawling (Easy)**: Relaxed, friendly, and playful.
+  - **⚡ Babbling (Medium)**: Smart, blocks winning lines, and plays tactically.
+  - **👑 Baby Genius (Unbeatable Bot)**: Powered by the Minimax algorithm with depth scoring — mathematically unbeatable!
+  - **First-Turn Selection**: Choose whether Baby Kata starts first, Baby Zero starts first, or pick randomly (`🎲 Random`).
+- 👥 **2-Player Mode (2 Little Babies)**:
   - Play with a friend on the same phone, tablet, or laptop.
   - Active turn glow badge and dynamic turn announcement banner.
-- 🎨 **4 Cute Pastel Color Palettes** (Switch anytime with the 🎨 button):
-  1. 🌸 **Sakura & Sky** (Sakura Pink Kata & Sky Blue Zero)
-  2. 🍬 **Bubblegum & Mint** (Lavender Purple Kata & Mint Green Zero)
-  3. 🍑 **Peach & Lavender** (Coral Peach Kata & Sweet Lavender Zero)
-  4. 🌟 **Sunny & Berry** (Ruby Berry Kata & Honey Buttercup Zero)
+- 🎨 **4 Cute Baby Themes** (Switch anytime with the 👶 button):
+  1. 👶 **Baby Girl & Boy** (Pink Pacifier Kata & Blue Pacifier Zero)
+  2. 🧸 **Teddy & Duckling** (Cozy Teddy Kata & Sweet Duckling Zero)
+  3. 🐰 **Bunny & Kitty** (Baby Bunny Kata & Baby Kitty Zero)
+  4. 🍼 **Pacifier & Rattle** (Sweet Pacifier Kata & Musical Rattle Zero)
 - 🔊 **Synthesized Web Audio FX**:
   - Zero external sound files — 100% reliable offline sound synthesizer.
-  - Bubble pops, happy win arpeggios, draw sighs, and tactile button clicks.
+  - Sweet baby pops, joyful nursery music box arpeggios, soft cozy sighs, and tactile clicks.
   - Sound toggle button (`🔊 / 🔇`) with preference saved.
 - 🎊 **Celebration & Effects**:
   - Full-screen colorful confetti cannons on victory.
@@ -35,7 +35,7 @@ A delightful, super-cute Zero Kata web game featuring custom smiling vector grap
   - Winning tiles perform a cute celebration wiggle.
   - Victory modal with custom winner message and win streaks counter!
 - 🏆 **Scoreboard & Streaks**:
-  - Tracks Kata wins, Zero / Bot wins, and Draws.
+  - Tracks Baby Kata wins, Baby Zero / Bot wins, and Cozy Ties.
   - Remembers win streaks (`🔥 Win Streak: 3`).
   - Saved automatically in `localStorage` so your score is never lost on refresh.
 - ↩️ **Undo Move**:
@@ -48,12 +48,12 @@ A delightful, super-cute Zero Kata web game featuring custom smiling vector grap
 ## 🕹️ How to Play
 
 1. Choose your game mode:
-   - Tap **🤖 vs Cute Machine** to play as Kata against the cute Bot (Zero).
-   - Tap **👥 2 Players** to play with a friend.
-2. If playing against the Machine, select your desired difficulty: **Easy**, **Medium**, or **Genius**.
+   - Tap **🤖 vs Baby Bot** to play as Baby Kata against the computer.
+   - Tap **👥 2 Babies** to play with a friend.
+2. If playing against the Baby Bot, select your desired difficulty: **Crawling**, **Babbling**, or **Baby Genius**.
 3. Take turns tapping an empty tile on the 3×3 grid.
 4. The first player to connect 3 of their symbols horizontally, vertically, or diagonally wins the round! 🎉
-5. If all 9 tiles are filled and nobody has 3 in a row, the round ends in a cute Draw! 🤝
+5. If all 9 tiles are filled and nobody has 3 in a row, the round ends in a cozy Tie! 🤝
 
 ---
 
