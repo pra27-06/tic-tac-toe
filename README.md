@@ -1,6 +1,6 @@
-# 🌴 ZERO KATA • GTA VI EDITION ⚡
+# 🌸 ZERO KATA • KAWAII PASTEL EDITION 🎀
 
-An electrifying, neon-soaked Grand Theft Auto VI (Vice City) themed web game. Powered by custom glowing neon laser vector graphics, retro 80s synthwave audio synthesis, high-voltage laser strike animations, a Rockstar-style **MISSION PASSED** celebration, and two complete game modes: **vs Vice AI** and **Street Duel (2-Player)**!
+A delightful, super-cute Zero Kata web game featuring custom smiling vector graphics with rosy blush cheeks, soft pastel dreamy gradients, celebratory confetti, gentle floating bubbles, playful Web Audio synthesized sounds, and two complete game modes: **vs Cute Machine** and **2-Player Pass & Play**!
 
 🎮 **Play Online**: [https://pra27-06.github.io/tic-tac-toe/](https://pra27-06.github.io/tic-tac-toe/)
 
@@ -8,50 +8,52 @@ An electrifying, neon-soaked Grand Theft Auto VI (Vice City) themed web game. Po
 
 ## ✨ Features
 
-- 🌴 **GTA VI Vice City Aesthetic**: High-voltage neon magenta (`#ff007f`) & electric cyan (`#00f0ff`) palette, dark synthwave grid backdrop, glowing palm silhouettes, and chrome metallic HUD.
-- ⚡ **Neon Vector Marks**:
-  - **KATA**: Dual-layer glowing hot-pink laser tube cross with white-hot plasma core and electric energy sparks.
-  - **ZERO**: Dual-layer glowing electric-cyan circular neon rim with white-hot plasma core and cyber radar hub.
-- 🤖 **Single-Player (vs Vice AI)**:
-  - **🌴 Rookie**: Casual, reckless street hustler.
-  - **🏎️ Hustler**: Smart, tactical mobster that blocks winning runs.
-  - **👑 Kingpin**: Unbeatable Minimax algorithm with depth scoring — mathematically impossible to conquer.
-  - **First Strike Choice**: Choose between `Kata First`, `Zero First`, or `🎲 Random`.
-- 👥 **2-Player Mode (Street Duel)**:
-  - Pass the device and challenge your friends on the same screen.
-- 🎨 **4 GTA VI Neon Palettes** (Switch anytime with the 🌴 button):
-  1. 🌴 **Vice City Sunset** (Neon Hot Pink & Electric Cyan)
-  2. 🏎️ **Miami Midnight** (Hyper Violet & Toxic Emerald)
-  3. 💰 **Gold Coast Heist** (Blazing Gold & Crimson Ruby)
-  4. ⚡ **Cyber Neon** (Acid Lime & Electric Blue)
-- 🔊 **Retro Synthwave Audio Synthesizer**:
-  - Procedural Web Audio API — 100% reliable offline sound with zero external MP3 dependencies.
-  - 80s synth punch bass for moves, iconic high-energy **Mission Passed** synth arpeggio for victory, and low-pass filter drop for stalemates.
-  - Sound toggle (`🔊 / 🔇`) with persistent preference.
-- 🎊 **Rockstar Celebration**:
-  - Full-screen glowing neon confetti & electric sparks on victory.
-  - Glowing high-voltage laser strike-through line cutting across winning tiles.
-  - "MISSION PASSED • RESPECT +100" victory screen with Heat Level Wanted Star ratings!
-- 🏆 **Heist Stats & Streaks**:
-  - Tracks Kata wins, Zero / AI wins, and Stalemates.
-  - Tracks Heat Level win streaks (`⭐ HEAT LEVEL: 5 STARS`).
-  - Saved automatically in `localStorage`.
+- 💖 **Aesthetic Pastel Kawaii Design**: Soft gradients, glassmorphism cards, gentle floating sparkles, and spring-physics bounce animations.
+- 🌸 **Cute Kawaii Vector Graphics**:
+  - **Kata**: Soft rounded pastel cross with sparkly smiling eyes `(◕ ‿ ◕)`, rosy blush cheeks, sweet smile, and glitter star.
+  - **Zero**: Soft rounded pastel donut ring with a cute pink ribbon bow on top, smiling eyes, rosy blush cheeks, and sweet smile.
+- 🤖 **1-Player Mode (vs Cute Machine)**:
+  - **🌸 Easy (Baby Bot)**: Relaxed, friendly, and playful.
+  - **⚡ Medium (Clever Bot)**: Smart, blocks winning lines, and plays tactically.
+  - **👑 Genius (Unbeatable Bot)**: Powered by the Minimax algorithm with depth scoring — mathematically unbeatable!
+  - **First-Turn Selection**: Choose whether Kata starts first, Zero starts first, or pick randomly (`🎲 Random`).
+- 👥 **2-Player Mode (Pass & Play)**:
+  - Play with a friend on the same phone, tablet, or laptop.
+  - Active turn glow badge and dynamic turn announcement banner.
+- 🎨 **4 Cute Pastel Color Palettes** (Switch anytime with the 🎨 button):
+  1. 🌸 **Sakura & Sky** (Sakura Pink Kata & Sky Blue Zero)
+  2. 🍬 **Bubblegum & Mint** (Lavender Purple Kata & Mint Green Zero)
+  3. 🍑 **Peach & Lavender** (Coral Peach Kata & Sweet Lavender Zero)
+  4. 🌟 **Sunny & Berry** (Ruby Berry Kata & Honey Buttercup Zero)
+- 🔊 **Synthesized Web Audio FX**:
+  - Zero external sound files — 100% reliable offline sound synthesizer.
+  - Bubble pops, happy win arpeggios, draw sighs, and tactile button clicks.
+  - Sound toggle button (`🔊 / 🔇`) with preference saved.
+- 🎊 **Celebration & Effects**:
+  - Full-screen colorful confetti cannons on victory.
+  - Dynamic animated SVG line striking through the 3 winning tiles.
+  - Winning tiles perform a cute celebration wiggle.
+  - Victory modal with custom winner message and win streaks counter!
+- 🏆 **Scoreboard & Streaks**:
+  - Tracks Kata wins, Zero / Bot wins, and Draws.
+  - Remembers win streaks (`🔥 Win Streak: 3`).
+  - Saved automatically in `localStorage` so your score is never lost on refresh.
 - ↩️ **Undo Move**:
-  - Quick rewind button to undo moves during practice or casual street play.
-- 📱 **Mobile & Touch Optimized**:
-  - Fast touch response with no accidental double-tap zoom delays.
+  - Made a mistake? Press the Undo button anytime to take back your move.
+- 📱 **100% Mobile & Touch Friendly**:
+  - Designed mobile-first with touch-action optimizations to prevent accidental double-tap zoom delays.
 
 ---
 
 ## 🕹️ How to Play
 
-1. Choose your mode:
-   - Tap **🤖 vs Vice AI** to challenge the syndicate computer.
-   - Tap **👥 Street Duel (2P)** to challenge a partner on the same screen.
-2. If playing against Vice AI, select your desired heat level: **Rookie**, **Hustler**, or **Kingpin**.
-3. Take turns claiming tiles on the 3×3 Vice City grid.
-4. The first player to connect 3 straight tiles horizontally, vertically, or diagonally rules the district! ⚡
-5. If all 9 tiles are seized with no 3-in-a-row, it ends in a **Stalemate**! ⚠️
+1. Choose your game mode:
+   - Tap **🤖 vs Cute Machine** to play as Kata against the cute Bot (Zero).
+   - Tap **👥 2 Players** to play with a friend.
+2. If playing against the Machine, select your desired difficulty: **Easy**, **Medium**, or **Genius**.
+3. Take turns tapping an empty tile on the 3×3 grid.
+4. The first player to connect 3 of their symbols horizontally, vertically, or diagonally wins the round! 🎉
+5. If all 9 tiles are filled and nobody has 3 in a row, the round ends in a cute Draw! 🤝
 
 ---
 
@@ -70,12 +72,12 @@ Anyone in the world can play your game for free using **GitHub Pages**:
 
 ---
 
-## 🌴 Tech Stack
+## 🌸 Tech Stack
 
 - **HTML5**: Semantic layout, accessible dialog modals, and responsive viewport setup.
-- **CSS3**: Cyberpunk glassmorphism, glowing neon filters, keyframe animations, and synthwave grid styling.
-- **Vanilla JavaScript (ES6+)**: Custom SVG neon vector engine, Minimax algorithm, Web Audio API synthwave synthesizer, and Canvas particle confetti engine.
+- **CSS3**: Modern CSS Variables, Flexbox, CSS Grid, Glassmorphism backdrop-filters, and Keyframe animations.
+- **Vanilla JavaScript (ES6+)**: Custom SVG Kawaii procedural graphics, Minimax algorithm, Web Audio API, Canvas particle confetti engine, and State management.
 
 ---
 
-Crafted with ⚡ by [Prachi Bhalla](https://github.com/pra27-06)
+Crafted with 💖 by [Prachi Bhalla](https://github.com/pra27-06)
